@@ -54,7 +54,7 @@ python -m pytest -q             # unit tests (feature helpers, validation heuris
 
 ```bash
 python -m langllm.prompts                 # 1. 84 native prompts (Llama 4 Maverick; no translation)
-#   → human check of es / ru / zh: see prompts/native/REVIEW.md, set human_checked: true
+python -m langllm.review                  # 1b. Qwen checks all 84 against their schema → prompts/native/REVIEW.md
 python -m langllm.collect --dry-run       # 2. count cells; then drop --dry-run (resumable, ~$5–10 total)
 python -m langllm.collect
 python -m langllm.validate                # 3. langid / length / refusal → results/validation_summary.csv
@@ -81,7 +81,9 @@ python -m langllm.figures  --features data/features/synthetic.csv
 feature, because Flesch–Kincaid is English-only). For every language a non-subject model
 (Llama 4 Maverick) writes a native prompt *from the schema*, not by translation. All seven
 versions of a prompt share topic, stance and sub-claims, so content is held fixed and only
-style is free. A native reader checks Spanish, Russian and Chinese. English is produced by
+style is free. Every prompt in every language is then reviewed by a third non-subject model
+(Qwen 3.7 Plus) that extracts topic, stance and sub-claims blind and matches them to the
+schema; mismatches are flagged for repair. Human sign-off is optional. English is produced by
 the same route so every language shares one protocol.
 
 **Generation.** Single user turn, no system prompt, temperature 0.7, fixed seeds per
@@ -125,8 +127,8 @@ two languages are pre-split on terminal punctuation and Stanza's splitter is dis
 ```
 config.yaml            models, languages + resource rank, tiers, generation/validation/analysis knobs
 prompts/schemas.json   the 12 English schemas (6 for / 6 against; 4 per reading tier)
-prompts/native/        one JSON per language written by the prompt writer (+ REVIEW.md checklist)
-langllm/               prompts → collect → validate → features → analysis → figures (+ synthetic, openrouter)
+prompts/native/        one JSON per language from the writer, review_{lang}.json from the reviewer, REVIEW.md summary
+langllm/               prompts → review → collect → validate → features → analysis → figures (+ synthetic, openrouter)
 tests/                 pytest: helpers, validation heuristics, schema balance, one Stanza round-trip
 data/                  raw responses (gitignored), validation.csv, features.csv
 results/               per-RQ tables + figures

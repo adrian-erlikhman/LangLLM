@@ -12,6 +12,8 @@ models:
 
 # Non-subject model that writes the native-language prompts from each schema.
 prompt_writer: meta-llama/llama-4-maverick
+# Non-subject model from a third family that checks every native prompt against its schema (all 7 languages).
+prompt_reviewer: qwen/qwen3.7-plus
 
 # Languages, in decreasing order of (approximate) training-data share. The rank
 # is the RQ2 covariate. `stanza` is the Stanza package id; `name_en` is used in
