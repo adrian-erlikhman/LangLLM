@@ -15,8 +15,18 @@ class OpenRouterError(RuntimeError):
 
 
 def api_key() -> str:
-    load_dotenv()
+    """Key from the environment, or from .env (KEY=value, or a bare key on one line; BOM tolerated)."""
     key = os.environ.get("OPENROUTER_API_KEY")
+    if not key:
+        from pathlib import Path
+        env_path = Path(__file__).resolve().parent.parent / ".env"
+        if env_path.exists():
+            load_dotenv(env_path, encoding="utf-8-sig")
+            key = os.environ.get("OPENROUTER_API_KEY")
+            if not key:
+                raw = env_path.read_text(encoding="utf-8-sig").strip()
+                if raw.startswith("sk-or-") and "=" not in raw and "\n" not in raw:
+                    key = raw
     if not key:
         raise OpenRouterError("OPENROUTER_API_KEY is not set (copy .env.example to .env)")
     return key
