@@ -219,19 +219,12 @@ def extract(text: str, lang: str, window: int = 50) -> dict:
     }
 
 
-def build(use_all: bool = False) -> pd.DataFrame:
-    cfg = load_config()
-    window = cfg["features"]["mattr_window"]
-    vpath = ROOT / "data" / "validation.csv"
-    keep: set[str] | None = None
-    if not use_all:
-        if not vpath.exists():
-            raise SystemExit("run python -m langllm.validate first (or pass --all)")
-        v = pd.read_csv(vpath)
-        keep = set(v.loc[v["keep"], "cell_id"])
+def build_from(records, out_name: str, keep: set[str] | None = None, extra_cols: tuple[str, ...] = ()) -> pd.DataFrame:
+    """Extract features for an iterable of raw-shaped records and write data/features/{out_name}."""
+    window = load_config()["features"]["mattr_window"]
     rows = []
     from tqdm import tqdm
-    for r in tqdm(list(iter_raw()), unit="doc"):
+    for r in tqdm(list(records), unit="doc"):
         if keep is not None and r["cell_id"] not in keep:
             continue
         if not (r.get("text") or "").strip():
@@ -239,15 +232,33 @@ def build(use_all: bool = False) -> pd.DataFrame:
         feats = extract(r["text"], r["lang"], window)
         rows.append({"cell_id": r["cell_id"], "model_key": r["model_key"], "model_served": r.get("model_served"),
                      "prompt_id": r["prompt_id"], "lang": r["lang"], "gen": r["gen"],
-                     "fk_tier": r["fk_tier"], "stance": r["stance"], **feats})
-    df = pd.DataFrame(rows, columns=META_COLS + FEATURE_NAMES)
+                     "fk_tier": r["fk_tier"], "stance": r["stance"], **{c: r.get(c) for c in extra_cols}, **feats})
+    df = pd.DataFrame(rows, columns=META_COLS + list(extra_cols) + FEATURE_NAMES)
     FEATURES_DIR.mkdir(parents=True, exist_ok=True)
-    df.to_csv(FEATURES_DIR / "features.csv", index=False)
-    print(f"wrote {len(df)} rows × {len(FEATURE_NAMES)} features to {FEATURES_DIR / 'features.csv'}")
+    df.to_csv(FEATURES_DIR / out_name, index=False)
+    print(f"wrote {len(df)} rows × {len(FEATURE_NAMES)} features to {FEATURES_DIR / out_name}")
     return df
+
+
+def build(use_all: bool = False) -> pd.DataFrame:
+    keep: set[str] | None = None
+    if not use_all:
+        vpath = ROOT / "data" / "validation.csv"
+        if not vpath.exists():
+            raise SystemExit("run python -m langllm.validate first (or pass --all)")
+        v = pd.read_csv(vpath)
+        keep = set(v.loc[v["keep"], "cell_id"])
+    return build_from(iter_raw(), "features.csv", keep)
+
+
+def build_translated() -> pd.DataFrame:
+    from .translate import iter_translated
+    return build_from(iter_translated(), "features_translated.csv", None, extra_cols=("translator", "source_cell_id"))
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--all", action="store_true", help="ignore the validation keep flag")
-    build(use_all=ap.parse_args().all)
+    ap.add_argument("--translated", action="store_true", help="features for data/translated/*.jsonl instead")
+    a = ap.parse_args()
+    build_translated() if a.translated else build(use_all=a.all)

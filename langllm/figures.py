@@ -174,12 +174,62 @@ def f7_pca(cfg, features_path=None):
     _save(fig, "F7_pca_by_language")
 
 
+def f8_translation(cfg):
+    t1 = pd.read_csv(RESULTS_DIR / "rq5_translation_accuracy.csv")
+    langs = [l for l in _langs(cfg) if l in set(t1["lang"])]
+    trs = list(t1["translator"].unique())
+    fig, axes = plt.subplots(1, len(trs), figsize=(5.2 * len(trs), 3.8), sharey=True)
+    axes = np.atleast_1d(axes)
+    for ax, tr in zip(axes, trs):
+        d = t1[t1.translator == tr].set_index("lang").loc[langs]
+        x = np.arange(len(langs)); w = 0.27
+        ax.bar(x - w, d["acc_native_same_lang"], w, color="#BBBBBB", label="native responses in that language")
+        ax.bar(x, d["acc_translated_lopo"], w, color="#4C72B0", label="translated from English (LOPO)")
+        ax.errorbar(x, d["acc_translated_lopo"], yerr=[d["acc_translated_lopo"] - d["ci_lo"], d["ci_hi"] - d["acc_translated_lopo"]],
+                    fmt="none", ecolor="k", capsize=2, lw=0.8)
+        ax.bar(x + w, d["acc_train_native_test_translated"], w, color="#DD8452", label="train native → test translated")
+        ax.axhline(d["acc_english_originals"].iloc[0], ls=":", c="#4C72B0", lw=1, label="English originals (LOPO)")
+        ax.axhline(CHANCE, ls="--", c="k", lw=0.8)
+        ax.set_xticks(x, [f"{l}
+#{cfg['languages'][l]['rank']}" for l in langs]); ax.set_ylim(0, 1)
+        ax.set_title({"google": "Google Translate", "llm": "LLM translator (non-subject)"}.get(tr, tr))
+    axes[0].set_ylabel("attribution accuracy"); axes[0].legend(frameon=False, fontsize=7, loc="upper right")
+    fig.suptitle("RQ5 — does translation destroy the fingerprint?", fontsize=10)
+    _save(fig, "F8_rq5_translation")
+
+
+def f9_feature_survival(cfg):
+    t3 = pd.read_csv(RESULTS_DIR / "rq5_feature_survival.csv")
+    trs = list(t3["translator"].unique())
+    fig, axes = plt.subplots(1, len(trs), figsize=(4.6 * len(trs), 6), sharey=True)
+    axes = np.atleast_1d(axes)
+    order = [f for g in FEATURE_GROUPS.values() for f in g]
+    for ax, tr in zip(axes, trs):
+        M = t3[t3.translator == tr].pivot(index="feature", columns="lang", values="spearman_rho").loc[order]
+        M = M[[l for l in _langs(cfg) if l in M.columns]]
+        im = ax.imshow(M.to_numpy(float), cmap="RdBu_r", vmin=-1, vmax=1, aspect="auto")
+        ax.set_xticks(range(M.shape[1]), M.columns); ax.set_yticks(range(len(order)), order, fontsize=7)
+        for lbl in ax.get_yticklabels():
+            grp = next(g for g, fs in FEATURE_GROUPS.items() if lbl.get_text() in fs); lbl.set_color(GROUP_COLORS[grp])
+        for i in range(M.shape[0]):
+            for j in range(M.shape[1]):
+                ax.text(j, i, f"{M.iat[i, j]:.2f}", ha="center", va="center", fontsize=6)
+        ax.set_title({"google": "Google Translate", "llm": "LLM translator"}.get(tr, tr), fontsize=9); ax.grid(False)
+    fig.colorbar(im, ax=axes, fraction=0.03, label="Spearman ρ, original vs translation (n = English sources)")
+    fig.suptitle("RQ5 — which features survive translation?", fontsize=10)
+    FIG_DIR.mkdir(parents=True, exist_ok=True); fig.savefig(FIG_DIR / "F9_rq5_feature_survival.png", bbox_inches="tight"); plt.close(fig)
+    print("wrote", FIG_DIR / "F9_rq5_feature_survival.png")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--features", help="features.csv used for the PCA panel")
     ap.add_argument("--tag", default="", help="results suffix, e.g. _lenctl")
+    ap.add_argument("--rq5", action="store_true", help="only the translation figures F8/F9")
     a = ap.parse_args()
     cfg = load_config()
+    if a.rq5:
+        f8_translation(cfg); f9_feature_survival(cfg); return
     f1_accuracy(cfg, a.tag); f2_confusions(cfg, a.tag); f3_gradient(cfg, a.tag)
     if not a.tag:
         f4_eta2(cfg); f5_transfer(cfg); f6_separation(cfg); f7_pca(cfg, a.features)

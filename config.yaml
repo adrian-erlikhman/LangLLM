@@ -15,6 +15,12 @@ prompt_writer: meta-llama/llama-4-maverick
 # Non-subject model from a third family that checks every native prompt against its schema (all 7 languages).
 prompt_reviewer: qwen/qwen3.7-plus
 
+# Translation extension (does translation destroy the fingerprint?). Free, non-subject,
+# non-Gemini translator with fallbacks; Google Translate via its public endpoint.
+translators:
+  llm: minimax/minimax-m3:free
+  llm_fallbacks: [nvidia/nemotron-3-super-120b-a12b:free, meta-llama/llama-4-maverick]
+
 # Languages, in decreasing order of (approximate) training-data share. The rank
 # is the RQ2 covariate. `stanza` is the Stanza package id; `name_en` is used in
 # the instruction to the prompt writer; `length_hint` is the native length target

@@ -18,6 +18,7 @@ attribution of five frontier models across a seven-language resource gradient.
 | **RQ2** | Does attribution accuracy fall with the language's training-data share? | Spearman ρ of accuracy vs resource rank (n = 7) + cell-level binomial GLM `correct ~ rank` with prompt-clustered SEs (n = 840) |
 | **RQ3** | Is a model's style language-invariant or per-language? | Per-feature two-way ANOVA (model × language, prompt blocked) → partial η²; cross-lingual transfer matrix of a within-language z-scored classifier |
 | **RQ4** | Do models converge on one generic style in low-resource languages? | Within-language model separation (mean centroid distance, silhouette, between/within trace) with bootstrap CIs, vs rank |
+| **RQ5** (ext.) | Does translation destroy the fingerprint? | Kept English responses translated into the six other languages by Google Translate and by a free non-subject, non-Gemini LLM; attribution on translated text, transfer from native-language classifiers, and per-feature survival |
 
 The full pre-specified analysis plan, including decision rules for each RQ, is in
 [docs/analysis_plan.md](docs/analysis_plan.md). Literature framing is in
@@ -61,6 +62,9 @@ python -m langllm.validate                # 3. langid / length / refusal → res
 python -m langllm.features                # 4. Stanza parse → data/features/features.csv
 python -m langllm.analysis                # 5. RQ1–RQ4 → results/
 python -m langllm.figures                 # 6. results/figures/F1…F7
+python -m langllm.translate               # 7. RQ5: English responses → 6 languages × {google, llm}
+python -m langllm.features --translated   #    features_translated.csv
+python -m langllm.analysis_translation    #    rq5_*.csv/json; python -m langllm.figures --rq5 for F8/F9
 ```
 
 Everything is resumable and idempotent: `collect` skips cells already on disk, `prompts`
@@ -128,7 +132,8 @@ two languages are pre-split on terminal punctuation and Stanza's splitter is dis
 config.yaml            models, languages + resource rank, tiers, generation/validation/analysis knobs
 prompts/schemas.json   the 12 English schemas (6 for / 6 against; 4 per reading tier)
 prompts/native/        one JSON per language from the writer, review_{lang}.json from the reviewer, REVIEW.md summary
-langllm/               prompts → review → collect → validate → features → analysis → figures (+ synthetic, openrouter)
+langllm/               prompts → review → refine → collect → validate → features → analysis → figures;
+                       translate + analysis_translation for RQ5 (+ synthetic, openrouter)
 tests/                 pytest: helpers, validation heuristics, schema balance, one Stanza round-trip
 data/                  raw responses (gitignored), validation.csv, features.csv
 results/               per-RQ tables + figures

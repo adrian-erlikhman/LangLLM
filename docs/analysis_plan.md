@@ -59,6 +59,20 @@ will be labelled as such.
   three metrics fall with rank *and* the lowest-resource CI lies below the English CI.
 - Pairwise centroid distances identify which models converge on which.
 
+## RQ5 (extension, added 2026-09-03 before any translated data existed) — translation
+
+Suggested by Philo: does Google Translate, or translation in general, destroy the features?
+- Sources: every kept English response (up to 120: 5 models × 12 prompts × 2).
+- Translators: Google Translate (public endpoint) and a free non-subject, non-Gemini LLM
+  (MiniMax M3, fallbacks Nemotron 3 Super, Llama 4 Maverick), into the six other languages.
+- T1: LOPO attribution on translated texts per (translator, language) vs the English
+  originals and vs native responses in that language. **Decision rule**: fingerprint
+  "survives" a translator/language if the CI excludes 0.20; "destroyed" if it includes it.
+- T2: classifier trained on native language-L responses applied to translated-into-L texts,
+  and one trained on the English originals applied to translations (z-scored per domain).
+- T3: per-feature Spearman ρ between original and translation across sources; mean model
+  η² before vs after. Reports which feature groups carry through translation.
+
 ## Confounds we address
 
 - Length → residualised robustness run.
