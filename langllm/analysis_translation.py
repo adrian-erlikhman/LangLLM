@@ -38,10 +38,15 @@ def _z(df: pd.DataFrame) -> pd.DataFrame:
 def _eta_model(d: pd.DataFrame) -> float:
     vals = []
     for f in FEATURE_NAMES:
-        m = smf.ols("y ~ C(model_key) + C(prompt_id)", data=d[["model_key", "prompt_id", f]].rename(columns={f: "y"})).fit()
+        dd = d[["model_key", "prompt_id", f]].rename(columns={f: "y"}).astype({"y": float})
+        if dd["y"].std() == 0 or dd["y"].isna().any():
+            continue  # constant feature (e.g. no dashes in a translation set) carries no model variance
+        m = smf.ols("y ~ C(model_key) + C(prompt_id)", data=dd).fit()
         aov = sm.stats.anova_lm(m, typ=2)
-        vals.append(aov.loc["C(model_key)", "sum_sq"] / (aov.loc["C(model_key)", "sum_sq"] + aov.loc["Residual", "sum_sq"]))
-    return float(np.mean(vals))
+        denom = aov.loc["C(model_key)", "sum_sq"] + aov.loc["Residual", "sum_sq"]
+        if denom > 0:
+            vals.append(aov.loc["C(model_key)", "sum_sq"] / denom)
+    return float(np.nanmean(vals)) if vals else float("nan")
 
 
 def run() -> None:

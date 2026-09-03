@@ -18,7 +18,11 @@ shrinks monotonically from English to Hindi (Spearman ρ = −0.96, p < 0.001), 
 Grok, the outlier in English, drifting toward the pack. The apparent paradox, convergence
 without loss of attribution, resolves as follows: models converge in the bulk of features while
 a few high-signal features (paragraph count, comma and colon rates, lexical-diversity slope)
-keep separating them. The translation extension (RQ5) is reported in §7.
+keep separating them. Finally, translation does **not** destroy the fingerprint: after Google
+Translate or a free non-subject LLM renders the English responses into the six other languages,
+five-way attribution still runs 0.57–0.70, and an English-trained classifier reads the
+translations at 0.66, because the surviving signal is structural (paragraphing, sentence rhythm,
+punctuation) rather than lexical.
 
 ## 1. Design
 
@@ -293,6 +297,96 @@ Pairwise centroid distances (within-language z-scored units):
 | gemini–gpt | 3.14 | 3.67 | 3.75 | 3.95 | 2.76 | 2.69 | 2.44 |
 | gemini–grok | 3.55 | 2.55 | 3.58 | 2.18 | 2.49 | 3.25 | 2.96 |
 | gpt–grok | 5.69 | 3.75 | 3.99 | 3.83 | 3.80 | 3.32 | 2.69 |
+
+## 7. RQ5 — does translation destroy the fingerprint?
+
+![F8](../results/figures/F8_rq5_translation.png)
+
+| translator | lang | rank | n | acc_translated_lopo | ci_lo | ci_hi | acc_english_originals | acc_native_same_lang | acc_train_native_test_translated | acc_train_english_test_translated |
+|---|---|---|---|---|---|---|---|---|---|---|
+| google | es | 2 | 120 | 0.608 | 0.517 | 0.692 | 0.717 | 0.625 | 0.583 | 0.717 |
+| google | zh | 3 | 120 | 0.567 | 0.475 | 0.650 | 0.717 | 0.650 | 0.467 | 0.633 |
+| google | ru | 4 | 120 | 0.658 | 0.575 | 0.742 | 0.717 | 0.650 | 0.542 | 0.717 |
+| google | ja | 5 | 120 | 0.658 | 0.575 | 0.742 | 0.717 | 0.708 | 0.525 | 0.575 |
+| google | tr | 6 | 120 | 0.608 | 0.517 | 0.692 | 0.717 | 0.592 | 0.467 | 0.650 |
+| google | hi | 7 | 120 | 0.650 | 0.567 | 0.725 | 0.717 | 0.639 | 0.542 | 0.692 |
+| llm | es | 2 | 120 | 0.600 | 0.516 | 0.683 | 0.717 | 0.625 | 0.617 | 0.750 |
+| llm | zh | 3 | 120 | 0.667 | 0.583 | 0.750 | 0.717 | 0.650 | 0.483 | 0.625 |
+| llm | ru | 4 | 120 | 0.608 | 0.516 | 0.700 | 0.717 | 0.650 | 0.508 | 0.658 |
+| llm | ja | 5 | 120 | 0.608 | 0.517 | 0.692 | 0.717 | 0.708 | 0.550 | 0.508 |
+| llm | tr | 6 | 120 | 0.592 | 0.500 | 0.675 | 0.717 | 0.592 | 0.442 | 0.650 |
+| llm | hi | 7 | 120 | 0.700 | 0.617 | 0.783 | 0.717 | 0.639 | 0.583 | 0.767 |
+
+Summary per translator:
+
+| translator | mean_acc_translated_lopo | acc_english_originals | mean_acc_native_same_lang | mean_acc_train_native_test_translated | mean_acc_train_english_test_translated | mean_feature_rho | features_rho_above_0.5 | mean_eta2_model_before | mean_eta2_model_after |
+|---|---|---|---|---|---|---|---|---|---|
+| google | 0.625 | 0.717 | 0.644 | 0.521 | 0.664 | 0.742 | 16 | 0.405 | 0.321 |
+| llm | 0.629 | 0.717 | 0.644 | 0.531 | 0.660 | 0.714 | 16 | 0.405 | 0.299 |
+
+![F9](../results/figures/F9_rq5_feature_survival.png)
+
+**Interpretation.** Neither translator destroys the fingerprint. Attribution on translated
+text alone runs 0.57–0.70 (mean 0.625 for Google Translate, 0.629 for the LLM translator)
+against 0.717 on the English originals and a mean of 0.644 for *native* responses in the same
+languages; every CI excludes chance and every binomial test has p < 0.001. Translating a text
+costs about nine points of accuracy, roughly what moving from English to a native low-resource
+language costs, and no more.
+
+The English fingerprint travels intact. A classifier trained on the English originals and
+applied to their translations scores 0.66 on average for both translators (0.77 for the LLM's
+Hindi), essentially the English accuracy, so what a translator outputs is still recognisably
+the source model's *English* style in another script. A classifier trained on the model's own
+native-language responses does worse on the translations (0.52–0.53): translated GPT resembles
+English GPT more than it resembles native Spanish GPT. This also answers the "which style does
+the translated text carry" question: the translator preserves the source's structural habits
+rather than re-styling the text into the model's native register for that language.
+
+Feature survival explains why. Structural and rhythmic features come through almost unchanged
+(Spearman ρ between original and translation, averaged over six languages): paragraph count
+1.00, paragraph length 0.98, digit rate 0.94–0.97, sentence length 0.89, burstiness 0.87,
+first-person rate 0.82–0.86, colon rate 0.75–0.84, sentence-length SD 0.83, dependency depth
+0.77, subordination 0.72–0.74. Lexical features are rewritten by the target language: MATTR
+0.29–0.34, function-word ratio 0.46, bigram entropy 0.48, connective rate 0.49. Sixteen of the
+twenty measurable features keep ρ > 0.5 under both translators. The share of feature variance
+explained by model falls from 0.40 in the English sources to 0.32 (Google) and 0.30 (LLM) after
+translation, a reduction, not an erasure. Question rate is undefined because these essays
+contain no questions.
+
+Google Translate and the LLM translator behave almost identically. The one visible difference
+is punctuation: the LLM normalises semicolons and colons more (ρ 0.68 vs 0.88, 0.75 vs 0.84),
+consistent with an LLM lightly imposing its own conventions, yet its translations are, if
+anything, marginally *more* attributable. A free non-subject LLM therefore does not overwrite
+the source fingerprint with its own. For provenance work the practical reading is that
+translation is not an effective laundering step against interpretable features, and that a
+classifier trained in English can be applied across a translation boundary without retraining.
+
+
+Mean Spearman ρ between original and translation, per feature (averaged over the six target languages):
+
+| feature | google | llm |
+|---|---|---|
+| para_count | 1.00 | 1.00 |
+| para_len_mean | 0.98 | 0.98 |
+| digit_rate | 0.94 | 0.97 |
+| sent_len_mean | 0.89 | 0.89 |
+| semicolon_per_1k | 0.88 | 0.68 |
+| burstiness | 0.87 | 0.86 |
+| first_person_rate | 0.86 | 0.82 |
+| colon_per_1k | 0.84 | 0.75 |
+| sent_len_sd | 0.83 | 0.82 |
+| dep_depth | 0.77 | 0.76 |
+| hapax_rate | 0.75 | 0.72 |
+| subord_rate | 0.74 | 0.72 |
+| zipf_slope | 0.72 | 0.69 |
+| dash_per_1k | 0.70 | 0.63 |
+| comma_per_1k | 0.69 | 0.66 |
+| mean_token_len | 0.60 | 0.61 |
+| connective_rate | 0.49 | 0.48 |
+| bigram_entropy | 0.48 | 0.49 |
+| func_word_ratio | 0.46 | 0.46 |
+| mattr | 0.34 | 0.29 |
+| question_rate |  |  |
 
 ## 8. Limitations
 

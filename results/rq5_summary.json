@@ -1,0 +1,24 @@
+{
+  "google": {
+    "mean_acc_translated_lopo": 0.6249999999999999,
+    "acc_english_originals": 0.7166666666666667,
+    "mean_acc_native_same_lang": 0.6439425770308124,
+    "mean_acc_train_native_test_translated": 0.5208333333333334,
+    "mean_acc_train_english_test_translated": 0.6638888888888889,
+    "mean_feature_rho": 0.7421997238524298,
+    "features_rho_above_0.5": 16,
+    "mean_eta2_model_before": 0.4046150958374329,
+    "mean_eta2_model_after": 0.3206557363141096
+  },
+  "llm": {
+    "mean_acc_translated_lopo": 0.6291666666666668,
+    "acc_english_originals": 0.7166666666666667,
+    "mean_acc_native_same_lang": 0.6439425770308124,
+    "mean_acc_train_native_test_translated": 0.5305555555555556,
+    "mean_acc_train_english_test_translated": 0.6597222222222222,
+    "mean_feature_rho": 0.7136818201578395,
+    "features_rho_above_0.5": 16,
+    "mean_eta2_model_before": 0.40461509583743277,
+    "mean_eta2_model_after": 0.29865692802863875
+  }
+}
