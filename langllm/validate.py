@@ -86,19 +86,21 @@ def validate() -> pd.DataFrame:
         text = unicodedata.normalize("NFC", r.get("text") or "")
         wc = word_equivalent(text, r["lang"])
         det, conf = detect_language(text, codes) if text else (None, 0.0)
-        refusal = looks_like_refusal(text, r["lang"], wc) if not r.get("error") else False
+        truncated = r.get("finish_reason") == "length"
+        # empty/short output that hit the token budget is reasoning overflow, not a refusal
+        refusal = looks_like_refusal(text, r["lang"], wc) if not (r.get("error") or (truncated and wc < 60)) else False
         wrong_lang = bool(text) and (det != r["lang"] or conf < vcfg["langid_min_confidence"])
         too_short, too_long = wc < vcfg["min_words"], wc > vcfg["max_words"]
         rows.append({
             "cell_id": r["cell_id"], "model_key": r["model_key"], "model_served": r.get("model_served"),
             "prompt_id": r["prompt_id"], "lang": r["lang"], "gen": r["gen"], "fk_tier": r["fk_tier"],
             "error": bool(r.get("error")), "finish_reason": r.get("finish_reason"),
-            "truncated": r.get("finish_reason") == "length",
+            "truncated": truncated,
             "reasoning_tokens": (r.get("usage") or {}).get("reasoning_tokens"),
             "word_equiv": wc, "lang_detected": det, "lang_conf": round(conf, 3),
             "wrong_language": wrong_lang, "refusal": refusal, "too_short": too_short, "too_long": too_long,
             "structure_lines": structure_violations(text),
-            "keep": not (r.get("error") or wrong_lang or refusal or too_short or too_long or r.get("finish_reason") == "length"),
+            "keep": not (r.get("error") or wrong_lang or refusal or too_short or too_long or truncated),
         })
     df = pd.DataFrame(rows)
     (ROOT / "data").mkdir(exist_ok=True)

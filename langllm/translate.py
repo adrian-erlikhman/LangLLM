@@ -55,7 +55,7 @@ def google_translate(text: str, tgt: str, max_retries: int = 6) -> str:
             time.sleep(min(90, 3 * 2 ** attempt + random.random()))
         else:
             raise RuntimeError(f"google translate gave up on paragraph for {tgt}")
-        time.sleep(0.8 + random.random())  # be polite; this is an unofficial endpoint
+        time.sleep(0.25 + 0.3 * random.random())  # be polite; this is an unofficial endpoint
     return "\n".join(out)
 
 
@@ -131,7 +131,7 @@ def run(translators: list[str], langs: list[str], workers: int) -> None:
                 rec.update({"finish_reason": "error", "error": str(e)[:500]})
                 return rec
 
-        w = 1 if tr == "google" else workers
+        w = min(3, workers) if tr == "google" else workers
         with ThreadPoolExecutor(max_workers=w) as ex, open(out_path(tr), "a", encoding="utf-8") as f:
             for fut in tqdm(as_completed([ex.submit(work, j) for j in jobs]), total=len(jobs), unit="tr"):
                 rec = fut.result()

@@ -222,9 +222,12 @@ def extract(text: str, lang: str, window: int = 50) -> dict:
 def build_from(records, out_name: str, keep: set[str] | None = None, extra_cols: tuple[str, ...] = ()) -> pd.DataFrame:
     """Extract features for an iterable of raw-shaped records and write data/features/{out_name}."""
     window = load_config()["features"]["mattr_window"]
+    out_path = FEATURES_DIR / out_name
+    have = pd.read_csv(out_path) if out_path.exists() else pd.DataFrame(columns=META_COLS + list(extra_cols) + FEATURE_NAMES)
+    done = set(have["cell_id"])
     rows = []
     from tqdm import tqdm
-    for r in tqdm(list(records), unit="doc"):
+    for r in tqdm([r for r in records if r["cell_id"] not in done], unit="doc"):
         if keep is not None and r["cell_id"] not in keep:
             continue
         if not (r.get("text") or "").strip():
@@ -233,7 +236,9 @@ def build_from(records, out_name: str, keep: set[str] | None = None, extra_cols:
         rows.append({"cell_id": r["cell_id"], "model_key": r["model_key"], "model_served": r.get("model_served"),
                      "prompt_id": r["prompt_id"], "lang": r["lang"], "gen": r["gen"],
                      "fk_tier": r["fk_tier"], "stance": r["stance"], **{c: r.get(c) for c in extra_cols}, **feats})
-    df = pd.DataFrame(rows, columns=META_COLS + list(extra_cols) + FEATURE_NAMES)
+    df = pd.concat([have, pd.DataFrame(rows, columns=have.columns)], ignore_index=True)
+    if keep is not None:
+        df = df[df["cell_id"].isin(keep)]  # drop rows whose cell was re-collected and later excluded
     FEATURES_DIR.mkdir(parents=True, exist_ok=True)
     df.to_csv(FEATURES_DIR / out_name, index=False)
     print(f"wrote {len(df)} rows × {len(FEATURE_NAMES)} features to {FEATURES_DIR / out_name}")

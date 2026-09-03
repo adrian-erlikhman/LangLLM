@@ -93,9 +93,12 @@ def run_job(job: dict, gcfg: dict) -> dict:
     return rec
 
 
-def collect(models: list[str], langs: list[str], dry_run: bool = False, workers: int | None = None) -> None:
+def collect(models: list[str], langs: list[str], dry_run: bool = False, workers: int | None = None,
+            max_tokens: int | None = None) -> None:
     cfg = load_config()
-    gcfg = cfg["generation"]
+    gcfg = dict(cfg["generation"])
+    if max_tokens:  # re-runs after reasoning overflow; the override is recorded in each record's params
+        gcfg["max_tokens"] = max_tokens
     jobs = plan(cfg, models, langs)
     total = len(cfg["models"]) * len(load_schemas()) * len(cfg["languages"]) * gcfg["n_per_cell"]
     print(f"{len(jobs)} cells to collect (study total {total}); models={models} langs={langs}")
@@ -123,9 +126,11 @@ def main() -> None:
     ap.add_argument("--lang", nargs="*", help="language codes (default: all)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--workers", type=int)
+    ap.add_argument("--max-tokens", type=int, help="override generation.max_tokens (e.g. after reasoning overflow)")
     a = ap.parse_args()
     cfg = load_config()
-    collect(a.model or list(cfg["models"]), a.lang or language_codes(cfg), dry_run=a.dry_run, workers=a.workers)
+    collect(a.model or list(cfg["models"]), a.lang or language_codes(cfg), dry_run=a.dry_run, workers=a.workers,
+            max_tokens=a.max_tokens)
 
 
 if __name__ == "__main__":
