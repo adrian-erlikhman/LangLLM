@@ -190,8 +190,7 @@ def f8_translation(cfg):
         ax.bar(x + w, d["acc_train_native_test_translated"], w, color="#DD8452", label="train native → test translated")
         ax.axhline(d["acc_english_originals"].iloc[0], ls=":", c="#4C72B0", lw=1, label="English originals (LOPO)")
         ax.axhline(CHANCE, ls="--", c="k", lw=0.8)
-        ax.set_xticks(x, [f"{l}
-#{cfg['languages'][l]['rank']}" for l in langs]); ax.set_ylim(0, 1)
+        ax.set_xticks(x, [f"{l}\n#{cfg['languages'][l]['rank']}" for l in langs]); ax.set_ylim(0, 1)
         ax.set_title({"google": "Google Translate", "llm": "LLM translator (non-subject)"}.get(tr, tr))
     axes[0].set_ylabel("attribution accuracy"); axes[0].legend(frameon=False, fontsize=7, loc="upper right")
     fig.suptitle("RQ5 — does translation destroy the fingerprint?", fontsize=10)
