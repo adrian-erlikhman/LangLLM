@@ -52,7 +52,7 @@
   {
     "id": "P03",
     "lang": "ja",
-    "prompt": "小学校での宿題を廃止すべきだという意見がある。あなたはこの意見に賛成か、反対か。反対の立場から、800字程度で意見文を書け。宿題の意義について、多角的な視点から論じよ。",
+    "prompt": "小学校での宿題を廃止すべきという意見があるが、あなたはこれに反対の立場をとって論じなさい。以下の三点をそれぞれ一つの段落を使って具体的に説明し、根拠として自分の主張を展開しなさい。第一に、毎日少しずつ行う練習は、読み書きや計算の定着に役立つ。第二に、宿題は中学校以降の自習の習慣を小学校の段階から身につけるために必要である。第三に、宿題を通じて保護者は子どもが何を学んでいるのかを知ることができる。これらの点をふまえて、800字程度でまとまりのある文章を書きなさい。見出しや箇条書きを使わず、段落だけで構成すること。",
     "schema": {
       "topic": "Abolishing homework in primary school",
       "stance": "against",
@@ -66,13 +66,23 @@
     "writer_model": "meta-llama/llama-4-maverick",
     "writer_model_served": "meta-llama/llama-4-maverick",
     "usage": {
-      "prompt_tokens": 284,
-      "completion_tokens": 61,
-      "total_tokens": 345,
-      "cost": 0.00016955
+      "prompt_tokens": 440,
+      "completion_tokens": 160,
+      "total_tokens": 600,
+      "cost": 0.00019936,
+      "reasoning_tokens": 0
     },
-    "written_at": "2026-09-03T16:56:32.334334Z",
-    "human_checked": false
+    "written_at": "2026-09-03T18:55:16.657412+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "小学校での宿題を廃止すべきだという意見がある。あなたはこの意見に賛成か、反対か。反対の立場から、800字程度で意見文を書け。宿題の意義について、多角的な視点から論じよ。",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted prompt lacks the three specific intended sub-claims and includes a vague extra claim."
+      }
+    ]
   },
   {
     "id": "P04",
@@ -102,7 +112,7 @@
   {
     "id": "P05",
     "lang": "ja",
-    "prompt": "ソーシャルメディアアカウントの利用に年齢確認を義務付けるべきかどうかが議論されている。年齢確認の導入に反対する立場から、この提案の是非について論じよ。年齢確認制度がもたらす弊害について具体的に考察し、説得力のある文章で主張を展開すること。800字程度。",
+    "prompt": "ソーシャルメディアのアカウントに年齢確認を義務付けるべきという意見がある。この主張に反論する論説文を書け。年齢確認の義務化は、身分証明書の収集を必要とし、プライバシーのリスクを高めること、決意した未成年者は他人の身分証明を利用したり他のプラットフォームを利用したりして規制を回避すること、そして、身分証明書を持たない人々に最も大きな負担を強いることを、それぞれ一つの段落を使って具体的に論じなさい。論説は、見出しや箇条書きを使わず、連続した文章で構成し、800字程度でまとめなさい。",
     "schema": {
       "topic": "Mandatory age verification for social media accounts",
       "stance": "against",
@@ -116,13 +126,23 @@
     "writer_model": "meta-llama/llama-4-maverick",
     "writer_model_served": "meta-llama/llama-4-maverick",
     "usage": {
-      "prompt_tokens": 291,
-      "completion_tokens": 72,
-      "total_tokens": 363,
-      "cost": 0.0001158
+      "prompt_tokens": 446,
+      "completion_tokens": 142,
+      "total_tokens": 588,
+      "cost": 0.000188032,
+      "reasoning_tokens": 0
     },
-    "written_at": "2026-09-03T16:56:37.073287Z",
-    "human_checked": false
+    "written_at": "2026-09-03T18:55:15.612231+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "ソーシャルメディアアカウントの利用に年齢確認を義務付けるべきかどうかが議論されている。年齢確認の導入に反対する立場から、この提案の是非について論じよ。年齢確認制度がもたらす弊害について具体的に考察し、説得力のある文章で主張を展開すること。800字程度。",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted prompt lacks the three specific sub-claims required by the intended schema."
+      }
+    ]
   },
   {
     "id": "P06",
@@ -177,7 +197,7 @@
   {
     "id": "P08",
     "lang": "ja",
-    "prompt": "週休三日制を国の標準的な労働制度として導入することについて、あなたの意見を八百字程度で論じなさい。導入の是非について、賛成の立場から説得力のある文章を書くこと。論じるにあたっては、以下の観点を含め、根拠となる事実や具体例を挙げて述べなさい。",
+    "prompt": "週の労働日数を4日に減らすことを国の政策として導入することについて、賛成の立場から説得力のある文章を書け。労働時間の短縮が生産量に影響を与えないことは、すでにいくつかの試験的な導入で実証されている点を指摘し、一つの段落を設けよ。また、休みが増えることで燃え尽き症候群が減り、病気休暇を取る人も減るだろうという点を、別の段落で述べよ。さらに、労働日数の短縮によって仕事がより多くの人々に分散される効果についても、独立した段落を設けて論じよ。文章は800字程度とし、見出しや箇条書きを使わず、段落をつないだ文章で構成すること。",
     "schema": {
       "topic": "A four-day working week as national policy",
       "stance": "for",
@@ -191,13 +211,23 @@
     "writer_model": "meta-llama/llama-4-maverick",
     "writer_model_served": "meta-llama/llama-4-maverick",
     "usage": {
-      "prompt_tokens": 279,
-      "completion_tokens": 80,
-      "total_tokens": 359,
-      "cost": 0.00011148
+      "prompt_tokens": 429,
+      "completion_tokens": 167,
+      "total_tokens": 596,
+      "cost": 0.0002194,
+      "reasoning_tokens": 0
     },
-    "written_at": "2026-09-03T16:56:48.066898Z",
-    "human_checked": false
+    "written_at": "2026-09-03T18:55:09.867157+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "週休三日制を国の標準的な労働制度として導入することについて、あなたの意見を八百字程度で論じなさい。導入の是非について、賛成の立場から説得力のある文章を書くこと。論じるにあたっては、以下の観点を含め、根拠となる事実や具体例を挙げて述べなさい。",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted points are generic instructions and do not contain the three specific intended sub-claims."
+      }
+    ]
   },
   {
     "id": "P09",
@@ -252,7 +282,7 @@
   {
     "id": "P11",
     "lang": "ja",
-    "prompt": "六歳からのすべての子どもにプログラミング教育を行うべきだという意見がある。これに反対する立場から、説得力のある文章を八百字程度で書け。プログラミング教育の必要性やその効果について考え、反対の立場を明確に示すとともに、具体的な根拠を挙げて論を展開すること。",
+    "prompt": "六歳からの全ての子どもにプログラミングを教えるべきだという意見がある。これに反対する立場から、八百字程度で論を展開しなさい。反対の根拠として、まず、幼い子どもは言語能力や数の感覚を身に付けたり、自由に遊んだりする時期であることを挙げ、その重要性を論じなさい。次に、プログラミングのツールは急速に変化するため、早い段階での学習が将来役に立つ可能性は低いことを指摘し、この点を詳述しなさい。さらに、教員の不足により、全ての子どもに一律にプログラミングを教えることは現実的ではないことを示し、この問題の深刻さを論じなさい。文章は途切れることなく続き、見出しや箇条書き、番号付きのリストを用いないこと。",
     "schema": {
       "topic": "Teaching programming to all children from age six",
       "stance": "against",
@@ -266,13 +296,23 @@
     "writer_model": "meta-llama/llama-4-maverick",
     "writer_model_served": "meta-llama/llama-4-maverick",
     "usage": {
-      "prompt_tokens": 287,
-      "completion_tokens": 81,
-      "total_tokens": 368,
-      "cost": 0.0001222
+      "prompt_tokens": 442,
+      "completion_tokens": 189,
+      "total_tokens": 631,
+      "cost": 0.000219944,
+      "reasoning_tokens": 0
     },
-    "written_at": "2026-09-03T16:56:54.214259Z",
-    "human_checked": false
+    "written_at": "2026-09-03T18:55:18.486236+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "六歳からのすべての子どもにプログラミング教育を行うべきだという意見がある。これに反対する立場から、説得力のある文章を八百字程度で書け。プログラミング教育の必要性やその効果について考え、反対の立場を明確に示すとともに、具体的な根拠を挙げて論を展開すること。",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted points are generic structural instructions rather than the specific intended sub-claims."
+      }
+    ]
   },
   {
     "id": "P12",

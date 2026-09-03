@@ -6,10 +6,10 @@ Fix flagged prompts by editing `{lang}.json` and re-running `python -m langllm.r
 
 | lang | auto pass | flagged | human checked | notes |
 |---|---|---|---|---|
-| en | 4/12 | P02(content,no_length) P03(no_length) P06(content) P08(no_length) P09(no_length) P10(no_length) P11(no_length) P12(no_length) | no | |
-| es | 9/12 | P06(content) P09(content) P12(content) | no | |
-| zh | 6/12 | P01(content) P02(content) P04(content) P07(content) P08(content) P12(content) | no | |
+| en | 12/12 | — | no | |
+| es | 12/12 | — | no | |
+| zh | 12/12 | — | no | |
 | ru | 12/12 | — | no | |
-| ja | 8/12 | P03(content) P05(content) P08(content) P11(content) | no | |
+| ja | 12/12 | — | no | |
 | tr | 12/12 | — | no | |
-| hi | 10/12 | P07(no_prose_only_instruction) P12(content) | no | |
+| hi | 12/12 | — | no | |

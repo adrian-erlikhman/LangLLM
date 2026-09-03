@@ -200,19 +200,17 @@
   {
     "id": "P07",
     "lang": "hi",
-    "verdict": "flag",
-    "flags": [
-      "no_prose_only_instruction"
-    ],
+    "verdict": "pass",
+    "flags": [],
     "extracted": {
       "topic": "The essay argues against the proposal to eliminate standardized tests for university admissions.",
       "stance": "against",
       "points": [
-        "A common test is the only metric for comparing students coming from schools of varying quality.",
-        "Without tests, the admission process may rely more on essays and activities, which favors wealthy applicants.",
-        "Test scores are as effective as school grades in predicting first-year performance."
+        "Standardized tests are the only means to compare students from schools of varying quality.",
+        "In the absence of these tests, reliance on essays and activities increases, which favors wealthy applicants.",
+        "Test scores are as effective as school grades in predicting first-year academic performance."
       ],
-      "prose_only": false,
+      "prose_only": true,
       "length_stated": true,
       "native_quality": 5,
       "other_language_mentioned": false
@@ -227,10 +225,10 @@
       ],
       "extra_claims": [],
       "verdict": "pass",
-      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+      "note": "The extracted prompt perfectly aligns with the intended topic, stance, and all three sub-claims without adding extra requirements."
     },
     "reviewer_model": "qwen/qwen3.7-plus",
-    "reviewed_at": "2026-09-03T17:31:20.372674+00:00"
+    "reviewed_at": "2026-09-03T18:55:46.334037+00:00"
   },
   {
     "id": "P08",
@@ -367,19 +365,15 @@
   {
     "id": "P12",
     "lang": "hi",
-    "verdict": "flag",
-    "flags": [
-      "content"
-    ],
+    "verdict": "pass",
+    "flags": [],
     "extracted": {
-      "topic": "The essay argues in favor of banning private cars in urban centers.",
+      "topic": "The essay argues in favor of banning private cars from urban centers.",
       "stance": "for",
       "points": [
-        "Banning private cars allows for more effective use of roads for walking, cycling, and commercial activities.",
-        "It leads to significant improvements in air quality and noise pollution.",
-        "Discuss the experiences of cities that have already implemented bans on private cars.",
-        "Show how these cities improved their urban environment.",
-        "Show how these cities saw an increase in retail trade."
+        "More space available on roads for walking, cycling, and commercial activities",
+        "Measurable improvement in air quality and noise pollution within months",
+        "Increase, not decrease, in retail trade in cities that have taken this step"
       ],
       "prose_only": true,
       "length_stated": true,
@@ -394,13 +388,11 @@
         true,
         true
       ],
-      "extra_claims": [
-        "Show how these cities improved their urban environment."
-      ],
-      "verdict": "fail",
-      "note": "The extracted prompt contains an extra claim regarding general urban environment improvement not present in the intended schema."
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
     },
     "reviewer_model": "qwen/qwen3.7-plus",
-    "reviewed_at": "2026-09-03T17:31:22.187661+00:00"
+    "reviewed_at": "2026-09-03T18:55:46.337033+00:00"
   }
 ]

@@ -68,15 +68,15 @@
   {
     "id": "P03",
     "lang": "ja",
-    "verdict": "flag",
-    "flags": [
-      "content"
-    ],
+    "verdict": "pass",
+    "flags": [],
     "extracted": {
       "topic": "The essay argues against the abolition of homework in elementary schools.",
       "stance": "against",
       "points": [
-        "Discuss the significance of homework from multiple perspectives."
+        "Daily practice helps solidify reading, writing, and calculation skills.",
+        "Homework is necessary to cultivate self-study habits from the elementary level in preparation for junior high school and beyond.",
+        "Through homework, parents can understand what their children are learning."
       ],
       "prose_only": true,
       "length_stated": true,
@@ -87,18 +87,16 @@
       "topic_match": true,
       "stance_match": true,
       "subclaims_present": [
-        false,
-        false,
-        false
+        true,
+        true,
+        true
       ],
-      "extra_claims": [
-        "Discuss the significance of homework from multiple perspectives."
-      ],
-      "verdict": "fail",
-      "note": "The extracted prompt lacks the three specific intended sub-claims and includes a vague extra claim."
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
     },
     "reviewer_model": "qwen/qwen3.7-plus",
-    "reviewed_at": "2026-09-03T17:30:39.169791+00:00"
+    "reviewed_at": "2026-09-03T18:55:26.501409+00:00"
   },
   {
     "id": "P04",
@@ -136,15 +134,15 @@
   {
     "id": "P05",
     "lang": "ja",
-    "verdict": "flag",
-    "flags": [
-      "content"
-    ],
+    "verdict": "pass",
+    "flags": [],
     "extracted": {
-      "topic": "The essay discusses whether age verification should be mandatory for social media accounts, arguing against the proposal.",
+      "topic": "The essay argues against the proposition that social media accounts should be required to implement age verification.",
       "stance": "against",
       "points": [
-        "Discuss the negative effects caused by the age verification system specifically."
+        "Mandatory age verification requires the collection of identification documents, which increases privacy risks.",
+        "Determined minors can bypass regulations by using other people's identification or utilizing other platforms.",
+        "It imposes the greatest burden on individuals who do not possess identification documents."
       ],
       "prose_only": true,
       "length_stated": true,
@@ -155,18 +153,16 @@
       "topic_match": true,
       "stance_match": true,
       "subclaims_present": [
-        false,
-        false,
-        false
+        true,
+        true,
+        true
       ],
-      "extra_claims": [
-        "Discuss the negative effects caused by the age verification system specifically."
-      ],
-      "verdict": "fail",
-      "note": "The extracted prompt lacks the three specific sub-claims required by the intended schema."
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
     },
     "reviewer_model": "qwen/qwen3.7-plus",
-    "reviewed_at": "2026-09-03T17:30:39.538899+00:00"
+    "reviewed_at": "2026-09-03T18:55:25.791017+00:00"
   },
   {
     "id": "P06",
@@ -237,16 +233,15 @@
   {
     "id": "P08",
     "lang": "ja",
-    "verdict": "flag",
-    "flags": [
-      "content"
-    ],
+    "verdict": "pass",
+    "flags": [],
     "extracted": {
-      "topic": "The essay is about introducing a three-day weekend as the national standard labor system.",
+      "topic": "The essay argues in favor of implementing a national policy to reduce the workweek to four days.",
       "stance": "for",
       "points": [
-        "Include the specified perspectives in the discussion.",
-        "Provide supporting facts and specific examples."
+        "Point out that pilot implementations have already demonstrated that reducing working hours does not affect production volume.",
+        "State that increased time off will reduce burnout syndrome and decrease the number of people taking sick leave.",
+        "Discuss the effect of distributing work among more people due to the reduction in working days."
       ],
       "prose_only": true,
       "length_stated": true,
@@ -257,16 +252,16 @@
       "topic_match": true,
       "stance_match": true,
       "subclaims_present": [
-        false,
-        false,
-        false
+        true,
+        true,
+        true
       ],
       "extra_claims": [],
-      "verdict": "fail",
-      "note": "The extracted points are generic instructions and do not contain the three specific intended sub-claims."
+      "verdict": "pass",
+      "note": "The extracted prompt perfectly aligns with the intended topic, stance, and all three sub-claims."
     },
     "reviewer_model": "qwen/qwen3.7-plus",
-    "reviewed_at": "2026-09-03T17:30:46.530616+00:00"
+    "reviewed_at": "2026-09-03T18:55:25.983677+00:00"
   },
   {
     "id": "P09",
@@ -337,17 +332,15 @@
   {
     "id": "P11",
     "lang": "ja",
-    "verdict": "flag",
-    "flags": [
-      "content"
-    ],
+    "verdict": "pass",
+    "flags": [],
     "extracted": {
-      "topic": "The essay argues against the proposition that programming education should be mandatory for all children starting from age six.",
+      "topic": "The essay argues against the proposition that all children from the age of six should be taught programming.",
       "stance": "against",
       "points": [
-        "Consider the necessity and effects of programming education",
-        "Clearly state the opposing stance",
-        "Develop the argument by citing specific grounds"
+        "Young children are in a period for acquiring language skills and number sense, or for playing freely, and the importance of this should be discussed.",
+        "Programming tools change rapidly, so early learning is unlikely to be useful in the future, and this point should be detailed.",
+        "Due to a shortage of teachers, it is not realistic to teach programming uniformly to all children, and the seriousness of this problem should be discussed."
       ],
       "prose_only": true,
       "length_stated": true,
@@ -358,20 +351,16 @@
       "topic_match": true,
       "stance_match": true,
       "subclaims_present": [
-        false,
-        false,
-        false
+        true,
+        true,
+        true
       ],
-      "extra_claims": [
-        "Consider the necessity and effects of programming education",
-        "Clearly state the opposing stance",
-        "Develop the argument by citing specific grounds"
-      ],
-      "verdict": "fail",
-      "note": "The extracted points are generic structural instructions rather than the specific intended sub-claims."
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
     },
     "reviewer_model": "qwen/qwen3.7-plus",
-    "reviewed_at": "2026-09-03T17:30:48.074805+00:00"
+    "reviewed_at": "2026-09-03T18:55:26.775612+00:00"
   },
   {
     "id": "P12",
