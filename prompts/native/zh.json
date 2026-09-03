@@ -1,0 +1,362 @@
+[
+  {
+    "id": "P01",
+    "lang": "zh",
+    "prompt": "请就“办公室工作默认采用远程办公模式”这一命题撰写一篇约600字的议论文，论证这一安排的合理性。在文章中，你需要分别用一个段落阐述以下三个观点：首先，取消通勤时间可以让员工将原本用于往返办公室的时间用于工作或个人事务，从而提高个人效率或生活质量；其次，远程办公使企业能够摆脱地域限制，招聘到更广泛范围内的优秀人才；最后，减少对实体办公空间的依赖可以降低公司运营成本，这些节省下来的资金可以重新分配到员工薪酬或研究开发中。全文应采用连续的段落形式，不使用标题、项目符号或编号列表。",
+    "schema": {
+      "topic": "Remote work as the default arrangement for office jobs",
+      "stance": "for",
+      "subclaims": [
+        "Commuting time is recovered as productive or personal time",
+        "Companies can hire from a wider geographic talent pool",
+        "Office space costs fall and can be redirected to salaries or research"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 433,
+      "completion_tokens": 142,
+      "total_tokens": 575,
+      "cost": 0.000185432,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:47.065219+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "请就“将远程工作设为办公室工作的默认安排”这一观点撰写一篇约600字的议论文。你需要论证这一安排的合理性，并从以下角度展开论述。文章应条理清晰，语言流畅，适合一般成年读者阅读。",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted prompt lacks the three specific intended sub-claims."
+      }
+    ]
+  },
+  {
+    "id": "P02",
+    "lang": "zh",
+    "prompt": "请论证城市公共交通应免费开放。你的论点必须支持免费开放，并基于以下三点具体理由分别展开论述：免费措施能大幅削减公共交通的运营成本，因为票务收入往往难以覆盖票务系统的运营开支；免费公共交通能有效减少短途自驾出行，从而缓解城市交通拥堵状况；低收入人群因免费公共交通获得更多就业和服务机会，从而改善社会公平性。全文须由连续的段落构成，不分章节，不使用标题、项目符号或编号列表，大约600字。",
+    "schema": {
+      "topic": "Making urban public transport free of charge",
+      "stance": "for",
+      "subclaims": [
+        "Fare collection itself is a large share of operating cost",
+        "Free transit shifts short car trips and reduces congestion",
+        "Low-income riders gain access to jobs and services"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 414,
+      "completion_tokens": 118,
+      "total_tokens": 532,
+      "cost": 0.000164928,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:44.832316+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "请论述城市公共交通免费化的利弊，并阐述你对这一问题的看法。假设城市公共交通完全免费，你认为这对城市发展会产生怎样的影响？在你的论述中，请特别关注以下几个方面：免费化如何影响公共交通的运营成本，免费公共交通对城市交通拥堵的缓解作用，以及对低收入人群生活的影响。全文大约600字。",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted stance is unclear and does not match the required 'for' position."
+      }
+    ]
+  },
+  {
+    "id": "P03",
+    "lang": "zh",
+    "prompt": "有人提议取消小学的家庭作业，你认为这种做法不可取。请围绕这一观点写一篇议论文，阐述你的理由。文章应包含以下内容：家庭作业有助于家长了解孩子的学习内容；适当的每日练习有助于巩固阅读和算术技能；小学阶段的家庭作业有助于孩子在升入中学前养成独立完成作业的习惯。字数大约600字。",
+    "schema": {
+      "topic": "Abolishing homework in primary school",
+      "stance": "against",
+      "subclaims": [
+        "Short daily practice consolidates reading and arithmetic",
+        "Homework builds routines of independent work before secondary school",
+        "It gives parents a window into what their child is learning"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 282,
+      "completion_tokens": 79,
+      "total_tokens": 361,
+      "cost": 0.0001196
+    },
+    "written_at": "2026-09-03T16:55:04.430399Z",
+    "human_checked": false
+  },
+  {
+    "id": "P04",
+    "lang": "zh",
+    "prompt": "在实现电力系统脱碳的过程中，核能的必要性日益凸显。请围绕“核能是电力脱碳不可或缺的一部分”这一命题展开论证，撰写一篇约600字的议论文。在文中，请分别用一个段落详细阐述以下三个关键论点：核能能够提供不受天气影响的稳定电力输出，有效补充风能和太阳能；核能的全生命周期每千瓦时排放量与风能相当；核能单位能量的土地占用面积远小于可再生能源。全文应采用连续的段落形式，不使用标题、项目符号或编号列表。",
+    "schema": {
+      "topic": "Nuclear power as a necessary part of decarbonising electricity",
+      "stance": "for",
+      "subclaims": [
+        "Nuclear provides firm, weather-independent output that complements wind and solar",
+        "Its lifecycle emissions per kilowatt-hour are comparable to wind",
+        "Land use per unit of energy is far smaller than for renewables"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 434,
+      "completion_tokens": 129,
+      "total_tokens": 563,
+      "cost": 0.000176584,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:45.650943+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "在实现电力系统脱碳的过程中，有人认为核能是不可或缺的一部分。请围绕这一观点展开论述，撰写一篇约600字的议论文。论述中需分别阐述核能在电力供应中的独特优势、其全生命周期碳排放强度与风能的比较、以及其单位能源占地面积与可再生能源的对比。要求论证充分，运用专业术语，针对专业读者。",
+        "flags": [
+          "content"
+        ],
+        "note": "The first sub-claim regarding firm, weather-independent output is missing and replaced by a vague point about unique advantages."
+      }
+    ]
+  },
+  {
+    "id": "P05",
+    "lang": "zh",
+    "prompt": "近年来，关于是否应在社交媒体上实施强制年龄验证的讨论日益激烈。有人认为这是保护未成年人的必要措施，但也有人对此持怀疑态度。请撰写一篇约600字的议论文，论证强制年龄验证并非有效的解决方案。在文中，你需要从个人信息安全、规避措施的可能性以及对弱势群体的影响等角度展开论述，全面阐述你的观点。",
+    "schema": {
+      "topic": "Mandatory age verification for social media accounts",
+      "stance": "against",
+      "subclaims": [
+        "Verification requires collecting identity documents, creating a privacy risk for everyone",
+        "Determined minors will route around it with borrowed identities or other platforms",
+        "The burden falls hardest on people without formal identification"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 290,
+      "completion_tokens": 82,
+      "total_tokens": 372,
+      "cost": 0.000115072
+    },
+    "written_at": "2026-09-03T16:55:11.030588Z",
+    "human_checked": false
+  },
+  {
+    "id": "P06",
+    "lang": "zh",
+    "prompt": "近年来，将大量空间探索资金转向海洋研究的提议引起了广泛讨论。作为一位熟悉相关领域的研究人员，请撰写一篇约600字的评论文章，反驳将空间探索资金大规模转移至海洋研究的观点。在文中，请针对以下几个关键问题展开论述：空间探索与海洋研究是否共享同一资金池，二者之间的资金分配是否存在此消彼长的关系；卫星观测技术在海洋研究中的作用及其对资金需求的影响；以及空间探索项目对其他产业的溢出效应。请充分利用相关领域的专业知识和数据，构建严谨的论证，以说服读者反对将空间探索资金转移至海洋研究。",
+    "schema": {
+      "topic": "Redirecting a large share of space-exploration funding to ocean research",
+      "stance": "against",
+      "subclaims": [
+        "Space and ocean science draw on different budgets and the trade-off is false",
+        "Satellite observation is itself the main tool for studying the oceans",
+        "Space programmes have unusually high spillover into other industries"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 291,
+      "completion_tokens": 134,
+      "total_tokens": 425,
+      "cost": 0.000151464
+    },
+    "written_at": "2026-09-03T16:55:19.218907Z",
+    "human_checked": false
+  },
+  {
+    "id": "P07",
+    "lang": "zh",
+    "prompt": "大学入学考试制度改革的讨论中，有人提议取消标准化考试。有人认为，这将使招生过程更加公平。然而，也有观点认为，取消标准化考试将带来一系列问题。请撰写一篇约600字的议论文，反对取消大学入学标准化考试的提议。文章应分别阐述以下三点：标准化考试是衡量不同学校学生成绩的唯一可比指标；取消标准化考试后，招生过程将更加依赖于难以量化的非学术因素，如文书和课外活动，这将使来自富裕家庭的申请者占据优势；研究表明，标准化考试成绩与大学一年级成绩的相关性与高中成绩相当。请以清晰的论述和合理的结构展开论证，全文应为连续的段落叙述，不得包含标题、项目符号或编号列表。",
+    "schema": {
+      "topic": "Dropping standardised tests from university admissions",
+      "stance": "against",
+      "subclaims": [
+        "A common test is the only measure comparable across schools of very different quality",
+        "Without it, admissions lean more on essays and activities that favour wealthy applicants",
+        "Test scores predict first-year performance about as well as school grades do"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 437,
+      "completion_tokens": 166,
+      "total_tokens": 603,
+      "cost": 0.000202936,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:48.919183+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "取消大学入学标准化考试的提议近年来引起了广泛讨论。作为大学招生政策的重要组成部分，标准化考试在选拔人才方面扮演着不可或缺的角色。请围绕“大学招生不应取消标准化考试”这一观点撰写一篇约600字的议论文。\n\n在论证过程中，请针对以下几个关键议题展开深入分析：标准化考试如何为不同层次学校的学生提供一个公平的比较基准；取消标准化考试后，大学招生可能会更加倚重哪些因素，以及这些因素可能带来的后果；标准化考试成绩与高中成绩在预测大学一年级学生表现方面的可比性。\n\n要求论证充分，结构清晰，语言流畅。",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted stance is labeled 'for' while the intended stance is 'against', creating a logical contradiction despite matching sub-claims."
+      }
+    ]
+  },
+  {
+    "id": "P08",
+    "lang": "zh",
+    "prompt": "请结合实际例子和数据，论证将四天工作制作为国家政策的可行性。你的论点应明确支持实施四天工作制，并从以下三个方面展开论述：首先，试验结果表明减少工作时间并不会降低生产效率；其次，更充分的休息可以减少员工的倦怠和缺勤现象；最后，更短的工作周可以使就业机会在更多人之间分配。全文大约600字，要求连贯的段落叙述，不要使用标题、项目符号或编号列表。",
+    "schema": {
+      "topic": "A four-day working week as national policy",
+      "stance": "for",
+      "subclaims": [
+        "Trials report equal output with fewer hours",
+        "Rest reduces burnout and sick leave",
+        "A shorter week spreads employment across more people"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 413,
+      "completion_tokens": 111,
+      "total_tokens": 524,
+      "cost": 0.0002722,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:35.262768+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "请结合实际论据，撰写一篇约600字的议论文，论述将四天工作制上升为国家政策的利弊。你的文章应重点阐述实行四天工作制的好处，包括它如何不影响生产效率、减少员工的职业倦怠和提高就业率等方面，以说服读者支持这一政策。",
+        "flags": [
+          "content"
+        ],
+        "note": "Topic mismatch: intended schema requires arguing 'for' the policy, but the extracted prompt asks for a balanced discussion of advantages and disadvantages."
+      }
+    ]
+  },
+  {
+    "id": "P09",
+    "lang": "zh",
+    "prompt": "随着数字支付的普及，现金在流通中的角色日益受到挑战。请撰写一篇约600字的议论文，论证在数字支付日益增长的背景下，保持现金流通的必要性。你的论述应围绕现金在现代经济中的独特功能展开，特别是在以下方面：其在断电或网络故障时的可用性，它作为唯一不产生交易记录的支付手段的特性，以及它对老年群体和无银行账户人群的重要性。要求论点清晰，论据充分，语言专业。",
+    "schema": {
+      "topic": "Keeping physical cash in circulation as digital payments grow",
+      "stance": "for",
+      "subclaims": [
+        "Cash works during power and network failures",
+        "It is the only payment method that does not create a transaction record",
+        "Elderly and unbanked people depend on it"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 284,
+      "completion_tokens": 107,
+      "total_tokens": 391,
+      "cost": 0.0001424
+    },
+    "written_at": "2026-09-03T16:55:28.341448Z",
+    "human_checked": false
+  },
+  {
+    "id": "P10",
+    "lang": "zh",
+    "prompt": "有人主张完全关闭动物园，你对此持反对意见。请撰写一篇约600字的议论文，反驳这一主张。在文章中，你需要从以下角度论证保留动物园的必要性：现代动物园的濒危物种繁殖计划、公众通过直接接触动物增强对保护工作的支持，以及动物园的兽医研究对野生动物种群的益处。请充分展开你的论点，并以清晰的逻辑和有力的证据来说服读者。",
+    "schema": {
+      "topic": "Phasing out zoos",
+      "stance": "against",
+      "subclaims": [
+        "Modern zoos run breeding programmes that have saved species from extinction",
+        "Direct contact with animals builds public support for conservation",
+        "Zoo veterinary research benefits wild populations"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 282,
+      "completion_tokens": 97,
+      "total_tokens": 379,
+      "cost": 0.00021025
+    },
+    "written_at": "2026-09-03T16:55:30.033510Z",
+    "human_checked": false
+  },
+  {
+    "id": "P11",
+    "lang": "zh",
+    "prompt": "有人提议从六岁开始，所有儿童都应该学习编程。你对此持反对意见。请围绕这一话题写一篇约600字的议论文，阐述你的观点和理由。\n\n在论述中，请针对以下几个方面展开论证：儿童早期教育应注重哪些方面更合适，编程工具的快速变化对早期编程教育的影响，以及当前师资条件是否支持对所有儿童进行编程教育。要求论点明确，论据充分，条理清晰，语言流畅。",
+    "schema": {
+      "topic": "Teaching programming to all children from age six",
+      "stance": "against",
+      "subclaims": [
+        "Early years are better spent on language, number sense and play",
+        "Programming tools change too fast for early instruction to remain useful",
+        "Teacher shortages make universal early coding instruction unrealistic"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 286,
+      "completion_tokens": 101,
+      "total_tokens": 387,
+      "cost": 0.000138
+    },
+    "written_at": "2026-09-03T16:55:31.926910Z",
+    "human_checked": false
+  },
+  {
+    "id": "P12",
+    "lang": "zh",
+    "prompt": "请论证在城市中心区禁止私人汽车的合理性。你的论点应基于以下三个关键事实：首先，禁止私人汽车可以释放街道空间，促进步行、骑行和商业活动的发展；其次，这一措施能在数月内显著改善空气质量和降低噪音污染；再次，已实施该政策的城市零售业客流量不降反升。请在文章中分别阐述这三个方面，并以此为基础构建你的论证。全文应为连续的文字叙述，大约600字，不应包含标题、项目符号或编号列表。",
+    "schema": {
+      "topic": "Banning private cars from city centres",
+      "stance": "for",
+      "subclaims": [
+        "Street space is freed for walking, cycling and commerce",
+        "Air quality and noise improve measurably within months",
+        "Cities that have done it report higher retail footfall, not lower"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 419,
+      "completion_tokens": 119,
+      "total_tokens": 538,
+      "cost": 0.000166624,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:44.815598+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "请论述在城市中心区域禁止私人汽车的必要性。你的论点应基于以下三个关键方面进行深入探讨：首先，取消私人汽车的通行将如何优化街道空间的利用，促进步行、骑行和商业活动的发展；其次，这一措施对城市空气质量和噪音污染的改善效果；最后，已实施类似政策的城市，其零售业人流量是否受到负面影响。请结合相关实例和数据，全面阐述禁止私人汽车进入城市中心区域的合理性和可行性。字数大约600字。",
+        "flags": [
+          "content"
+        ],
+        "note": "The third sub-claim is framed as a question rather than the required assertion of higher retail footfall."
+      }
+    ]
+  }
+]

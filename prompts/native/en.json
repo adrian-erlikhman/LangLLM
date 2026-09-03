@@ -1,0 +1,383 @@
+[
+  {
+    "id": "P01",
+    "lang": "en",
+    "prompt": "Make the case that office jobs should default to remote work arrangements. In your essay, discuss how this shift would allow employees to reclaim time previously spent commuting, either for personal activities or for work that boosts productivity. Explain how companies can benefit from accessing a broader talent pool by shedding geographical constraints on hiring. Also, consider the financial implications for businesses, particularly how reduced needs for office space can lead to cost savings that can be invested in employee salaries or research and development. Develop each of these points fully, using relevant examples or data to support your argument. Your essay should be clear, well-organized, and approximately 350 words.",
+    "schema": {
+      "topic": "Remote work as the default arrangement for office jobs",
+      "stance": "for",
+      "subclaims": [
+        "Commuting time is recovered as productive or personal time",
+        "Companies can hire from a wider geographic talent pool",
+        "Office space costs fall and can be redirected to salaries or research"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 289,
+      "completion_tokens": 127,
+      "total_tokens": 416,
+      "cost": 0.000146192
+    },
+    "written_at": "2026-09-03T16:53:12.642121Z",
+    "human_checked": false
+  },
+  {
+    "id": "P02",
+    "lang": "en",
+    "prompt": "Write a persuasive essay arguing in favour of making urban public transport free for all users. In your essay, make the case that eliminating fares would yield significant benefits for cities and their residents. Develop your argument across three main lines of reasoning: first, that the cost of collecting fares is a substantial burden on transit operators, and that this expense could be better spent on improving services; second, that free public transport would encourage people to switch from driving for short trips, thereby reducing congestion on city streets; and third, that low-income residents, who often face significant barriers to mobility, would gain greater access to employment opportunities and essential services. \n\nYour essay should be written in continuous prose, with no headings, bullet points, or numbered lists, and should be approximately 350 words in length.",
+    "schema": {
+      "topic": "Making urban public transport free of charge",
+      "stance": "for",
+      "subclaims": [
+        "Fare collection itself is a large share of operating cost",
+        "Free transit shifts short car trips and reduces congestion",
+        "Low-income riders gain access to jobs and services"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 435,
+      "completion_tokens": 158,
+      "total_tokens": 593,
+      "cost": 0.000196968,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:38.704526+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Make the case for eliminating fares on urban public transportation. In a well-supported argument, demonstrate that making transit free for all riders would be a sound investment in the economic and environmental health of cities. \n\nIn developing your position, consider the various ways in which fare-free transit could benefit urban communities. You might, for example, examine the financial implications of dispensing with fare collection, and discuss how the resulting savings could be allocated to improve the overall quality of transit service. Alternatively, you could analyze the potential impact of free transit on traffic congestion, and argue that by inducing drivers to switch to public transportation, cities can reduce gridlock and promote more efficient travel. Another possible line of argument involves the social equity benefits of fare-free transit, and the ways in which it can expand access to employment, education, and other essential services for low-income residents.\n\nIn the course of your essay, be sure to address all three of these dimensions: the cost savings that could be achieved by eliminating fares; the potential for free transit to reduce traffic congestion by converting short car trips to transit trips; and the benefits that fare-free transit would bring to low-income riders, for whom the cost of fares can be a significant barrier to mobility and opportunity. Your essay should be clearly written and well-organized, with each point developed in its own coherent paragraph.",
+        "flags": [
+          "content",
+          "no_length"
+        ],
+        "note": "The first sub-claim mismatches as the prompt focuses on reallocating savings rather than the cost share of fare collection."
+      }
+    ]
+  },
+  {
+    "id": "P03",
+    "lang": "en",
+    "prompt": "Write a persuasive essay arguing against the idea that primary schools should abolish homework. In your essay, make the case that daily homework is essential for reinforcing the reading and arithmetic skills that students learn in class. You should also explain how homework helps children develop the independent work habits they will need when they enter secondary school. In addition, discuss the value of homework as a way for parents to stay informed about what their child is studying. Develop each of these points in a separate paragraph, using evidence and examples to support your argument. Your essay should be around 350 words long and consist of continuous prose, with no headings, bullet points, or numbered lists.",
+    "schema": {
+      "topic": "Abolishing homework in primary school",
+      "stance": "against",
+      "subclaims": [
+        "Short daily practice consolidates reading and arithmetic",
+        "Homework builds routines of independent work before secondary school",
+        "It gives parents a window into what their child is learning"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 411,
+      "completion_tokens": 132,
+      "total_tokens": 543,
+      "cost": 0.0001878,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:27.990218+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Some educators have proposed doing away with homework for primary school students, arguing that it takes away from family time and extracurricular activities. Write a persuasive essay arguing against this proposal. Make the case that homework plays a vital role in a child's educational development, citing the ways in which daily practice reinforces fundamental skills, prepares students for the demands of secondary school, and keeps parents informed about their child's curriculum. Be sure to devote at least a paragraph to each of these considerations as you build your argument. Your essay should be clear, well-organized, and convincing to a general reader.",
+        "flags": [
+          "no_length"
+        ],
+        "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
+      }
+    ]
+  },
+  {
+    "id": "P04",
+    "lang": "en",
+    "prompt": "Write a persuasive essay arguing that nuclear power is an indispensable component of a decarbonised electricity system. In making your case, address the following key considerations: the capacity of nuclear to provide a stable output that is not contingent on meteorological conditions, thereby complementing the intermittency of renewable energy sources; the comparative lifecycle emissions of nuclear power in relation to other low-carbon technologies; and the relative land use requirements of nuclear installations versus those of wind and solar farms. Ensure that each of these factors is developed in a dedicated paragraph, and that your discussion is informed by the relevant technical literature. Your essay should be approximately 350 words in length.",
+    "schema": {
+      "topic": "Nuclear power as a necessary part of decarbonising electricity",
+      "stance": "for",
+      "subclaims": [
+        "Nuclear provides firm, weather-independent output that complements wind and solar",
+        "Its lifecycle emissions per kilowatt-hour are comparable to wind",
+        "Land use per unit of energy is far smaller than for renewables"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 291,
+      "completion_tokens": 128,
+      "total_tokens": 419,
+      "cost": 0.0001606
+    },
+    "written_at": "2026-09-03T16:53:27.488471Z",
+    "human_checked": false
+  },
+  {
+    "id": "P05",
+    "lang": "en",
+    "prompt": "Proponents of mandatory age verification for social media accounts argue that it is a necessary step to protect minors from online harm. Write a persuasive essay arguing against this proposition. In your essay, consider the potential consequences of requiring users to verify their age, including the impact on individual privacy, the effectiveness of such measures in preventing minors' access, and the potential for unequal burdens on different segments of the population. Develop a clear and well-supported argument against mandatory age verification, drawing on relevant concerns and evidence to make your case. Your essay should be well-organized, clearly written, and approximately 350 words in length.",
+    "schema": {
+      "topic": "Mandatory age verification for social media accounts",
+      "stance": "against",
+      "subclaims": [
+        "Verification requires collecting identity documents, creating a privacy risk for everyone",
+        "Determined minors will route around it with borrowed identities or other platforms",
+        "The burden falls hardest on people without formal identification"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 290,
+      "completion_tokens": 123,
+      "total_tokens": 413,
+      "cost": 0.000143608
+    },
+    "written_at": "2026-09-03T16:53:33.481375Z",
+    "human_checked": false
+  },
+  {
+    "id": "P06",
+    "lang": "en",
+    "prompt": "Argue against the proposition that a significant portion of space-exploration funding should be redirected to ocean research. In making your case, develop the following points, each in a separate paragraph: firstly, that the budgets for space and ocean science are largely distinct and therefore a trade-off between the two is illusory; secondly, that satellite observation, a key component of space research, is already a crucial tool in the study of the oceans; and thirdly, that space programmes have a uniquely high level of spillover into other industries, generating benefits that extend far beyond the field of space exploration itself. Your essay should be around 350 words in length and consist of continuous prose, with no headings, bullet points, or numbered lists.",
+    "schema": {
+      "topic": "Redirecting a large share of space-exploration funding to ocean research",
+      "stance": "against",
+      "subclaims": [
+        "Space and ocean science draw on different budgets and the trade-off is false",
+        "Satellite observation is itself the main tool for studying the oceans",
+        "Space programmes have unusually high spillover into other industries"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 417,
+      "completion_tokens": 149,
+      "total_tokens": 566,
+      "cost": 0.000187104,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:39.700681+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Critics of the current allocation of resources for space exploration have proposed that a significant portion of these funds be redirected towards research into the world's oceans, arguing that the latter is a more pressing concern for humanity. Argue against this proposition, addressing the following considerations in your response.\n\nIn your essay, make the case that diverting funds from space exploration to ocean research is not a straightforward trade-off, as the budgets for these two areas are not as intertwined as they may initially seem. Discuss the extent to which satellite observation technologies, a key component of space programmes, have become integral to the study of the oceans, and consider whether this reliance undermines the argument that space funding is being misallocated. Furthermore, examine the broader economic benefits that have arisen from investment in space exploration, and assess the likelihood that similar spillover effects would result from a comparable investment in ocean research.\n\nYour response should be around 350 words and should engage with the technical and economic nuances of the debate, making a compelling case against the reallocation of funds from space exploration to ocean research.",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted prompt contains two extra claims not present in the intended schema."
+      }
+    ]
+  },
+  {
+    "id": "P07",
+    "lang": "en",
+    "prompt": "Some argue that universities should abandon standardised tests as a factor in admissions decisions. Write a persuasive essay arguing against this position. In your essay, discuss how a common standardised test provides a level playing field for applicants from diverse educational backgrounds, how its absence would exacerbate existing inequalities in the admissions process, and how its predictive validity compares to that of high school grades in forecasting student success in the first year of university. Be sure to develop each of these points in a separate paragraph, using evidence and reasoning to support your argument. Your essay should be around 350 words.",
+    "schema": {
+      "topic": "Dropping standardised tests from university admissions",
+      "stance": "against",
+      "subclaims": [
+        "A common test is the only measure comparable across schools of very different quality",
+        "Without it, admissions lean more on essays and activities that favour wealthy applicants",
+        "Test scores predict first-year performance about as well as school grades do"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 299,
+      "completion_tokens": 116,
+      "total_tokens": 415,
+      "cost": 0.00023805
+    },
+    "written_at": "2026-09-03T16:53:44.962759Z",
+    "human_checked": false
+  },
+  {
+    "id": "P08",
+    "lang": "en",
+    "prompt": "Write a persuasive essay arguing in favour of adopting a four-day working week as national policy. In your essay, make the case that trials have shown employees can maintain their output even with a shorter working week, that a better-rested workforce will take less sick leave, and that a shorter working week will create more jobs by spreading the available work across more people. Devote a separate paragraph to developing each of these three points. Your essay should be around 350 words and should be written as continuous prose, with no headings, bullet points, or numbered lists.",
+    "schema": {
+      "topic": "A four-day working week as national policy",
+      "stance": "for",
+      "subclaims": [
+        "Trials report equal output with fewer hours",
+        "Rest reduces burnout and sick leave",
+        "A shorter week spreads employment across more people"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 403,
+      "completion_tokens": 113,
+      "total_tokens": 516,
+      "cost": 0.000159248,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:36.006537+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Write a persuasive essay arguing that the government should adopt a four-day working week as national policy. In your essay, present a compelling case in favour of this change, drawing on evidence that a shorter working week can maintain productivity while improving employee wellbeing and benefiting the broader economy. Be sure to discuss the findings of trials that have tested the four-day week, the impact of extra rest time on worker burnout and absenteeism, and the potential for a shorter working week to create more job opportunities by spreading available work across a larger workforce. Your essay should be clear, well-organised, and convincing, making a strong case for why a four-day working week should be implemented nationwide.",
+        "flags": [
+          "no_length"
+        ],
+        "note": "All intended sub-claims are present and no extraneous claims were extracted."
+      }
+    ]
+  },
+  {
+    "id": "P09",
+    "lang": "en",
+    "prompt": "In an era where digital payments are increasingly ubiquitous, argue in favour of maintaining a robust circulation of physical cash. In making your case, develop a compelling narrative that incorporates the following key considerations: the resilience of cash transactions in the face of infrastructural failures, such as power outages and network disruptions; the unique attribute of cash as the sole payment method that does not generate a transactional record, thereby safeguarding user anonymity; and the critical reliance on cash among demographic segments that are either unbanked or elderly, for whom alternative payment modalities are not viable. Ensure that each of these factors is accorded a dedicated paragraph, wherein you elucidate its significance and substantiate its relevance to the broader argument. Your essay should be crafted in continuous prose, eschewing headings, bullet points, and numbered lists, and should approximate 350 words in length.",
+    "schema": {
+      "topic": "Keeping physical cash in circulation as digital payments grow",
+      "stance": "for",
+      "subclaims": [
+        "Cash works during power and network failures",
+        "It is the only payment method that does not create a transaction record",
+        "Elderly and unbanked people depend on it"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 415,
+      "completion_tokens": 168,
+      "total_tokens": 583,
+      "cost": 0.000199928,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:39.325005+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "As the proliferation of digital payment systems continues to reshape the global financial landscape, concerns are being raised about the long-term viability of physical cash. In light of this trend, argue in favour of maintaining a robust circulation of cash, even as digital transactions become increasingly prevalent. \n\nIn making your case, be sure to address the critical role that cash plays in ensuring transactional continuity during infrastructure failures, such as power grid collapses or network outages. You should also consider the unique attribute of cash that distinguishes it from all digital payment methods, and discuss the implications of this distinction for individual privacy. Furthermore, examine the disproportionate reliance on cash among certain demographic groups, and assess the potential consequences of a cashless economy for these populations.\n\nYour argument should be grounded in a nuanced understanding of the complex interplay between cash, digital payments, and the broader financial ecosystem. You are expected to marshal evidence and reasoning to support your position, and to anticipate potential counterarguments. The discussion should be informed by relevant technical and socioeconomic considerations, and should demonstrate a sophisticated grasp of the issues at stake.",
+        "flags": [
+          "no_length"
+        ],
+        "note": "The extracted points align perfectly with the intended schema in topic, stance, and all three sub-claims."
+      }
+    ]
+  },
+  {
+    "id": "P10",
+    "lang": "en",
+    "prompt": "Write a persuasive essay arguing against the proposal to phase out zoos. In making your case, develop the following points, each in a separate paragraph: the crucial role that modern zoos play in breeding programmes that have prevented the extinction of numerous species; the importance of direct contact between the public and animals in fostering support for conservation efforts; and the significant benefits that veterinary research conducted in zoos has yielded for wild animal populations. Your essay should be around 350 words in length and should be written in continuous prose, without headings, bullet points, or numbered lists.",
+    "schema": {
+      "topic": "Phasing out zoos",
+      "stance": "against",
+      "subclaims": [
+        "Modern zoos run breeding programmes that have saved species from extinction",
+        "Direct contact with animals builds public support for conservation",
+        "Zoo veterinary research benefits wild populations"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 414,
+      "completion_tokens": 114,
+      "total_tokens": 528,
+      "cost": 0.000162144,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:35.789948+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Some conservationists argue that zoos have outlived their usefulness and should be phased out entirely. Write a persuasive essay arguing against this proposition. In your essay, discuss the crucial role that modern zoos play in breeding programmes for endangered species, highlighting specific examples of species that have been saved from extinction through these efforts. Also, consider the impact that direct contact with animals in zoos has on public attitudes towards conservation, and explain how this exposure can foster a deeper appreciation and support for conservation initiatives. Finally, examine the ways in which veterinary research conducted in zoos can inform and improve conservation efforts in the wild, and discuss the potential benefits of this research for wild animal populations. Your essay should be well-supported with relevant examples and should demonstrate a clear understanding of the complex relationships between zoos, conservation, and wildlife management.",
+        "flags": [
+          "no_length"
+        ],
+        "note": "The extracted prompt perfectly aligns with the intended topic, stance, and all three sub-claims without adding extra requirements."
+      }
+    ]
+  },
+  {
+    "id": "P11",
+    "lang": "en",
+    "prompt": "Write a persuasive essay arguing against the idea that all children should be taught programming from the age of six. In your essay, make sure to develop the following points, each in its own paragraph: the early years of a child's education are more effectively spent on building a strong foundation in language, number sense, and imaginative play; the rapid pace of change in programming tools and technologies means that skills learned at a young age are likely to become outdated by the time a child is old enough to apply them; and the current shortage of qualified teachers makes it unrealistic to expect that all schools will be able to provide high-quality coding instruction to every child. Your essay should be around 350 words and should be written as continuous prose, without headings, bullet points, or numbered lists.",
+    "schema": {
+      "topic": "Teaching programming to all children from age six",
+      "stance": "against",
+      "subclaims": [
+        "Early years are better spent on language, number sense and play",
+        "Programming tools change too fast for early instruction to remain useful",
+        "Teacher shortages make universal early coding instruction unrealistic"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 414,
+      "completion_tokens": 155,
+      "total_tokens": 569,
+      "cost": 0.00019068,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:43.274487+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Some educators believe that children as young as six should be taught programming skills. Write a persuasive essay arguing that this is not a good idea. In your essay, discuss the importance of focusing on foundational skills during the early years of education, and explain why introducing programming at such a young age may not be practical or effective in the long run. Be sure to address the rapid pace of technological change and its implications for early coding instruction. Additionally, consider the challenges of implementing a universal coding curriculum, given the current state of the teaching workforce. Your essay should be clearly written and well-organized, with a strong argument supported by logical reasoning.",
+        "flags": [
+          "no_length"
+        ],
+        "note": "The extracted points accurately reflect all intended sub-claims and stance without adding extraneous requirements."
+      }
+    ]
+  },
+  {
+    "id": "P12",
+    "lang": "en",
+    "prompt": "Argue in favour of banning private cars from city centres, making the case that this policy yields significant urban benefits. In developing your position, discuss how the removal of private vehicles from city centres liberates street space for alternative uses such as pedestrian thoroughfares, cycling infrastructure, and commercial activity. Separately, examine the empirical evidence that demonstrates marked improvements in air quality and noise pollution within a relatively short timeframe following the implementation of such a ban. Additionally, address the counterintuitive finding that cities which have adopted this policy have experienced increased retail footfall, rather than the decline that might be expected. Ensure that each of these points is developed in its own paragraph, with a clear and persuasive argument presented in each case. Your essay should be around 350 words in length and consist of continuous prose, without headings, bullet points, or numbered lists.",
+    "schema": {
+      "topic": "Banning private cars from city centres",
+      "stance": "for",
+      "subclaims": [
+        "Street space is freed for walking, cycling and commerce",
+        "Air quality and noise improve measurably within months",
+        "Cities that have done it report higher retail footfall, not lower"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 419,
+      "completion_tokens": 172,
+      "total_tokens": 591,
+      "cost": 0.000203512,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:31:51.525990+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Discuss the case for prohibiting private cars from city centres, presenting a compelling argument in favour of such a policy. In your essay, examine the ways in which the removal of private vehicles from urban cores can lead to a reallocation of street space that prioritises pedestrian movement, cycling infrastructure, and commercial activity. Consider also the rapid improvements in air quality and noise pollution that have been observed in cities that have implemented similar bans, and assess the evidence suggesting that these changes can occur within a relatively short timeframe. Furthermore, address the contention that restricting private car access will inevitably lead to a decline in retail activity, drawing on examples from cities that have successfully implemented car-free policies to demonstrate that, in fact, such measures can be associated with increased footfall and a more vibrant urban environment. Your argument should be supported by relevant evidence and should demonstrate a nuanced understanding of the complex interactions between urban planning, transportation policy, and economic activity.",
+        "flags": [
+          "no_length"
+        ],
+        "note": "The extracted points align perfectly with the intended topic, stance, and all three sub-claims without introducing extraneous arguments."
+      }
+    ]
+  }
+]

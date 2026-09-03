@@ -1,0 +1,332 @@
+[
+  {
+    "id": "P01",
+    "lang": "es",
+    "prompt": "Redacte un ensayo persuasivo de unas 350 palabras en el que defienda la idea de que el trabajo a distancia debería ser la modalidad habitual para los empleos de oficina. \nEn su argumentación, desarrolle los siguientes puntos: cómo el tiempo que se destina a los desplazamientos diarios puede aprovecharse de manera productiva o personal; de qué manera las empresas pueden beneficiarse de un acceso más amplio a candidatos cualificados de diversas ubicaciones geográficas; y cómo la reducción de los costes asociados al espacio de oficina puede permitir a las empresas destinar más recursos a los salarios de sus empleados o a la investigación. \nOrganice su texto en párrafos coherentes y asegúrese de que su argumentación resulte convincente para un público adulto general.",
+    "schema": {
+      "topic": "Remote work as the default arrangement for office jobs",
+      "stance": "for",
+      "subclaims": [
+        "Commuting time is recovered as productive or personal time",
+        "Companies can hire from a wider geographic talent pool",
+        "Office space costs fall and can be redirected to salaries or research"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 292,
+      "completion_tokens": 153,
+      "total_tokens": 445,
+      "cost": 0.00027815
+    },
+    "written_at": "2026-09-03T16:54:06.692083Z",
+    "human_checked": false
+  },
+  {
+    "id": "P02",
+    "lang": "es",
+    "prompt": "El transporte público urbano es fundamental para el funcionamiento de las ciudades modernas. Sin embargo, su financiamiento sigue siendo un tema de debate. En este ensayo, argumente a favor de la gratuidad del transporte público urbano, considerando sus implicaciones económicas, ambientales y sociales. \n\nDesarrolle su argumentación en torno a tres ejes principales. En primer lugar, analice cómo la eliminación de los costos asociados a la recaudación de tarifas podría impactar en la estructura de costos operativos del transporte público. \n\nA continuación, examine de qué manera la gratuidad podría influir en los patrones de movilidad urbana, particularmente en la reducción de los viajes cortos en automóvil y su efecto en la congestión vehicular. \n\nFinalmente, discuta cómo la gratuidad del transporte público podría mejorar la accesibilidad de los sectores de menores ingresos a oportunidades laborales y servicios esenciales, y qué implicaciones podría tener esto en la equidad social y la inclusión.\n\nSu ensayo debe ser claro, bien estructurado y convincente, con un total de alrededor de 350 palabras.",
+    "schema": {
+      "topic": "Making urban public transport free of charge",
+      "stance": "for",
+      "subclaims": [
+        "Fare collection itself is a large share of operating cost",
+        "Free transit shifts short car trips and reduces congestion",
+        "Low-income riders gain access to jobs and services"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 288,
+      "completion_tokens": 209,
+      "total_tokens": 497,
+      "cost": 0.0002248
+    },
+    "written_at": "2026-09-03T16:54:10.000659Z",
+    "human_checked": false
+  },
+  {
+    "id": "P03",
+    "lang": "es",
+    "prompt": "En muchos colegios se está debatiendo la posibilidad de eliminar las tareas para casa en la educación primaria. Algunos sostienen que esta medida mejoraría la calidad de vida de los alumnos y reduciría su estrés. Sin embargo, otros creen que las tareas para casa son fundamentales en esta etapa educativa. Escriba un texto argumentativo en el que defienda la importancia de mantener las tareas en casa para los alumnos de primaria.\n\nEn su texto, deberá presentar tres razones por las que considera que las tareas para casa son beneficiosas. Puede organizar sus argumentos como estime oportuno, pero deberá abordar los siguientes puntos: la consolidación de los conocimientos adquiridos en el aula, la preparación de los alumnos para la educación secundaria y la implicación de los padres en el proceso de aprendizaje de sus hijos.\n\nSu texto debe tener una extensión aproximada de 350 palabras y estar dirigido a un público adulto general. Utilice un lenguaje claro y accesible, evitando tecnicismos y jerga especializada. Desarrolle sus argumentos de manera coherente y persuasiva, apoyándose en ejemplos y razonamientos lógicos.",
+    "schema": {
+      "topic": "Abolishing homework in primary school",
+      "stance": "against",
+      "subclaims": [
+        "Short daily practice consolidates reading and arithmetic",
+        "Homework builds routines of independent work before secondary school",
+        "It gives parents a window into what their child is learning"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 284,
+      "completion_tokens": 223,
+      "total_tokens": 507,
+      "cost": 0.0002352
+    },
+    "written_at": "2026-09-03T16:54:13.448177Z",
+    "human_checked": false
+  },
+  {
+    "id": "P04",
+    "lang": "es",
+    "prompt": "Redacte un ensayo persuasivo de unas 350 palabras en el que defienda la necesidad de la energía nuclear en la descarbonización de la generación eléctrica. Su argumentación deberá sustentarse en tres pilares fundamentales. En primer lugar, deberá demostrar cómo la energía nuclear puede complementar a las fuentes renovables intermitentes, como la eólica y la solar, proporcionando una salida firme e independiente de las condiciones meteorológicas. Asimismo, deberá analizar y comparar las emisiones a lo largo del ciclo de vida de la energía nuclear con las de otras fuentes de energía baja en carbono, como la eólica, y destacar sus similitudes. Por último, deberá examinar la eficiencia en el uso del suelo de la energía nuclear en comparación con las energías renovables, subrayando la significativa ventaja que supone su menor requerimiento de superficie por unidad de energía generada. Su texto debe estar dirigido a un público especializado y presentar un discurso denso y técnicamente riguroso.",
+    "schema": {
+      "topic": "Nuclear power as a necessary part of decarbonising electricity",
+      "stance": "for",
+      "subclaims": [
+        "Nuclear provides firm, weather-independent output that complements wind and solar",
+        "Its lifecycle emissions per kilowatt-hour are comparable to wind",
+        "Land use per unit of energy is far smaller than for renewables"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 293,
+      "completion_tokens": 192,
+      "total_tokens": 485,
+      "cost": 0.00024231
+    },
+    "written_at": "2026-09-03T16:54:16.872254Z",
+    "human_checked": false
+  },
+  {
+    "id": "P05",
+    "lang": "es",
+    "prompt": "En un ensayo persuasivo de unas 350 palabras, argumente en contra de la implementación de la verificación obligatoria de la edad para acceder a las redes sociales. Desarrolle su posición en torno a las implicaciones de esta medida en la privacidad de los usuarios, su efectividad para prevenir el acceso de menores y su impacto en la inclusión digital de ciertos grupos de la población. Asegúrese de abordar estos tres aspectos en párrafos separados y de presentar sus argumentos de manera clara y convincente para un lector informado.",
+    "schema": {
+      "topic": "Mandatory age verification for social media accounts",
+      "stance": "against",
+      "subclaims": [
+        "Verification requires collecting identity documents, creating a privacy risk for everyone",
+        "Determined minors will route around it with borrowed identities or other platforms",
+        "The burden falls hardest on people without formal identification"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 292,
+      "completion_tokens": 104,
+      "total_tokens": 396,
+      "cost": 0.0001416
+    },
+    "written_at": "2026-09-03T16:54:18.988649Z",
+    "human_checked": false
+  },
+  {
+    "id": "P06",
+    "lang": "es",
+    "prompt": "Redacte un ensayo persuasivo en el que argumente en contra de la propuesta de reasignar una porción significativa de los fondos destinados a la exploración espacial hacia la investigación oceánica. Su argumentación debe basarse en tres premisas fundamentales, cada una de las cuales debe desarrollarse en un párrafo separado: en primer lugar, que los presupuestos para la ciencia espacial y la oceanografía son en gran medida independientes, lo que hace que la disyuntiva entre ambas áreas sea más aparente que real; en segundo lugar, que la observación satelital constituye una herramienta primordial para el estudio de los océanos, por lo que la exploración espacial ya está contribuyendo sustancialmente a la investigación oceánica; y, por último, que los programas espaciales tienen un efecto derrame excepcionalmente alto en otras industrias, lo que justifica su continuidad. El ensayo debe tener un total de unas 350 palabras y estar redactado en forma de prosa continua, sin títulos, viñetas ni enumeraciones.",
+    "schema": {
+      "topic": "Redirecting a large share of space-exploration funding to ocean research",
+      "stance": "against",
+      "subclaims": [
+        "Space and ocean science draw on different budgets and the trade-off is false",
+        "Satellite observation is itself the main tool for studying the oceans",
+        "Space programmes have unusually high spillover into other industries"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 442,
+      "completion_tokens": 207,
+      "total_tokens": 649,
+      "cost": 0.000232472,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:24.190594+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Redacte un ensayo persuasivo en el que argumente en contra de la propuesta de reasignar una porción significativa de los fondos destinados a la exploración espacial hacia la investigación oceanográfica. Su argumentación debe sustentarse en tres pilares fundamentales, desarrollados cada uno en un párrafo independiente. El ensayo debe tener una extensión aproximada de 350 palabras y dirigirse a un público especializado. Asegúrese de emplear un lenguaje técnico propio del ámbito y de presentar una argumentación densa y convincente.",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted prompt lacks the specific substantive sub-claims required by the intended schema."
+      }
+    ]
+  },
+  {
+    "id": "P07",
+    "lang": "es",
+    "prompt": "En el debate sobre la admisión a las universidades, se ha propuesto eliminar las pruebas estandarizadas como requisito. Quienes abogan por esta medida argumentan que limita las oportunidades de ciertos grupos y no refleja adecuadamente las capacidades de los estudiantes. Sin embargo, hay razones sólidas para mantener estas pruebas como parte del proceso de admisión. \n\nEn un ensayo persuasivo de aproximadamente 350 palabras, defienda la continuidad de las pruebas estandarizadas en el proceso de admisión a las universidades. Su argumentación debe considerar específicamente los siguientes aspectos: la comparabilidad de los candidatos provenientes de instituciones educativas de calidad muy diversa, el impacto de la eliminación de estas pruebas en la igualdad de oportunidades para los solicitantes de diferentes orígenes socioeconómicos, y la relación entre los resultados de las pruebas estandarizadas y el desempeño académico en el primer año de universidad.\n\nDesarrolle su argumentación en párrafos coherentes y bien estructurados, asegurándose de abordar cada uno de los aspectos mencionados de manera clara y convincente.",
+    "schema": {
+      "topic": "Dropping standardised tests from university admissions",
+      "stance": "against",
+      "subclaims": [
+        "A common test is the only measure comparable across schools of very different quality",
+        "Without it, admissions lean more on essays and activities that favour wealthy applicants",
+        "Test scores predict first-year performance about as well as school grades do"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 300,
+      "completion_tokens": 205,
+      "total_tokens": 505,
+      "cost": 0.000224
+    },
+    "written_at": "2026-09-03T16:54:24.996533Z",
+    "human_checked": false
+  },
+  {
+    "id": "P08",
+    "lang": "es",
+    "prompt": "Escriba un ensayo persuasivo en el que defienda la implantación de la semana laboral de cuatro días como política nacional. En su argumentación, exponga las ventajas de esta medida para la productividad, la salud laboral y el empleo. Asegúrese de desarrollar cada uno de estos aspectos en un párrafo independiente y de alcanzar una extensión de unas 350 palabras.",
+    "schema": {
+      "topic": "A four-day working week as national policy",
+      "stance": "for",
+      "subclaims": [
+        "Trials report equal output with fewer hours",
+        "Rest reduces burnout and sick leave",
+        "A shorter week spreads employment across more people"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 281,
+      "completion_tokens": 74,
+      "total_tokens": 355,
+      "cost": 0.00018345
+    },
+    "written_at": "2026-09-03T16:54:26.653571Z",
+    "human_checked": false
+  },
+  {
+    "id": "P09",
+    "lang": "es",
+    "prompt": "Redacte un ensayo persuasivo de unas 350 palabras en el que defienda la importancia de mantener en circulación el efectivo físico a medida que crecen los pagos digitales. Su argumentación deberá sustentarse en tres pilares fundamentales, cada uno de los cuales deberá desarrollarse en un párrafo separado: en primer lugar, la capacidad del efectivo para funcionar con independencia de la infraestructura de red y suministro eléctrico, lo que lo hace especialmente valioso en situaciones de fallo o interrupción del servicio; en segundo lugar, el hecho de que el efectivo sea el único método de pago que no deja constancia registrable de las transacciones efectuadas, lo que preserva la privacidad de los usuarios; y, por último, la dependencia del efectivo por parte de determinados colectivos, como las personas mayores y aquellas que no tienen acceso a servicios bancarios. El ensayo deberá estar redactado en prosa continua, sin epígrafes, viñetas ni listas numeradas.",
+    "schema": {
+      "topic": "Keeping physical cash in circulation as digital payments grow",
+      "stance": "for",
+      "subclaims": [
+        "Cash works during power and network failures",
+        "It is the only payment method that does not create a transaction record",
+        "Elderly and unbanked people depend on it"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 434,
+      "completion_tokens": 192,
+      "total_tokens": 626,
+      "cost": 0.000220432,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:23.318931+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "En un contexto de creciente adopción de medios de pago digitales, se plantea el debate sobre la conveniencia de mantener en circulación el efectivo físico. Escriba un ensayo persuasivo en el que defienda la importancia de preservar el uso del dinero en efectivo. \n\nEn su argumentación, desarrolle tres razones fundamentales que justifiquen la necesidad de mantener el efectivo en circulación. Asegúrese de dedicar un párrafo a cada una de ellas. \n\nSu texto debe alcanzar un total de unas 350 palabras y dirigirse a un público especializado, capaz de comprender argumentos complejos y tecnicismos propios del ámbito.",
+        "flags": [
+          "content"
+        ],
+        "note": "The prompt requests three reasons but does not specify the required sub-claims."
+      }
+    ]
+  },
+  {
+    "id": "P10",
+    "lang": "es",
+    "prompt": "En un ensayo persuasivo de unas 350 palabras, argumente en contra de la propuesta de eliminar los zoológicos. Asegúrese de desarrollar tres razones clave en sendos párrafos: la importancia de los programas de cría en cautividad para la conservación de especies amenazadas, el papel de los zoológicos en la sensibilización del público hacia la protección de la biodiversidad a través del contacto directo con los animales, y las contribuciones de la investigación veterinaria en los zoológicos al bienestar de las poblaciones silvestres.",
+    "schema": {
+      "topic": "Phasing out zoos",
+      "stance": "against",
+      "subclaims": [
+        "Modern zoos run breeding programmes that have saved species from extinction",
+        "Direct contact with animals builds public support for conservation",
+        "Zoo veterinary research benefits wild populations"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 283,
+      "completion_tokens": 107,
+      "total_tokens": 390,
+      "cost": 0.000131072
+    },
+    "written_at": "2026-09-03T16:54:41.512310Z",
+    "human_checked": false
+  },
+  {
+    "id": "P11",
+    "lang": "es",
+    "prompt": "En los últimos años, se ha propuesto que se enseñe programación a todos los niños a partir de los seis años de edad. Escribe un texto persuasivo en el que argumentes en contra de esta propuesta. \n\nDebes desarrollar tres razones principales para oponerte a la idea de enseñar programación a niños tan pequeños. Algunas de las consideraciones que podrías tener en cuenta incluyen el valor de otras habilidades y actividades en la infancia, la naturaleza cambiante de la tecnología y las limitaciones prácticas del sistema educativo.\n\nTu texto debe convencer a un lector adulto sin conocimientos técnicos especializados de que la enseñanza universal de la programación a niños de seis años no es una buena idea. Desarrolla tus argumentos en unos tres párrafos bien fundamentados. La extensión de tu texto será de aproximadamente 350 palabras.",
+    "schema": {
+      "topic": "Teaching programming to all children from age six",
+      "stance": "against",
+      "subclaims": [
+        "Early years are better spent on language, number sense and play",
+        "Programming tools change too fast for early instruction to remain useful",
+        "Teacher shortages make universal early coding instruction unrealistic"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 288,
+      "completion_tokens": 161,
+      "total_tokens": 449,
+      "cost": 0.000169656
+    },
+    "written_at": "2026-09-03T16:54:50.973039Z",
+    "human_checked": false
+  },
+  {
+    "id": "P12",
+    "lang": "es",
+    "prompt": "Redacte un ensayo persuasivo en el que defienda la prohibición de vehículos privados en los centros urbanos. Su argumentación deberá basarse en tres premisas fundamentales, cada una de las cuales deberá desarrollar en un párrafo independiente: la liberación del espacio viario para el peatón, el ciclista y el comercio minorista; la mejora sustancial de la calidad del aire y la reducción de la contaminación acústica en un plazo de pocos meses; y la experiencia de ciudades que ya han adoptado esta medida, que registran un aumento en la afluencia de público a las zonas comerciales, en lugar de un descenso. Su texto deberá tener una extensión de unas 350 palabras y estar redactado en prosa continua, sin epígrafes, viñetas ni enumeraciones.",
+    "schema": {
+      "topic": "Banning private cars from city centres",
+      "stance": "for",
+      "subclaims": [
+        "Street space is freed for walking, cycling and commerce",
+        "Air quality and noise improve measurably within months",
+        "Cities that have done it report higher retail footfall, not lower"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 436,
+      "completion_tokens": 160,
+      "total_tokens": 596,
+      "cost": 0.0002152,
+      "reasoning_tokens": 0
+    },
+    "written_at": "2026-09-03T17:32:13.786901+00:00",
+    "human_checked": false,
+    "revisions": [
+      {
+        "prompt": "Redacte un ensayo persuasivo de aproximadamente 350 palabras en el que defienda la conveniencia de prohibir la circulación de vehículos privados en los centros urbanos. Su argumentación deberá sustentarse en tres ejes fundamentales, cada uno de los cuales deberá desarrollarse en un párrafo independiente. \n\nSe espera que su texto demuestre un dominio técnico del tema y un manejo fluido de la prosa académica especializada.",
+        "flags": [
+          "content"
+        ],
+        "note": "The extracted prompt lacks the specific substantive sub-claims required by the intended schema."
+      }
+    ]
+  }
+]

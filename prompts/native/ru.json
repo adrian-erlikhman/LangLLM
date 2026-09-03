@@ -1,0 +1,302 @@
+[
+  {
+    "id": "P01",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе в поддержку утверждения, что удалённая работа должна стать стандартным форматом для офисных профессий. В своей аргументации опирайтесь на следующие соображения: выигрыш во времени, который ранее тратился на дорогу и теперь может быть использован для личных или рабочих целей; расширение географии поиска талантов для компаний; и снижение затрат на аренду офисных помещений, которые можно перенаправить на повышение зарплат или финансирование исследований. Разверните каждый из этих тезисов в отдельном абзаце. Общий объём эссе - около 350 слов.",
+    "schema": {
+      "topic": "Remote work as the default arrangement for office jobs",
+      "stance": "for",
+      "subclaims": [
+        "Commuting time is recovered as productive or personal time",
+        "Companies can hire from a wider geographic talent pool",
+        "Office space costs fall and can be redirected to salaries or research"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 290,
+      "completion_tokens": 117,
+      "total_tokens": 407,
+      "cost": 0.000139432
+    },
+    "written_at": "2026-09-03T16:55:41.645639Z",
+    "human_checked": false
+  },
+  {
+    "id": "P02",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе в поддержку предложения сделать городской общественный транспорт бесплатным для пассажиров. В своём эссе приведите весомые аргументы в пользу этой меры, учитывая экономические, экологические и социальные последствия. В частности, обсудите следующие аспекты: как отказ от платы за проезд повлияет на операционные расходы транспортных компаний; каким образом бесплатный общественный транспорт может изменить привычки горожан в передвижении и повлиять на загруженность дорог; и как эта мера скажется на доступности рабочих мест и услуг для малоимущих слоёв населения. Развивайте каждый из этих аспектов в отдельном абзаце, подкрепляя свои утверждения фактами и логическими рассуждениями. Объём эссе должен составлять примерно 350 слов.",
+    "schema": {
+      "topic": "Making urban public transport free of charge",
+      "stance": "for",
+      "subclaims": [
+        "Fare collection itself is a large share of operating cost",
+        "Free transit shifts short car trips and reduces congestion",
+        "Low-income riders gain access to jobs and services"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 148,
+      "total_tokens": 435,
+      "cost": 0.0001758
+    },
+    "written_at": "2026-09-03T16:55:45.118577Z",
+    "human_checked": false
+  },
+  {
+    "id": "P03",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе на тему отмены домашних заданий в начальной школе, приведя веские аргументы против этого предложения. В своём тексте необходимо развить следующие три тезиса, каждый в отдельном абзаце: ежедневные занятия, пусть и непродолжительные, закрепляют навыки чтения и счёта; выполнение домашних заданий готовит детей к самостоятельной работе, которая станет для них основной в средней школе; наконец, домашние задания дают родителям возможность понять, что именно изучают их дети. Общий объём эссе – около 350 слов.",
+    "schema": {
+      "topic": "Abolishing homework in primary school",
+      "stance": "against",
+      "subclaims": [
+        "Short daily practice consolidates reading and arithmetic",
+        "Homework builds routines of independent work before secondary school",
+        "It gives parents a window into what their child is learning"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 283,
+      "completion_tokens": 109,
+      "total_tokens": 392,
+      "cost": 0.0001438
+    },
+    "written_at": "2026-09-03T16:55:47.622470Z",
+    "human_checked": false
+  },
+  {
+    "id": "P04",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе в поддержку утверждения, что атомная энергетика является необходимой составляющей декарбонизации электроэнергетики. В своей аргументации опирайтесь на следующие ключевые преимущества ядерной энергетики: низкие выбросы на протяжении всего жизненного цикла по сравнению с другими низкоуглеродными источниками, способность обеспечивать стабильную генерацию, не зависящую от погодных условий, и высокую эффективность использования земельных ресурсов. Разверните каждый из этих тезисов в отдельном абзаце, подкрепляя их соответствующими техническими данными и логическими выводами. Объем эссе - около 350 слов.",
+    "schema": {
+      "topic": "Nuclear power as a necessary part of decarbonising electricity",
+      "stance": "for",
+      "subclaims": [
+        "Nuclear provides firm, weather-independent output that complements wind and solar",
+        "Its lifecycle emissions per kilowatt-hour are comparable to wind",
+        "Land use per unit of energy is far smaller than for renewables"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 292,
+      "completion_tokens": 126,
+      "total_tokens": 418,
+      "cost": 0.0001592
+    },
+    "written_at": "2026-09-03T16:55:50.085183Z",
+    "human_checked": false
+  },
+  {
+    "id": "P05",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе на тему обязательной верификации возраста для пользователей социальных сетей, аргументируя свою позицию против введения такой меры. В своём эссе необходимо рассмотреть следующие аспекты: угрозу приватности, которую несёт сбор документов для верификации; неэффективность возрастных ограничений в условиях доступности альтернативных платформ и возможности использования чужих идентификационных данных несовершеннолетними; а также неравномерное распределение бремени верификации, особенно тяжело сказывающееся на людях, не имеющих официальных документов, удостоверяющих личность. Каждый из этих аспектов должен быть подробно рассмотрен в отдельном абзаце. Эссе должно быть написано для образованного взрослого читателя и насчитывать около 350 слов.",
+    "schema": {
+      "topic": "Mandatory age verification for social media accounts",
+      "stance": "against",
+      "subclaims": [
+        "Verification requires collecting identity documents, creating a privacy risk for everyone",
+        "Determined minors will route around it with borrowed identities or other platforms",
+        "The burden falls hardest on people without formal identification"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 291,
+      "completion_tokens": 137,
+      "total_tokens": 428,
+      "cost": 0.0001678
+    },
+    "written_at": "2026-09-03T16:55:52.951456Z",
+    "human_checked": false
+  },
+  {
+    "id": "P06",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе, в котором аргументируйте свою позицию против перераспределения значительной доли финансирования космических исследований в пользу исследований океана. В своей работе необходимо развить следующие тезисы: бюджеты космической и океанографической наук практически не пересекаются, поэтому мнимая альтернатива между ними не имеет под собой оснований; спутниковые наблюдения являются одним из основных инструментов изучения океанов; космические программы обладают беспрецедентным потенциалом для создания побочных технологий, находящих применение в других отраслях. Каждый из этих аргументов должен быть подробно развит в отдельном абзаце. Предполагается, что читатель обладает высоким уровнем компетентности в данной области, поэтому используйте специальную терминологию без дополнительных пояснений. Объем эссе - около 350 слов.",
+    "schema": {
+      "topic": "Redirecting a large share of space-exploration funding to ocean research",
+      "stance": "against",
+      "subclaims": [
+        "Space and ocean science draw on different budgets and the trade-off is false",
+        "Satellite observation is itself the main tool for studying the oceans",
+        "Space programmes have unusually high spillover into other industries"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 292,
+      "completion_tokens": 157,
+      "total_tokens": 449,
+      "cost": 0.000184
+    },
+    "written_at": "2026-09-03T16:55:55.804965Z",
+    "human_checked": false
+  },
+  {
+    "id": "P07",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе на тему отказа от стандартизированных тестов при поступлении в вузы, аргументируя свою позицию против этого предложения. В своей работе необходимо рассмотреть следующие аспекты: во-первых, каким образом единый тест обеспечивает сопоставимость оценок абитуриентов из школ разного уровня; во-вторых, как отсутствие стандартизированных тестов может повлиять на роль эссе и внеклассных занятий в процессе отбора, и каким образом это может сказаться на представительстве абитуриентов из семей с разным уровнем дохода; в-третьих, насколько результаты тестов коррелируют с академической успеваемостью на первом году обучения по сравнению с оценками в школе. Разверните каждый из этих тезисов в отдельном абзаце, подкрепляя свои аргументы фактами и логическими рассуждениями. Объем эссе - около 350 слов.",
+    "schema": {
+      "topic": "Dropping standardised tests from university admissions",
+      "stance": "against",
+      "subclaims": [
+        "A common test is the only measure comparable across schools of very different quality",
+        "Without it, admissions lean more on essays and activities that favour wealthy applicants",
+        "Test scores predict first-year performance about as well as school grades do"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 299,
+      "completion_tokens": 174,
+      "total_tokens": 473,
+      "cost": 0.000180904
+    },
+    "written_at": "2026-09-03T16:56:04.183780Z",
+    "human_checked": false
+  },
+  {
+    "id": "P08",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе в поддержку введения четырёхдневной рабочей недели в качестве государственной политики. В своей работе приведите весомые аргументы в пользу сокращения рабочей недели. Обсудите результаты экспериментов, которые показали, что при меньшем количестве рабочих часов производительность остаётся на прежнем уровне. Объясните, как дополнительный отдых влияет на снижение выгорания и количества дней нетрудоспособности по болезни. Кроме того, покажите, как сокращение рабочей недели может способствовать более равномерному распределению рабочих мест среди населения. Ваша работа должна быть написана ясным и доступным языком и насчитывать около 350 слов.",
+    "schema": {
+      "topic": "A four-day working week as national policy",
+      "stance": "for",
+      "subclaims": [
+        "Trials report equal output with fewer hours",
+        "Rest reduces burnout and sick leave",
+        "A shorter week spreads employment across more people"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 279,
+      "completion_tokens": 123,
+      "total_tokens": 402,
+      "cost": 0.0001542
+    },
+    "written_at": "2026-09-03T16:56:06.477801Z",
+    "human_checked": false
+  },
+  {
+    "id": "P09",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе в поддержку сохранения наличных денег в обращении на фоне растущей популярности цифровых платежей. В работе необходимо привести весомые аргументы в пользу сохранения наличных денег, учитывая их уникальные преимущества. Следует отдельно остановиться на таких аспектах, как способность наличных денег функционировать в условиях отключения электроэнергии и сбоев в работе сетей, отсутствие у них транзакционной истории, а также их критическая важность для определённых категорий населения, включая пожилых людей и тех, кто не имеет доступа к банковским услугам. Эссе должно представлять собой связный, технически насыщенный текст объёмом около 350 слов.",
+    "schema": {
+      "topic": "Keeping physical cash in circulation as digital payments grow",
+      "stance": "for",
+      "subclaims": [
+        "Cash works during power and network failures",
+        "It is the only payment method that does not create a transaction record",
+        "Elderly and unbanked people depend on it"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 285,
+      "completion_tokens": 127,
+      "total_tokens": 412,
+      "cost": 0.000145392
+    },
+    "written_at": "2026-09-03T16:56:13.194497Z",
+    "human_checked": false
+  },
+  {
+    "id": "P10",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе на тему \"Отказ от зоопарков: оправданное решение или преждевременный шаг?\" Зоопарки уже давно являются предметом дискуссий, и многие выступают за их полное закрытие. Ваша задача - аргументированно доказать, что отказ от зоопарков не является оптимальным решением проблемы сохранения биоразнообразия.\n\nВ своём эссе вы должны привести весомые аргументы в пользу сохранения зоопарков, опираясь на их роль в сохранении исчезающих видов, влияние на общественное мнение и вклад в развитие ветеринарной науки. В частности, необходимо осветить следующие аспекты: роль современных зоопарков в реализации программ разведения редких и исчезающих видов; значение прямого контакта людей с животными для формирования общественного мнения в пользу охраны природы; вклад ветеринарных исследований, проводимых в зоопарках, в защиту дикой природы.\n\nЭссе должно быть написано ясным и точным языком, с использованием соответствующих научных терминов. Предполагаемый объём - около 350 слов.",
+    "schema": {
+      "topic": "Phasing out zoos",
+      "stance": "against",
+      "subclaims": [
+        "Modern zoos run breeding programmes that have saved species from extinction",
+        "Direct contact with animals builds public support for conservation",
+        "Zoo veterinary research benefits wild populations"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 283,
+      "completion_tokens": 205,
+      "total_tokens": 488,
+      "cost": 0.0003348
+    },
+    "written_at": "2026-09-03T16:56:16.209573Z",
+    "human_checked": false
+  },
+  {
+    "id": "P11",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе на тему \"Обучение программированию всех детей с шести лет\". Выразите свою позицию против введения обязательного обучения программированию в раннем возрасте. В своём эссе приведите весомые аргументы, подтверждающие вашу точку зрения.\n\nВ частности, обсудите следующие аспекты: стоит ли отдавать предпочтение развитию языковых навыков, счёту и играм в первые годы обучения; насколько быстро меняются инструменты программирования и как это влияет на целесообразность их раннего изучения; а также насколько реально обеспечить всех детей квалифицированными преподавателями программирования.\n\nВаше эссе должно быть написано ясным и доступным языком, понятным широкому кругу читателей. Объем эссе - около 350 слов.",
+    "schema": {
+      "topic": "Teaching programming to all children from age six",
+      "stance": "against",
+      "subclaims": [
+        "Early years are better spent on language, number sense and play",
+        "Programming tools change too fast for early instruction to remain useful",
+        "Teacher shortages make universal early coding instruction unrealistic"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 143,
+      "total_tokens": 430,
+      "cost": 0.0001718
+    },
+    "written_at": "2026-09-03T16:56:18.932744Z",
+    "human_checked": false
+  },
+  {
+    "id": "P12",
+    "lang": "ru",
+    "prompt": "Напишите убедительное эссе в поддержку запрета частных автомобилей в центральных районах городов. В своей аргументации опирайтесь на следующие ключевые преимущества такой меры: значительное улучшение качества воздуха и снижение уровня шума в течение нескольких месяцев после введения ограничения; высвобождение уличного пространства для пешеходов, велосипедистов и коммерческой деятельности; а также опыт городов, уже реализовавших подобную политику, свидетельствующий о росте, а не снижении, покупательского потока в розничной торговле. Разверните каждый из этих тезисов в отдельном абзаце. Объем эссе - около 350 слов.",
+    "schema": {
+      "topic": "Banning private cars from city centres",
+      "stance": "for",
+      "subclaims": [
+        "Street space is freed for walking, cycling and commerce",
+        "Air quality and noise improve measurably within months",
+        "Cities that have done it report higher retail footfall, not lower"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 286,
+      "completion_tokens": 120,
+      "total_tokens": 406,
+      "cost": 0.00014072
+    },
+    "written_at": "2026-09-03T16:56:25.137241Z",
+    "human_checked": false
+  }
+]

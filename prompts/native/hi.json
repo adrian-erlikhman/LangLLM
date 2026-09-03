@@ -1,0 +1,302 @@
+[
+  {
+    "id": "P01",
+    "lang": "hi",
+    "prompt": "आजकल अधिकांश दफ्तर काम करने के लिए शहरी कार्यालयों में कर्मचारियों की दैनिक आवाजाही पर निर्भर रहते हैं। कुछ विशेषज्ञों का मत है कि कार्यालयीन कार्यों के लिए डिफ़ॉल्ट रूप से घर से काम करने की व्यवस्था होनी चाहिए। इस विचार के समर्थन में तर्क दीजिये। \n\nअपने तर्क में इस बात पर चर्चा कीजिये कि कैसे घर से काम करने से लोगों को दफ्तर आने-जाने में लगने वाला समय वापस मिल जाता है, जिसे वे अपने निजी या पेशेवर कार्यों के लिए उपयोग कर सकते हैं। यह भी बताइए कि कैसे कंपनियाँ दूरस्थ कार्य के कारण भौगोलिक रूप से विस्तृत प्रतिभा पूल से कर्मचारियों की भर्ती कर सकती हैं। इसके अलावा, घर से काम करने से कार्यालय स्थान की लागत में कमी कैसे आती है और इस बचत को वेतन या अनुसंधान में कैसे पुनर्निर्देशित किया जा सकता है, इस पर भी प्रकाश डालिये। \n\nअपने पक्ष में तर्क देते हुए लगभग 350 शब्दों में एक निबंध लिखिए।",
+    "schema": {
+      "topic": "Remote work as the default arrangement for office jobs",
+      "stance": "for",
+      "subclaims": [
+        "Commuting time is recovered as productive or personal time",
+        "Companies can hire from a wider geographic talent pool",
+        "Office space costs fall and can be redirected to salaries or research"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 291,
+      "completion_tokens": 240,
+      "total_tokens": 531,
+      "cost": 0.0002502
+    },
+    "written_at": "2026-09-03T16:58:21.032618Z",
+    "human_checked": false
+  },
+  {
+    "id": "P02",
+    "lang": "hi",
+    "prompt": "शहरी सार्वजनिक परिवहन को निःशुल्क करने के प्रस्ताव पर विचार करें। इस विचार के समर्थन में एक तर्कपूर्ण निबंध लिखें जिसमें आप इसके पक्ष में ठोस तर्क प्रस्तुत करें। अपने निबंध में निम्नलिखित बातों पर विशेष ध्यान दें: सबसे पहले, यह बताएं कि किराया वसूलने की प्रक्रिया स्वयं परिचालन लागत का एक बड़ा हिस्सा है, और इसे समाप्त करने से आर्थिक लाभ हो सकता है। दूसरे, तर्क दें कि निःशुल्क परिवहन से लोग अपनी छोटी यात्राओं के लिए कारों के बजाय सार्वजनिक परिवहन का उपयोग करने लगते हैं, जिससे यातायात की भीड़ कम होती है। अंत में, यह दर्शाएं कि कम आय वाले लोगों को निःशुल्क परिवहन से रोजगार और आवश्यक सेवाओं तक पहुंचने में कैसे मदद मिलती है, और इससे सामाजिक न्याय को बढ़ावा मिलता है। अपने तर्कों को लगभग 350 शब्दों में विस्तार से प्रस्तुत करें।",
+    "schema": {
+      "topic": "Making urban public transport free of charge",
+      "stance": "for",
+      "subclaims": [
+        "Fare collection itself is a large share of operating cost",
+        "Free transit shifts short car trips and reduces congestion",
+        "Low-income riders gain access to jobs and services"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 288,
+      "completion_tokens": 211,
+      "total_tokens": 499,
+      "cost": 0.0002264
+    },
+    "written_at": "2026-09-03T16:58:26.061170Z",
+    "human_checked": false
+  },
+  {
+    "id": "P03",
+    "lang": "hi",
+    "prompt": "प्राथमिक विद्यालयों में घर पर दिए जाने वाले कार्य को समाप्त करने का सुझाव अक्सर दिया जाता रहा है। कुछ लोगों का मानना है कि छोटे बच्चों को विद्यालय के बाद अतिरिक्त काम नहीं देना चाहिए। इस कथन के विपरीत अपनी दलील देते हुए एक निबंध लिखें जिसमें आप प्राथमिक विद्यालयों में घर पर दिए जाने वाले कार्य को जारी रखने के पक्ष में तर्क प्रस्तुत करें।\n\nअपने निबंध में आप इस बात पर चर्चा करें कि नियमित रूप से थोड़े समय के लिए किया गया अभ्यास बच्चों को पढ़ने और गणित की मूल बातें मजबूत करने में कैसे मदद करता है। इसके अलावा, यह भी बताएं कि घर पर कार्य करने से बच्चों में स्वतंत्र रूप से काम करने की आदत कैसे विकसित होती है, जो आगे चलकर माध्यमिक विद्यालय में उनके लिए उपयोगी साबित होती है। साथ ही, इस तथ्य पर भी प्रकाश डालें कि घर पर दिया गया कार्य अभिभावकों को अपने बच्चे की शैक्षिक प्रगति को समझने और उसके सीखने की प्रक्रिया में शामिल होने का अवसर कैसे प्रदान करता है।\n\nअपने तर्कों को लगभग 350 शब्दों में विस्तार से प्रस्तुत करें।",
+    "schema": {
+      "topic": "Abolishing homework in primary school",
+      "stance": "against",
+      "subclaims": [
+        "Short daily practice consolidates reading and arithmetic",
+        "Homework builds routines of independent work before secondary school",
+        "It gives parents a window into what their child is learning"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 285,
+      "completion_tokens": 253,
+      "total_tokens": 538,
+      "cost": 0.0003907
+    },
+    "written_at": "2026-09-03T16:58:29.149080Z",
+    "human_checked": false
+  },
+  {
+    "id": "P04",
+    "lang": "hi",
+    "prompt": "भारत में बिजली क्षेत्र के डीकार्बनाइजेशन की दिशा में परमाणु ऊर्जा की भूमिका पर एक विस्तृत तर्कपूर्ण निबंध लिखें। अपने तर्क में यह स्थापित करें कि परमाणु ऊर्जा इस लक्ष्य की प्राप्ति के लिए एक आवश्यक घटक है। अपने निबंध में निम्नलिखित बिंदुओं को अलग-अलग अनुच्छेदों में विकसित करें: परमाणु ऊर्जा संयंत्रों द्वारा प्रदान की जाने वाली दृढ़ और मौसम-स्वतंत्र बिजली उत्पादन क्षमता जो पवन और सौर ऊर्जा के साथ प्रभावी ढंग से जुड़ती है; प्रति किलोवाट-घंटे जीवनचक्र उत्सर्जन के संदर्भ में परमाणु ऊर्जा की तुलना पवन ऊर्जा से करना; और ऊर्जा की प्रति इकाई भूमि उपयोग के मामले में परमाणु ऊर्जा की श्रेष्ठता को रेखांकित करना जो अक्षय ऊर्जा स्रोतों की तुलना में बहुत कम है। अपने तर्क को लगभग 350 शब्दों में प्रस्तुत करें।",
+    "schema": {
+      "topic": "Nuclear power as a necessary part of decarbonising electricity",
+      "stance": "for",
+      "subclaims": [
+        "Nuclear provides firm, weather-independent output that complements wind and solar",
+        "Its lifecycle emissions per kilowatt-hour are comparable to wind",
+        "Land use per unit of energy is far smaller than for renewables"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 293,
+      "completion_tokens": 213,
+      "total_tokens": 506,
+      "cost": 0.000229
+    },
+    "written_at": "2026-09-03T16:58:33.024732Z",
+    "human_checked": false
+  },
+  {
+    "id": "P05",
+    "lang": "hi",
+    "prompt": "सोशल मीडिया प्लेटफ़ॉर्म पर अनिवार्य आयु सत्यापन की आवश्यकता पर बहस छिड़ी हुई है। इस प्रस्ताव के विरोध में एक तर्कपूर्ण निबंध लिखें जिसमें लगभग 350 शब्द हों। अपने तर्क में इस बात पर चर्चा करें कि आयु सत्यापन के लिए पहचान दस्तावेज़ों की आवश्यकता होने से गोपनीयता का उल्लंघन हो सकता है, और यह कि दृढ़ निश्चयी नाबालिग लोग इसके बावजूद अन्य तरीकों से इन प्लेटफ़ॉर्म का उपयोग करने में सफल हो सकते हैं। साथ ही, इस बात पर भी विचार करें कि जिन लोगों के पास औपचारिक पहचान पत्र नहीं हैं, उन पर इसका सबसे अधिक बोझ पड़ सकता है। अपने तर्क को प्रभावी ढंग से प्रस्तुत करें और अपने विचारों को स्पष्ट रूप से व्यक्त करें।",
+    "schema": {
+      "topic": "Mandatory age verification for social media accounts",
+      "stance": "against",
+      "subclaims": [
+        "Verification requires collecting identity documents, creating a privacy risk for everyone",
+        "Determined minors will route around it with borrowed identities or other platforms",
+        "The burden falls hardest on people without formal identification"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 292,
+      "completion_tokens": 178,
+      "total_tokens": 470,
+      "cost": 0.0002008
+    },
+    "written_at": "2026-09-03T16:58:36.795809Z",
+    "human_checked": false
+  },
+  {
+    "id": "P06",
+    "lang": "hi",
+    "prompt": "हाल के वर्षों में यह तर्क दिया जा रहा है कि अंतरिक्ष अन्वेषण के लिए आवंटित बड़े हिस्से को महासागर अनुसंधान की ओर मोड़ना चाहिए। इस प्रस्ताव के समर्थन में कई तर्क प्रस्तुत किए जाते हैं, लेकिन क्या यह वास्तव में एक व्यावहारिक और तर्कसंगत सुझाव है? लगभग 350 शब्दों में एक निबंध लिखें जिसमें आप इस प्रस्ताव के विरुद्ध तर्क प्रस्तुत करें।\n\nअपने तर्क में इस तथ्य पर विचार करें कि अंतरिक्ष अनुसंधान और महासागर अनुसंधान के लिए अलग-अलग बजट आवंटित किए जाते हैं और इन दोनों क्षेत्रों के बीच सीधा व्यापार-अंतर नहीं है। इसके अलावा, महासागरों के अध्ययन में उपग्रह अवलोकन की महत्वपूर्ण भूमिका को ध्यान में रखें, जो अंतरिक्ष अनुसंधान का एक प्रमुख अनुप्रयोग है। साथ ही, अंतरिक्ष कार्यक्रमों से अन्य उद्योगों में होने वाले अप्रत्यक्ष लाभों की असाधारण दर को भी अपने तर्क में शामिल करें।\n\nइन बिंदुओं को विकसित करते हुए एक प्रभावशाली निबंध लिखें जो इस प्रस्ताव के विरुद्ध एक ठोस तर्क प्रस्तुत करता है। अपने तर्क को तकनीकी और विशेषज्ञता वाले शब्दावली के साथ समर्थित करें जो इस विषय के विशेषज्ञ पाठक को प्रभावित करे।",
+    "schema": {
+      "topic": "Redirecting a large share of space-exploration funding to ocean research",
+      "stance": "against",
+      "subclaims": [
+        "Space and ocean science draw on different budgets and the trade-off is false",
+        "Satellite observation is itself the main tool for studying the oceans",
+        "Space programmes have unusually high spillover into other industries"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 293,
+      "completion_tokens": 290,
+      "total_tokens": 583,
+      "cost": 0.0002906
+    },
+    "written_at": "2026-09-03T16:58:41.669684Z",
+    "human_checked": false
+  },
+  {
+    "id": "P07",
+    "lang": "hi",
+    "prompt": "विश्वविद्यालयों में प्रवेश के लिए मानकीकृत परीक्षणों को समाप्त करने का सुझाव दिया जा रहा है। इस प्रस्ताव के विरुद्ध तर्क देते हुए एक निबंध लिखें। अपने तर्क में यह स्पष्ट करें कि विभिन्न गुणवत्ता वाले विद्यालयों से आने वाले छात्रों की तुलना करने के लिए एक सामान्य परीक्षण ही एकमात्र मापदंड है। इसके अलावा, यह भी बताएं कि परीक्षणों के बिना, प्रवेश प्रक्रिया में निबंधों और गतिविधियों पर अधिक निर्भरता हो सकती है, जो धनी आवेदकों के पक्ष में होती है। साथ ही, यह तर्क भी प्रस्तुत करें कि परीक्षण के अंक प्रथम वर्ष के प्रदर्शन की भविष्यवाणी करने में विद्यालयीन अंकों जितने ही प्रभावी होते हैं। \n\nनिबंध में इन तीनों बिंदुओं को अलग-अलग अनुच्छेदों में विकसित करें और लगभग 350 शब्दों में अपने तर्क को प्रस्तुत करें।",
+    "schema": {
+      "topic": "Dropping standardised tests from university admissions",
+      "stance": "against",
+      "subclaims": [
+        "A common test is the only measure comparable across schools of very different quality",
+        "Without it, admissions lean more on essays and activities that favour wealthy applicants",
+        "Test scores predict first-year performance about as well as school grades do"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 300,
+      "completion_tokens": 197,
+      "total_tokens": 497,
+      "cost": 0.0002176
+    },
+    "written_at": "2026-09-03T16:58:45.234185Z",
+    "human_checked": false
+  },
+  {
+    "id": "P08",
+    "lang": "hi",
+    "prompt": "देश में चार दिन के कार्य सप्ताह को अपनाने की नीति पर विचार किया जा रहा है। इस प्रस्ताव के समर्थन में एक निबंध लिखें जिसमें आप तर्क दें कि यह नीति हमारे समाज के लिए लाभदायक होगी। अपने तर्क में इस बात का उल्लेख करें कि कम घंटों में भी काम का उत्पादन समान रहता है, जैसा कि कई परीक्षणों में देखा गया है। इसके अलावा, कम कार्य दिवसों से कर्मचारियों को अधिक आराम मिलेगा, जिससे तनाव और बीमारी की दरें कम होंगी। एक अन्य महत्वपूर्ण बिंदु यह है कि जब कार्य सप्ताह छोटा होगा, तो अधिक लोगों को रोजगार के अवसर मिलेंगे, जिससे बेरोजगारी की समस्या कुछ हद तक कम हो सकती है। इन बिंदुओं को विस्तार से समझाते हुए लगभग 350 शब्दों में अपना निबंध लिखें।",
+    "schema": {
+      "topic": "A four-day working week as national policy",
+      "stance": "for",
+      "subclaims": [
+        "Trials report equal output with fewer hours",
+        "Rest reduces burnout and sick leave",
+        "A shorter week spreads employment across more people"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 280,
+      "completion_tokens": 179,
+      "total_tokens": 459,
+      "cost": 0.0001992
+    },
+    "written_at": "2026-09-03T16:58:48.888707Z",
+    "human_checked": false
+  },
+  {
+    "id": "P09",
+    "lang": "hi",
+    "prompt": "डिजिटल भुगतान प्रणाली के बढ़ते प्रसार के बावजूद, नकदी के प्रचलन को बनाये रखने के पक्ष में तर्क प्रस्तुत कीजिये। अपने तर्क में इस बात पर बल दीजिये कि नकदी की उपलब्धता वित्तीय समावेशन को बढ़ावा देती है, खासकर उन वर्गों के लिये जो बैंकिंग प्रणाली से वंचित हैं या जिनके पास डिजिटल भुगतान के साधन नहीं हैं। साथ ही, आपातकालीन स्थितियों में जब विद्युत और नेटवर्क विफल हो जाते हैं, नकदी के उपयोग की सुविधा को भी अपने तर्क में शामिल कीजिये। इसके अलावा, लेन-देन की गोपनीयता बनाए रखने में नकदी की भूमिका पर भी प्रकाश डालिये, क्योंकि यह एकमात्र ऐसा भुगतान साधन है जिसके उपयोग से लेन-देन का कोई इलेक्ट्रॉनिक रिकॉर्ड नहीं बनता। लगभग 350 शब्दों में अपने तर्क को विस्तार से प्रस्तुत कीजिये।",
+    "schema": {
+      "topic": "Keeping physical cash in circulation as digital payments grow",
+      "stance": "for",
+      "subclaims": [
+        "Cash works during power and network failures",
+        "It is the only payment method that does not create a transaction record",
+        "Elderly and unbanked people depend on it"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 286,
+      "completion_tokens": 207,
+      "total_tokens": 493,
+      "cost": 0.00025317
+    },
+    "written_at": "2026-09-03T16:58:52.878242Z",
+    "human_checked": false
+  },
+  {
+    "id": "P10",
+    "lang": "hi",
+    "prompt": "चिड़ियाघरों को चरणबद्ध तरीके से समाप्त करने की मांग जोर पकड़ रही है, लेकिन क्या यह वास्तव में सही निर्णय होगा? इस विषय पर अपने विचार व्यक्त करते हुए एक निबंध लिखें जिसमें चिड़ियाघरों को बनाए रखने के पक्ष में तर्क प्रस्तुत किए जाएं। अपने तर्क में इस बात पर चर्चा करें कि कैसे आधुनिक चिड़ियाघर प्रजनन कार्यक्रमों के माध्यम से विलुप्तप्राय प्रजातियों के संरक्षण में महत्वपूर्ण भूमिका निभा रहे हैं। साथ ही, यह भी बताएं कि चिड़ियाघरों में जानवरों के साथ सीधे संपर्क से आम जनता में संरक्षण के प्रति समर्थन कैसे बढ़ता है। इसके अलावा, चिड़ियाघरों में पशु चिकित्सा अनुसंधान के माध्यम से जंगली आबादी को होने वाले लाभों पर भी प्रकाश डालें।\n\nनिबंध लगभग 350 शब्दों में लिखें और अपने तर्कों को विस्तार से प्रस्तुत करें।",
+    "schema": {
+      "topic": "Phasing out zoos",
+      "stance": "against",
+      "subclaims": [
+        "Modern zoos run breeding programmes that have saved species from extinction",
+        "Direct contact with animals builds public support for conservation",
+        "Zoo veterinary research benefits wild populations"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 283,
+      "completion_tokens": 220,
+      "total_tokens": 503,
+      "cost": 0.0002326
+    },
+    "written_at": "2026-09-03T16:58:57.053595Z",
+    "human_checked": false
+  },
+  {
+    "id": "P11",
+    "lang": "hi",
+    "prompt": "छह साल की उम्र से ही हर बच्चे को प्रोग्रामिंग सिखाने की बात कही जा रही है। इस विचार के पक्ष में कई तर्क दिए जा रहे हैं, लेकिन क्या यह सचमुच सभी बच्चों के लिए सही होगा? अपने तर्कों के साथ इस प्रस्ताव के खिलाफ एक निबंध लिखें जिसमें लगभग 350 शब्द हों।\n\nआपको अपने निबंध में इस बात पर चर्चा करनी है कि शुरुआती सालों में बच्चों को भाषा, संख्या की समझ और खेल पर ध्यान देना चाहिए, न कि प्रोग्रामिंग पर। इसके अलावा, प्रोग्रामिंग के उपकरण इतनी तेजी से बदलते हैं कि शुरुआती शिक्षा का महत्व कम हो जाता है - इस पर भी विचार करें। साथ ही, शिक्षकों की कमी के कारण सभी बच्चों को कम उम्र में प्रोग्रामिंग सिखाना व्यावहारिक नहीं है, इसे भी अपने तर्क में शामिल करें। \n\nअपने विचार स्पष्ट और तर्कसंगत तरीके से प्रस्तुत करें और अपने निबंध को लगभग 350 शब्दों में सीमित रखें।",
+    "schema": {
+      "topic": "Teaching programming to all children from age six",
+      "stance": "against",
+      "subclaims": [
+        "Early years are better spent on language, number sense and play",
+        "Programming tools change too fast for early instruction to remain useful",
+        "Teacher shortages make universal early coding instruction unrealistic"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 288,
+      "completion_tokens": 222,
+      "total_tokens": 510,
+      "cost": 0.000212112
+    },
+    "written_at": "2026-09-03T16:59:05.265302Z",
+    "human_checked": false
+  },
+  {
+    "id": "P12",
+    "lang": "hi",
+    "prompt": "शहरी केंद्रों से निजी कारों पर प्रतिबंध लगाने के पक्ष में एक तर्कपूर्ण निबंध लिखें। अपने तर्क में इस बात पर जोर दें कि इस तरह के कदम से न केवल सड़क का उपयोग पैदल चलने, साइकिल चलाने और वाणिज्यिक गतिविधियों के लिए अधिक प्रभावी ढंग से किया जा सकता है, बल्कि वायु गुणवत्ता और ध्वनि प्रदूषण में भी उल्लेखनीय सुधार होता है। इसके अलावा, उन शहरों के अनुभवों पर चर्चा करें जिन्होंने पहले ही निजी कारों पर प्रतिबंध लगाया है और दिखाएं कि कैसे उन्होंने न केवल अपने शहरी वातावरण में सुधार किया है, बल्कि खुदरा व्यापार में भी वृद्धि देखी है। अपने तर्क को लगभग 350 शब्दों में प्रस्तुत करें।",
+    "schema": {
+      "topic": "Banning private cars from city centres",
+      "stance": "for",
+      "subclaims": [
+        "Street space is freed for walking, cycling and commerce",
+        "Air quality and noise improve measurably within months",
+        "Cities that have done it report higher retail footfall, not lower"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 169,
+      "total_tokens": 456,
+      "cost": 0.00022114
+    },
+    "written_at": "2026-09-03T16:59:11.031830Z",
+    "human_checked": false
+  }
+]

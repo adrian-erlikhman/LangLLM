@@ -1,0 +1,302 @@
+[
+  {
+    "id": "P01",
+    "lang": "tr",
+    "prompt": "Ofis işlerinde varsayılan düzenleme olarak uzaktan çalışma fikrini savunan ikna edici bir yazı yazınız. Yazınızda, bu düzenlemenin çalışanların işe gidip gelme süresini geri kazanmalarına, şirketlerin daha geniş bir coğrafi yetenek havuzundan işe alım yapmalarına ve ofis alanı maliyetlerinin düşmesine nasıl olanak tanıdığını gösteriniz. Bu konuları ayrı ayrı paragraf içinde ele alınız. Yaklaşık 350 kelimelik bir yazı yazmanız beklenmektedir.",
+    "schema": {
+      "topic": "Remote work as the default arrangement for office jobs",
+      "stance": "for",
+      "subclaims": [
+        "Commuting time is recovered as productive or personal time",
+        "Companies can hire from a wider geographic talent pool",
+        "Office space costs fall and can be redirected to salaries or research"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 291,
+      "completion_tokens": 112,
+      "total_tokens": 403,
+      "cost": 0.000136152
+    },
+    "written_at": "2026-09-03T16:57:17.824354Z",
+    "human_checked": false
+  },
+  {
+    "id": "P02",
+    "lang": "tr",
+    "prompt": "Kent içi toplu taşımacılığın ücretsiz olması gerektiği görüşünü savunan ikna edici bir yazı yazınız. Yazınızda, bu uygulamanın işletme maliyetlerini düşüreceğini, kısa mesafeli araba kullanımını azaltarak trafik sıkışıklığını hafifleteceğini ve düşük gelirli yolcuların iş ve hizmetlere erişimini artıracağını öne sürerek okuyucularınızı ikna etmeye çalışınız. Yaklaşık 350 kelime uzunluğunda olması beklenen yazınızda bu üç yönü ayrı paragrafta ele alınız.",
+    "schema": {
+      "topic": "Making urban public transport free of charge",
+      "stance": "for",
+      "subclaims": [
+        "Fare collection itself is a large share of operating cost",
+        "Free transit shifts short car trips and reduces congestion",
+        "Low-income riders gain access to jobs and services"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 289,
+      "completion_tokens": 123,
+      "total_tokens": 412,
+      "cost": 0.0002426
+    },
+    "written_at": "2026-09-03T16:57:19.900669Z",
+    "human_checked": false
+  },
+  {
+    "id": "P03",
+    "lang": "tr",
+    "prompt": "İlkokulda ödevin kaldırılması önerisi son zamanlarda sıkça tartışılıyor. Bu öneriye karşı çıkarak ikna edici bir yazı yazın. Yazınızda, günlük kısa süreli alıştırma yapmanın okuma ve temel matematik becerilerini pekiştirdiğini, ödevin ortaöğretime hazırlıkta bağımsız çalışma alışkanlığı kazandırdığını ve velilere çocuklarının neler öğrendiğine dair bir pencere sunduğunu örneklerle açıklayarak öne sürülen iddiayı çürütmeye çalışın. Yaklaşık 350 kelimelik yazınızda, konuyu genel okuyucu kitlesine hitap edecek şekilde açık ve anlaşılır bir dille ele alın.",
+    "schema": {
+      "topic": "Abolishing homework in primary school",
+      "stance": "against",
+      "subclaims": [
+        "Short daily practice consolidates reading and arithmetic",
+        "Homework builds routines of independent work before secondary school",
+        "It gives parents a window into what their child is learning"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 284,
+      "completion_tokens": 152,
+      "total_tokens": 436,
+      "cost": 0.000162592
+    },
+    "written_at": "2026-09-03T16:57:25.652777Z",
+    "human_checked": false
+  },
+  {
+    "id": "P04",
+    "lang": "tr",
+    "prompt": "Elektrik üretiminin karbon nötr hale getirilmesinde nükleer enerjinin oynadığı vazgeçilmez rolü tartışınız. Bu konudaki görüşünüzü, ilgili teknik literatürü göz önünde bulundurarak ve kanıtlarla destekleyerek savunduğunuz bir yazı yazınız. Yazınızda, nükleer enerjinin değişken yenilenebilir enerji kaynaklarına istikrarlı bir tamamlayıcı oluşturduğunu, kilowatt-saat başına düşen yaşam döngüsü emisyonlarının rüzgar enerjisininkilerle karşılaştırılabilir olduğunu ve birim enerji üretimi için gereken arazi kullanımının yenilenebilir enerji kaynaklarına kıyasla çok daha düşük olduğunu vurgulayınız. Yaklaşık 350 kelimelik bir yazı yazmanız beklenmektedir.",
+    "schema": {
+      "topic": "Nuclear power as a necessary part of decarbonising electricity",
+      "stance": "for",
+      "subclaims": [
+        "Nuclear provides firm, weather-independent output that complements wind and solar",
+        "Its lifecycle emissions per kilowatt-hour are comparable to wind",
+        "Land use per unit of energy is far smaller than for renewables"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 294,
+      "completion_tokens": 160,
+      "total_tokens": 454,
+      "cost": 0.0002869
+    },
+    "written_at": "2026-09-03T16:57:28.439793Z",
+    "human_checked": false
+  },
+  {
+    "id": "P05",
+    "lang": "tr",
+    "prompt": "Toplumsal medya hesapları için zorunlu yaş doğrulamasının uygulanması, çevrimiçi ortamda gençlerin güvenliği konusunda sıkça dile getirilen bir öneridir. Bu öneriye karşı çıkarak, yaş doğrulama zorunluluğunun getirilmesinin neden uygun olmayabileceğini tartışınız.\n\nYazınızda, yaş doğrulama sürecinin kimlik belgelerinin toplanmasını gerektirmesinin yol açacağı gizlilik risklerine, belirlenmiş yaş sınırının etrafından dolaşmak için küçüklerin başvurabileceği yöntemlere ve bu zorunluluğun resmi kimlik belgesi olmayan kişiler üzerindeki orantısız yüküne değinerek konuyu irdleyiniz.\n\nYaklaşık 350 kelime uzunluğunda olması beklenen yazınızda, her bir noktayı ayrı bir paragraf içinde ele alarak savınızı gerekçelendiriniz.",
+    "schema": {
+      "topic": "Mandatory age verification for social media accounts",
+      "stance": "against",
+      "subclaims": [
+        "Verification requires collecting identity documents, creating a privacy risk for everyone",
+        "Determined minors will route around it with borrowed identities or other platforms",
+        "The burden falls hardest on people without formal identification"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 293,
+      "completion_tokens": 175,
+      "total_tokens": 468,
+      "cost": 0.0003038
+    },
+    "written_at": "2026-09-03T16:57:30.280136Z",
+    "human_checked": false
+  },
+  {
+    "id": "P06",
+    "lang": "tr",
+    "prompt": "Uzay araştırmalarına ayrılan fonların önemli bir kısmının okyanus araştırmalarına yönlendirilmesi önerisi son zamanlarda sıkça tartışılıyor. Bu öneriye karşı çıkarak, söz konusu fikrin dayandığı varsayımların ve öne sürülen gerekçelerin geçerliliğini sorgulayan ikna edici bir deneme yazınız. Yazınızda, uzay ve okyanus biliminin farklı bütçelere dayandığını ve bu alanlar arasındaki kaynak tahsisinin sözde bir trade-off olduğunu; uydu gözleminin okyanusların incelenmesinde kilit bir araç olduğunu; uzay programlarının diğer endüstrilere olan olağanüstü derecede yüksek oranda yan faydalar sağladığını öne süren argümanları geliştirerek, bu öneriye karşı çıkınız. Yaklaşık 350 kelimelik denemenizde, bu üç ana argümanı her biri ayrı bir paragrafta ele alınacak şekilde sununuz. Uzman bir okuyucu kitlesine hitap eden yazınızda, yoğun bir argümantasyon ve teknik kelime dağarcığı kullanınız.",
+    "schema": {
+      "topic": "Redirecting a large share of space-exploration funding to ocean research",
+      "stance": "against",
+      "subclaims": [
+        "Space and ocean science draw on different budgets and the trade-off is false",
+        "Satellite observation is itself the main tool for studying the oceans",
+        "Space programmes have unusually high spillover into other industries"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 293,
+      "completion_tokens": 230,
+      "total_tokens": 523,
+      "cost": 0.0002426
+    },
+    "written_at": "2026-09-03T16:57:34.067024Z",
+    "human_checked": false
+  },
+  {
+    "id": "P07",
+    "lang": "tr",
+    "prompt": "Üniversiteye giriş sınavlarında standart testlerin kaldırılması önerisi son yıllarda sıkça tartışılıyor. Bu değişikliğin yükseköğretim sistemine olası etkilerini değerlendirerek, standart testlerin kaldırılmasına karşı ikna edici bir argüman geliştirin. \n\nYazınızda, farklı kalitedeki okullardan gelen adayları değerlendirmede standart testlerin sağladığı nesnel karşılaştırma olanağını, testlerin kaldırılması durumunda başvuru sürecinde ortaya çıkabilecek eşitsizlikleri ve standart test puanlarının ilk yıl akademik başarıyı öngörmedeki geçerliliğini ele alın. \n\nYaklaşık 350 kelimelik metninizi, okuyucuların yükseköğretim sisteminin işleyişine ve ilgili tartışmalara aşina olduğu varsayımıyla yazın.",
+    "schema": {
+      "topic": "Dropping standardised tests from university admissions",
+      "stance": "against",
+      "subclaims": [
+        "A common test is the only measure comparable across schools of very different quality",
+        "Without it, admissions lean more on essays and activities that favour wealthy applicants",
+        "Test scores predict first-year performance about as well as school grades do"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 300,
+      "completion_tokens": 168,
+      "total_tokens": 468,
+      "cost": 0.000176928
+    },
+    "written_at": "2026-09-03T16:57:41.615838Z",
+    "human_checked": false
+  },
+  {
+    "id": "P08",
+    "lang": "tr",
+    "prompt": "Ülkemizde dört günlük çalışma haftasının ulusal politika olarak benimsenmesi gerektiğini savunan bir yazı yazınız. Yazınızda, bu değişikliğin çalışanların üretkenliğini koruyacağını, işyerlerindeki tükenmişliği ve hastalık izinlerini azaltacağını, istihdamı daha fazla kişi arasında dağıtarak ekonomiye katkı sağlayacağını örneklerle açıklayınız. Yaklaşık 350 kelime olacak şekilde yazınız.",
+    "schema": {
+      "topic": "A four-day working week as national policy",
+      "stance": "for",
+      "subclaims": [
+        "Trials report equal output with fewer hours",
+        "Rest reduces burnout and sick leave",
+        "A shorter week spreads employment across more people"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 280,
+      "completion_tokens": 91,
+      "total_tokens": 371,
+      "cost": 0.000119336
+    },
+    "written_at": "2026-09-03T16:57:46.273337Z",
+    "human_checked": false
+  },
+  {
+    "id": "P09",
+    "lang": "tr",
+    "prompt": "Dijital ödeme yöntemlerinin yaygınlaşmasıyla birlikte fiziksel nakit kullanımının azalması, birçok tartışmayı beraberinde getirmektedir. Bu denemede, nakit para dolaşımının sürdürülmesinin gerekliliği hususundaki görüşünüzü, ilgili paydaşları ikna edici nitelikteki argümanlarla destekleyerek savunmanız beklenmektedir.\n\nTartışmanızı geliştirirken, nakit kullanımının enerji ve ağ kesintileri gibi kriz durumlarında işlevselliğini koruduğu gerçeğinden yararlanarak, bu özelliğin ekonomik istikrar açısından önemini vurgulayın. Ayrıca, nakit işlemlerin geriye dönük bir kayıt oluşturmaması nedeniyle sağladığı mahremiyet avantajını irdileyerek, bu durumun bireysel özgürlükler ve veri güvenliği bağlamındaki yansımalarını ele alın. Son olarak, yaşlılar ve banka hizmetlerinden yararlanamayan kesimler gibi belirli nüfus gruplarının nakit paraya olan bağımlılığını göz önünde bulundurarak, bu grupların finansal dahil edilmesinin sağlanması açısından nakit dolaşımının sürdürülmesinin gerekliliğini tartışın.\n\nYaklaşık 350 kelimelik metninizi, bu üç ana argümanı ayrı paragraflarda ele alacak şekilde yapılandırın ve her bir noktayı ikna edici bir şekilde desteklemek için yeterli kanıt ve örnek sunun.",
+    "schema": {
+      "topic": "Keeping physical cash in circulation as digital payments grow",
+      "stance": "for",
+      "subclaims": [
+        "Cash works during power and network failures",
+        "It is the only payment method that does not create a transaction record",
+        "Elderly and unbanked people depend on it"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 286,
+      "completion_tokens": 289,
+      "total_tokens": 575,
+      "cost": 0.000258344
+    },
+    "written_at": "2026-09-03T16:57:57.455755Z",
+    "human_checked": false
+  },
+  {
+    "id": "P10",
+    "lang": "tr",
+    "prompt": "Hayvanat bahçelerinin tamamen kapatılması gerektiği iddiasını ele alan ikna edici bir yazı yazınız. Bu iddiaya karşı çıkarak, modern hayvanat bahçelerinin nesli tükenmekte olan türlerin korunmasına nasıl katkıda bulunduğunu tartışınız. Yazınızda, hayvanat bahçelerinin türlerin korunmasına yönelik üreme programlarına, halkın doğa koruma bilincinin gelişmesine katkısına ve vahşi popülasyonlara fayda sağlayan veterinerlik araştırmalarına değinerek iddianın geçersizliğini ortaya koyunuz. Yaklaşık 350 kelimelik yazınızda, okuyucuyu ikna etmek için yeterli delil ve örnek sunmaya özen gösteriniz.",
+    "schema": {
+      "topic": "Phasing out zoos",
+      "stance": "against",
+      "subclaims": [
+        "Modern zoos run breeding programmes that have saved species from extinction",
+        "Direct contact with animals builds public support for conservation",
+        "Zoo veterinary research benefits wild populations"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 283,
+      "completion_tokens": 151,
+      "total_tokens": 434,
+      "cost": 0.0001774
+    },
+    "written_at": "2026-09-03T16:58:00.816459Z",
+    "human_checked": false
+  },
+  {
+    "id": "P11",
+    "lang": "tr",
+    "prompt": "Altı yaşından itibaren tüm çocuklara programlama öğretmenin zorunlu hale getirilmesi önerisi son zamanlarda sıkça tartışılıyor. Bu öneriye karşı çıkarak, çocukların erken yaşta programlamayla tanıştırılmasının doğru olmadığını savunan bir yazı yazınız. Yazınızda, çocukların ilk yıllarını dil gelişimine, sayı duyusuna ve oyunlara ayırmalarının daha yararlı olacağını, programlama araçlarının çok hızlı değiştiğini ve bu nedenle erken yaşta verilen eğitimin uzun vadede işe yaramayacağını, ayrıca yeterli öğretmen bulunmadığını ve bu nedenle her çocuğa erken yaşta programlama öğretmenin gerçekçi olmadığını öne sürünüz. Yaklaşık 350 kelimelik bir yazı yazarak bu konudaki düşüncelerinizi okuyucularla paylaşınız.",
+    "schema": {
+      "topic": "Teaching programming to all children from age six",
+      "stance": "against",
+      "subclaims": [
+        "Early years are better spent on language, number sense and play",
+        "Programming tools change too fast for early instruction to remain useful",
+        "Teacher shortages make universal early coding instruction unrealistic"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 288,
+      "completion_tokens": 168,
+      "total_tokens": 456,
+      "cost": 0.000174528
+    },
+    "written_at": "2026-09-03T16:58:09.159384Z",
+    "human_checked": false
+  },
+  {
+    "id": "P12",
+    "lang": "tr",
+    "prompt": "Şehir merkezlerinde özel araç kullanımının yasaklanması son yıllarda giderek daha fazla tartışılan bir konu haline geldi. Bu yöndeki düzenlemelerin kent yaşamına etkileri üzerine yapılan araştırmalar, bu tür kısıtlamaların çeşitli yararlar sağladığını gösteriyor. Yaklaşık 350 kelimelik bir makalede, şehir merkezlerinde özel araç kullanımının yasaklanmasının kentler için neden yararlı olacağını tartışınız. Argümanlarınızı geliştirirken, bu tür bir düzenlemenin yol alanını nasıl yeniden dağıtabileceği, hava kalitesi ve gürültü kirliliği üzerindeki etkilerini ve perakende satışlar üzerindeki sonuçlarını göz önünde bulundurunuz.",
+    "schema": {
+      "topic": "Banning private cars from city centres",
+      "stance": "for",
+      "subclaims": [
+        "Street space is freed for walking, cycling and commerce",
+        "Air quality and noise improve measurably within months",
+        "Cities that have done it report higher retail footfall, not lower"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 141,
+      "total_tokens": 428,
+      "cost": 0.000155536
+    },
+    "written_at": "2026-09-03T16:58:15.568406Z",
+    "human_checked": false
+  }
+]

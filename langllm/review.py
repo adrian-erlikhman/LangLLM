@@ -37,7 +37,8 @@ Assignment:
 >>>"""
 
 MATCH = """Compare an intended essay schema with what a reviewer extracted from the written prompt. Answer in JSON only:
-"topic_match": true/false, "stance_match": true/false,
+"topic_match": true/false (same proposition, even if worded or scoped differently),
+"stance_match": true/false — IMPORTANT: the intended stance is relative to the proposition "{topic}". "against" means the essay must argue AGAINST that proposition (e.g. against phasing out zoos = defending zoos). Judge whether the prompt asks for the same side of the proposition, not whether the word matches.
 "subclaims_present": list of three booleans (was each intended sub-claim requested, same meaning),
 "extra_claims": list of extracted points that are NOT among the intended sub-claims (empty if none),
 "verdict": "pass" if topic and stance match, all three sub-claims present, no extra claims; else "fail",

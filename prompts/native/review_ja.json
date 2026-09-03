@@ -1,0 +1,409 @@
+[
+  {
+    "id": "P01",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues in favor of adopting remote work as the default form of office work.",
+      "stance": "for",
+      "points": [
+        "Effective use of commuting time",
+        "Acquisition of a wide range of talent",
+        "Cost reduction of office space"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:40.136106+00:00"
+  },
+  {
+    "id": "P02",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues in favor of making public transportation free to alleviate urban congestion and correct social disparities.",
+      "stance": "for",
+      "points": [
+        "The high cost associated with collecting fares",
+        "Alleviation of traffic congestion by suppressing short-distance car use",
+        "Improvement of access to employment and living services for low-income groups"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted points align perfectly with the intended schema in topic, stance, and sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:40.323172+00:00"
+  },
+  {
+    "id": "P03",
+    "lang": "ja",
+    "verdict": "flag",
+    "flags": [
+      "content"
+    ],
+    "extracted": {
+      "topic": "The essay argues against the abolition of homework in elementary schools.",
+      "stance": "against",
+      "points": [
+        "Discuss the significance of homework from multiple perspectives."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        false,
+        false,
+        false
+      ],
+      "extra_claims": [
+        "Discuss the significance of homework from multiple perspectives."
+      ],
+      "verdict": "fail",
+      "note": "The extracted prompt lacks the three specific intended sub-claims and includes a vague extra claim."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:39.169791+00:00"
+  },
+  {
+    "id": "P04",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The role nuclear power should play in a decarbonizing electricity system.",
+      "stance": "for",
+      "points": [
+        "It serves as a stable power source that complements wind and solar power.",
+        "Its lifecycle emissions per kWh are equivalent to those of wind power.",
+        "Its land use per unit of energy is extremely small compared to renewable energy."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:40.903034+00:00"
+  },
+  {
+    "id": "P05",
+    "lang": "ja",
+    "verdict": "flag",
+    "flags": [
+      "content"
+    ],
+    "extracted": {
+      "topic": "The essay discusses whether age verification should be mandatory for social media accounts, arguing against the proposal.",
+      "stance": "against",
+      "points": [
+        "Discuss the negative effects caused by the age verification system specifically."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        false,
+        false,
+        false
+      ],
+      "extra_claims": [
+        "Discuss the negative effects caused by the age verification system specifically."
+      ],
+      "verdict": "fail",
+      "note": "The extracted prompt lacks the three specific sub-claims required by the intended schema."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:39.538899+00:00"
+  },
+  {
+    "id": "P06",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues against the proposal to redirect some funding from space exploration to ocean research.",
+      "stance": "against",
+      "points": [
+        "Space science and ocean science are operated under separate budget frameworks, so investment in one does not come at the expense of the other.",
+        "Satellite observation plays an extremely significant role in ocean research.",
+        "Space development programs have very high spillover effects on other industries."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:40.134108+00:00"
+  },
+  {
+    "id": "P07",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues against abolishing standardized tests in university entrance examinations.",
+      "stance": "against",
+      "points": [
+        "Standardized tests are the only means to enable comparisons between high schools with vastly different educational qualities.",
+        "Abolishing standardized tests would force admissions to rely on personal statements and extracurricular activities, thereby advantaging economically privileged applicants.",
+        "Standardized test scores are as effective as high school grades in predicting first-year university academic performance."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted prompt perfectly aligns with the intended topic, stance, and all three sub-claims without adding extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:47.059884+00:00"
+  },
+  {
+    "id": "P08",
+    "lang": "ja",
+    "verdict": "flag",
+    "flags": [
+      "content"
+    ],
+    "extracted": {
+      "topic": "The essay is about introducing a three-day weekend as the national standard labor system.",
+      "stance": "for",
+      "points": [
+        "Include the specified perspectives in the discussion.",
+        "Provide supporting facts and specific examples."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        false,
+        false,
+        false
+      ],
+      "extra_claims": [],
+      "verdict": "fail",
+      "note": "The extracted points are generic instructions and do not contain the three specific intended sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:46.530616+00:00"
+  },
+  {
+    "id": "P09",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The importance of maintaining cash circulation amidst the spread of digital payments.",
+      "stance": "for",
+      "points": [
+        "The usefulness of cash during power or network outages",
+        "The characteristic of cash as the only payment method that leaves no transaction records",
+        "The indispensability of cash for the elderly and unbanked households"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:47.136662+00:00"
+  },
+  {
+    "id": "P10",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues against the abolition of zoos by highlighting their roles in conservation, education, and research.",
+      "stance": "against",
+      "points": [
+        "The role modern zoos play in protecting endangered species",
+        "The effect of direct interaction with animals in raising awareness for nature conservation",
+        "How veterinary research conducted in zoos contributes to the protection of wild animals"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:48.695085+00:00"
+  },
+  {
+    "id": "P11",
+    "lang": "ja",
+    "verdict": "flag",
+    "flags": [
+      "content"
+    ],
+    "extracted": {
+      "topic": "The essay argues against the proposition that programming education should be mandatory for all children starting from age six.",
+      "stance": "against",
+      "points": [
+        "Consider the necessity and effects of programming education",
+        "Clearly state the opposing stance",
+        "Develop the argument by citing specific grounds"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        false,
+        false,
+        false
+      ],
+      "extra_claims": [
+        "Consider the necessity and effects of programming education",
+        "Clearly state the opposing stance",
+        "Develop the argument by citing specific grounds"
+      ],
+      "verdict": "fail",
+      "note": "The extracted points are generic structural instructions rather than the specific intended sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:48.074805+00:00"
+  },
+  {
+    "id": "P12",
+    "lang": "ja",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues in favor of banning private cars from city centers.",
+      "stance": "for",
+      "points": [
+        "Road space freed up by the ban is redistributed to pedestrians, cyclists, and commercial activities.",
+        "Significant improvements in air quality and noise levels are realized within a few months.",
+        "Cities that have implemented this measure have seen an increase, rather than a decrease, in retail customer foot traffic."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:48.104215+00:00"
+  }
+]

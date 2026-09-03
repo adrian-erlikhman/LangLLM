@@ -1,0 +1,398 @@
+[
+  {
+    "id": "P01",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues that remote work should be the standard model for office jobs.",
+      "stance": "for",
+      "points": [
+        "How the time spent on daily commutes can be used productively or personally",
+        "How companies can benefit from access to a wider pool of qualified candidates from diverse geographic locations",
+        "How reducing costs associated with office space can allow companies to allocate more resources to employee salaries or research"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:29:53.383393+00:00"
+  },
+  {
+    "id": "P02",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues in favor of making urban public transportation free.",
+      "stance": "for",
+      "points": [
+        "Analyze how eliminating fare collection costs could impact the operational cost structure of public transport.",
+        "Examine how free transport could influence urban mobility patterns, specifically by reducing short car trips and alleviating traffic congestion.",
+        "Discuss how free public transport could improve access to job opportunities and essential services for lower-income groups, and its implications for social equity and inclusion."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted points align perfectly with the intended schema in topic, stance, and all three sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:29:53.471398+00:00"
+  },
+  {
+    "id": "P03",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The importance of maintaining homework for primary school students.",
+      "stance": "for",
+      "points": [
+        "Consolidation of knowledge acquired in the classroom",
+        "Preparation of students for secondary education",
+        "Involvement of parents in their children's learning process"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema aligns semantically with the intended stance against abolition and includes all required sub-claims without extras."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:29:52.818389+00:00"
+  },
+  {
+    "id": "P04",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues for the necessity of nuclear energy in the decarbonization of electricity generation.",
+      "stance": "for",
+      "points": [
+        "Demonstrate how nuclear energy can complement intermittent renewable sources, such as wind and solar, by providing firm output independent of weather conditions.",
+        "Analyze and compare the life-cycle emissions of nuclear energy with other low-carbon energy sources, such as wind, highlighting their similarities.",
+        "Examine the land-use efficiency of nuclear energy compared to renewable energies, underlining the significant advantage of its lower land requirement per unit of energy generated."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted prompt perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:29:53.810213+00:00"
+  },
+  {
+    "id": "P05",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues against the implementation of mandatory age verification for accessing social media.",
+      "stance": "against",
+      "points": [
+        "Implications of this measure on user privacy",
+        "Its effectiveness in preventing minors' access",
+        "Its impact on the digital inclusion of certain population groups"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted points accurately reflect the intended sub-claims regarding privacy, effectiveness, and digital inclusion."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:29:52.570373+00:00"
+  },
+  {
+    "id": "P06",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues against reallocating significant funds from space exploration to oceanographic research.",
+      "stance": "against",
+      "points": [
+        "Space science and oceanography budgets are largely independent, making the trade-off between the two areas more apparent than real.",
+        "Satellite observation is a primary tool for studying oceans, meaning space exploration already contributes substantially to oceanographic research.",
+        "Space programs have an exceptionally high spillover effect on other industries, which justifies their continuation."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:32:32.212284+00:00"
+  },
+  {
+    "id": "P07",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues for maintaining standardized tests as a requirement in university admissions.",
+      "stance": "for",
+      "points": [
+        "The comparability of candidates coming from educational institutions of very diverse quality",
+        "The impact of eliminating these tests on equal opportunity for applicants from different socioeconomic backgrounds",
+        "The relationship between standardized test results and academic performance in the first year of university"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted stance 'for maintaining tests' correctly aligns with the intended stance 'against dropping tests', and all sub-claims are present without extras."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:29:59.568918+00:00"
+  },
+  {
+    "id": "P08",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay is about defending the implementation of a four-day workweek as a national policy.",
+      "stance": "for",
+      "points": [
+        "Advantages for productivity",
+        "Advantages for occupational health",
+        "Advantages for employment"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted points align semantically with all intended sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:29:58.851434+00:00"
+  },
+  {
+    "id": "P09",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay is about defending the importance of keeping physical cash in circulation as digital payments grow.",
+      "stance": "for",
+      "points": [
+        "Cash can operate independently of network infrastructure and power supply, making it valuable during service failures or interruptions.",
+        "Cash is the only payment method that leaves no record of transactions, thereby preserving user privacy.",
+        "Certain groups, such as the elderly and those without access to banking services, depend on cash."
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims without any extraneous points."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:32:31.714747+00:00"
+  },
+  {
+    "id": "P10",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues against the proposal to eliminate zoos.",
+      "stance": "against",
+      "points": [
+        "The importance of captive breeding programs for the conservation of threatened species",
+        "The role of zoos in raising public awareness about biodiversity protection through direct contact with animals",
+        "The contributions of veterinary research in zoos to the well-being of wild populations"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:00.866872+00:00"
+  },
+  {
+    "id": "P11",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay argues against the proposal to teach programming to all children starting at age six.",
+      "stance": "against",
+      "points": [
+        "The value of other skills and activities in childhood",
+        "The changing nature of technology",
+        "The practical limitations of the educational system"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted points accurately reflect the intended sub-claims and stance."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:30:00.027008+00:00"
+  },
+  {
+    "id": "P12",
+    "lang": "es",
+    "verdict": "pass",
+    "flags": [],
+    "extracted": {
+      "topic": "The essay is about defending the prohibition of private vehicles in urban centers.",
+      "stance": "for",
+      "points": [
+        "The liberation of road space for pedestrians, cyclists, and retail commerce",
+        "The substantial improvement of air quality and reduction of noise pollution within a few months",
+        "The experience of cities that have already adopted this measure, which report an increase in foot traffic to commercial areas rather than a decline"
+      ],
+      "prose_only": true,
+      "length_stated": true,
+      "native_quality": 5,
+      "other_language_mentioned": false
+    },
+    "match": {
+      "topic_match": true,
+      "stance_match": true,
+      "subclaims_present": [
+        true,
+        true,
+        true
+      ],
+      "extra_claims": [],
+      "verdict": "pass",
+      "note": "The extracted schema perfectly aligns with the intended topic, stance, and all three sub-claims."
+    },
+    "reviewer_model": "qwen/qwen3.7-plus",
+    "reviewed_at": "2026-09-03T17:32:31.712738+00:00"
+  }
+]

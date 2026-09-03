@@ -1,0 +1,302 @@
+[
+  {
+    "id": "P01",
+    "lang": "ja",
+    "prompt": "近年、オフィスワークにおけるリモートワークの導入が進んでいる。あなたは、オフィスワークのデフォルトの形態としてリモートワークを採用することに賛成である。以下の主張を踏まえ、リモートワークの利点を説得力のある文章で述べよ。\n\n800字程度で論じ、特に、通勤時間の有効活用、幅広い人材の獲得、オフィススペースのコスト削減の三点に触れ、それぞれの観点からリモートワークのメリットを詳しく説明すること。",
+    "schema": {
+      "topic": "Remote work as the default arrangement for office jobs",
+      "stance": "for",
+      "subclaims": [
+        "Commuting time is recovered as productive or personal time",
+        "Companies can hire from a wider geographic talent pool",
+        "Office space costs fall and can be redirected to salaries or research"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 290,
+      "completion_tokens": 123,
+      "total_tokens": 413,
+      "cost": 0.0001564
+    },
+    "written_at": "2026-09-03T16:56:27.596869Z",
+    "human_checked": false
+  },
+  {
+    "id": "P02",
+    "lang": "ja",
+    "prompt": "都市交通の混雑緩和や社会格差の是正を目的として、公共交通機関の運賃を無料化する動きが世界各地で広がりつつある。この提案に賛成する立場から、800字程度の論説文を作成せよ。論述にあたっては、運賃徴収にかかるコストの大きさ、自動車の短距離利用の抑制による交通渋滞の緩和、低所得層の雇用や生活サービスへのアクセス改善、の三点をそれぞれ明確に示し、それぞれの観点から公共交通機関の無料化がもたらす効果を具体的に論じよ。",
+    "schema": {
+      "topic": "Making urban public transport free of charge",
+      "stance": "for",
+      "subclaims": [
+        "Fare collection itself is a large share of operating cost",
+        "Free transit shifts short car trips and reduces congestion",
+        "Low-income riders gain access to jobs and services"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 138,
+      "total_tokens": 425,
+      "cost": 0.00019479
+    },
+    "written_at": "2026-09-03T16:56:30.499294Z",
+    "human_checked": false
+  },
+  {
+    "id": "P03",
+    "lang": "ja",
+    "prompt": "小学校での宿題を廃止すべきだという意見がある。あなたはこの意見に賛成か、反対か。反対の立場から、800字程度で意見文を書け。宿題の意義について、多角的な視点から論じよ。",
+    "schema": {
+      "topic": "Abolishing homework in primary school",
+      "stance": "against",
+      "subclaims": [
+        "Short daily practice consolidates reading and arithmetic",
+        "Homework builds routines of independent work before secondary school",
+        "It gives parents a window into what their child is learning"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 284,
+      "completion_tokens": 61,
+      "total_tokens": 345,
+      "cost": 0.00016955
+    },
+    "written_at": "2026-09-03T16:56:32.334334Z",
+    "human_checked": false
+  },
+  {
+    "id": "P04",
+    "lang": "ja",
+    "prompt": "低炭素化する電力システムにおいて原子力発電の果たすべき役割を論じよ。原子力は不可欠な存在であるという立場に立ち、説得力のある論考を800字程度でまとめよ。具体的には、風力や太陽光発電と補完的な役割を果たす安定した出力の供給源であること、kWhあたりのライフサイクル排出量が風力と同等であること、そして再生可能エネルギーに比べて単位エネルギーあたりの土地利用が極めて小さいことの三点をそれぞれ詳述すること。論理展開や専門用語の使用に留意し、説得力のある文章を作成すること。",
+    "schema": {
+      "topic": "Nuclear power as a necessary part of decarbonising electricity",
+      "stance": "for",
+      "subclaims": [
+        "Nuclear provides firm, weather-independent output that complements wind and solar",
+        "Its lifecycle emissions per kilowatt-hour are comparable to wind",
+        "Land use per unit of energy is far smaller than for renewables"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 292,
+      "completion_tokens": 141,
+      "total_tokens": 433,
+      "cost": 0.0001712
+    },
+    "written_at": "2026-09-03T16:56:35.552311Z",
+    "human_checked": false
+  },
+  {
+    "id": "P05",
+    "lang": "ja",
+    "prompt": "ソーシャルメディアアカウントの利用に年齢確認を義務付けるべきかどうかが議論されている。年齢確認の導入に反対する立場から、この提案の是非について論じよ。年齢確認制度がもたらす弊害について具体的に考察し、説得力のある文章で主張を展開すること。800字程度。",
+    "schema": {
+      "topic": "Mandatory age verification for social media accounts",
+      "stance": "against",
+      "subclaims": [
+        "Verification requires collecting identity documents, creating a privacy risk for everyone",
+        "Determined minors will route around it with borrowed identities or other platforms",
+        "The burden falls hardest on people without formal identification"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 291,
+      "completion_tokens": 72,
+      "total_tokens": 363,
+      "cost": 0.0001158
+    },
+    "written_at": "2026-09-03T16:56:37.073287Z",
+    "human_checked": false
+  },
+  {
+    "id": "P06",
+    "lang": "ja",
+    "prompt": "宇宙探査への資金配分の一部を海洋研究に振り向けるべきだという提案がなされている。これに対し、反対の立場から論じよ。宇宙科学と海洋科学はそれぞれ異なる予算枠で運営されており、一方への投資が他方を犠牲にすることにはならないこと、海洋研究において衛星観測が果たす役割は極めて大きいこと、そして宇宙開発プログラムが他の産業に及ぼす波及効果はきわめて高いことを、それぞれ論拠として、説得的な論考を展開せよ。字数は800字程度とする。",
+    "schema": {
+      "topic": "Redirecting a large share of space-exploration funding to ocean research",
+      "stance": "against",
+      "subclaims": [
+        "Space and ocean science draw on different budgets and the trade-off is false",
+        "Satellite observation is itself the main tool for studying the oceans",
+        "Space programmes have unusually high spillover into other industries"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 292,
+      "completion_tokens": 126,
+      "total_tokens": 418,
+      "cost": 0.0001592
+    },
+    "written_at": "2026-09-03T16:56:40.175702Z",
+    "human_checked": false
+  },
+  {
+    "id": "P07",
+    "lang": "ja",
+    "prompt": "大学入試から標準テストを廃止すべきかどうかが議論されている。標準テストを廃止すべきでないという立場から、800字程度の論説文を書け。論の展開にあたっては、以下の観点にそれぞれ触れること。第一に、教育の質が大きく異なる高校間での比較を可能にするのは標準テストだけである。第二に、標準テストがなくなると、入試は志望動機書や課外活動の評価に傾斜せざるを得なくなり、結果として経済的に恵まれた受験生が有利になる。第三に、高校での成績と同程度に、標準テストの成績は大学での初年度の成績を予測する上で有効である。",
+    "schema": {
+      "topic": "Dropping standardised tests from university admissions",
+      "stance": "against",
+      "subclaims": [
+        "A common test is the only measure comparable across schools of very different quality",
+        "Without it, admissions lean more on essays and activities that favour wealthy applicants",
+        "Test scores predict first-year performance about as well as school grades do"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 299,
+      "completion_tokens": 154,
+      "total_tokens": 453,
+      "cost": 0.000183
+    },
+    "written_at": "2026-09-03T16:56:43.582660Z",
+    "human_checked": false
+  },
+  {
+    "id": "P08",
+    "lang": "ja",
+    "prompt": "週休三日制を国の標準的な労働制度として導入することについて、あなたの意見を八百字程度で論じなさい。導入の是非について、賛成の立場から説得力のある文章を書くこと。論じるにあたっては、以下の観点を含め、根拠となる事実や具体例を挙げて述べなさい。",
+    "schema": {
+      "topic": "A four-day working week as national policy",
+      "stance": "for",
+      "subclaims": [
+        "Trials report equal output with fewer hours",
+        "Rest reduces burnout and sick leave",
+        "A shorter week spreads employment across more people"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 279,
+      "completion_tokens": 80,
+      "total_tokens": 359,
+      "cost": 0.00011148
+    },
+    "written_at": "2026-09-03T16:56:48.066898Z",
+    "human_checked": false
+  },
+  {
+    "id": "P09",
+    "lang": "ja",
+    "prompt": "デジタル決済の普及が進む中で、現金の流通を維持することの重要性を論じよ。具体的には、電力やネットワークの障害時における現金の有用性、取引記録が残らない唯一の決済手段であるという現金の特性、そして高齢者や無銀行世帯にとっての現金の不可欠性を、それぞれ詳述しつつ、現金の社会的意義を強調せよ。論理的な構成と説得力ある記述により、800字程度で論述すること。",
+    "schema": {
+      "topic": "Keeping physical cash in circulation as digital payments grow",
+      "stance": "for",
+      "subclaims": [
+        "Cash works during power and network failures",
+        "It is the only payment method that does not create a transaction record",
+        "Elderly and unbanked people depend on it"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 285,
+      "completion_tokens": 107,
+      "total_tokens": 392,
+      "cost": 0.0001426
+    },
+    "written_at": "2026-09-03T16:56:50.500827Z",
+    "human_checked": false
+  },
+  {
+    "id": "P10",
+    "lang": "ja",
+    "prompt": "動物園の廃止を主張する意見があるが、これに反対する論拠を明確に述べよ。具体的には、現代の動物園が絶滅危惧種の保護に果たす役割、動物との直接的な触れ合いが自然保護への意識を高める効果、そして動物園での獣医学研究が野生動物の保護に寄与する点について、それぞれ詳しく論じ、廃止論に対する反論を展開せよ。論旨は明快に、かつ具体例を挙げて説得力をもって述べ、800字程度でまとめること。",
+    "schema": {
+      "topic": "Phasing out zoos",
+      "stance": "against",
+      "subclaims": [
+        "Modern zoos run breeding programmes that have saved species from extinction",
+        "Direct contact with animals builds public support for conservation",
+        "Zoo veterinary research benefits wild populations"
+      ],
+      "fk_tier": "educated"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 282,
+      "completion_tokens": 127,
+      "total_tokens": 409,
+      "cost": 0.000158
+    },
+    "written_at": "2026-09-03T16:56:52.700863Z",
+    "human_checked": false
+  },
+  {
+    "id": "P11",
+    "lang": "ja",
+    "prompt": "六歳からのすべての子どもにプログラミング教育を行うべきだという意見がある。これに反対する立場から、説得力のある文章を八百字程度で書け。プログラミング教育の必要性やその効果について考え、反対の立場を明確に示すとともに、具体的な根拠を挙げて論を展開すること。",
+    "schema": {
+      "topic": "Teaching programming to all children from age six",
+      "stance": "against",
+      "subclaims": [
+        "Early years are better spent on language, number sense and play",
+        "Programming tools change too fast for early instruction to remain useful",
+        "Teacher shortages make universal early coding instruction unrealistic"
+      ],
+      "fk_tier": "general"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 81,
+      "total_tokens": 368,
+      "cost": 0.0001222
+    },
+    "written_at": "2026-09-03T16:56:54.214259Z",
+    "human_checked": false
+  },
+  {
+    "id": "P12",
+    "lang": "ja",
+    "prompt": "都市中心部における私的自動車の乗り入れを禁止することの是非が議論されている。この議論について、乗り入れ禁止に賛成する立場から、800字程度の論説文を作成せよ。論説においては、乗り入れ禁止によって解放された道路空間が歩行者や自転車利用者、商業活動に再配分されること、空気質と騒音レベルの顕著な改善が数ヶ月以内に実現すること、そしてこれを実施した都市では小売業の客足が減少するどころか増加しているという実績があることの三点を、別々の段落でそれぞれ詳述すること。論旨が明快かつ論理的に整然と展開されるよう、また、専門家の読者を意識した緻密な議論と専門用語の適切な使用に留意すること。",
+    "schema": {
+      "topic": "Banning private cars from city centres",
+      "stance": "for",
+      "subclaims": [
+        "Street space is freed for walking, cycling and commerce",
+        "Air quality and noise improve measurably within months",
+        "Cities that have done it report higher retail footfall, not lower"
+      ],
+      "fk_tier": "expert"
+    },
+    "writer_model": "meta-llama/llama-4-maverick",
+    "writer_model_served": "meta-llama/llama-4-maverick",
+    "usage": {
+      "prompt_tokens": 287,
+      "completion_tokens": 183,
+      "total_tokens": 470,
+      "cost": 0.0003109
+    },
+    "written_at": "2026-09-03T16:56:56.331117Z",
+    "human_checked": false
+  }
+]
