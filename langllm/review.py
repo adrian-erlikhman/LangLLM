@@ -19,7 +19,7 @@ import re
 import datetime as dt
 from concurrent.futures import ThreadPoolExecutor
 from .config import load_config, load_schemas, NATIVE_PROMPTS_DIR, language_codes
-from .openrouter import chat, text_of
+from .openrouter import chat, text_of, OpenRouterError
 from .prompts import load_native
 
 EXTRACT = """Below is an essay assignment written in {name_en}. Read it and answer in English, as JSON only, with keys:
@@ -53,8 +53,16 @@ Extracted from the prompt:
 
 
 def _json(text: str) -> dict:
-    m = re.search(r"\{.*\}", text, flags=re.S)
-    return json.loads(m.group(0)) if m else {"_parse_error": text[:300]}
+    """First JSON object in the reply (models add prose or code fences around it)."""
+    text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip(), flags=re.M)
+    start = text.find("{")
+    if start < 0:
+        return {"_parse_error": text[:300]}
+    try:
+        obj, _ = json.JSONDecoder().raw_decode(text[start:])
+        return obj if isinstance(obj, dict) else {"_parse_error": text[:300]}
+    except json.JSONDecodeError:
+        return {"_parse_error": text[:300]}
 
 
 NO_REASONING = {"enabled": False}  # Qwen 3.7 is a reasoning model; without this it spends the whole budget thinking
@@ -69,9 +77,12 @@ def review_one(s: dict, p: dict | None, lang: str, cfg: dict) -> dict:
     reviewer, L = cfg["prompt_reviewer"], cfg["languages"][lang]
     if not p:
         return {"id": s["id"], "lang": lang, "verdict": "missing"}
-    ex = _ask(reviewer, EXTRACT.format(name_en=L["name_en"], prompt=p["prompt"]), 900)
-    mt = _ask(reviewer, MATCH.format(topic=s["topic"], stance=s["stance"], c1=s["subclaims"][0], c2=s["subclaims"][1],
-                                     c3=s["subclaims"][2], extracted=json.dumps(ex, ensure_ascii=False)), 600)
+    try:
+        ex = _ask(reviewer, EXTRACT.format(name_en=L["name_en"], prompt=p["prompt"]), 900)
+        mt = _ask(reviewer, MATCH.format(topic=s["topic"], stance=s["stance"], c1=s["subclaims"][0], c2=s["subclaims"][1],
+                                         c3=s["subclaims"][2], extracted=json.dumps(ex, ensure_ascii=False)), 600)
+    except OpenRouterError as e:  # network/API failure: record it, keep going, re-run later
+        return {"id": s["id"], "lang": lang, "verdict": "flag", "flags": ["reviewer_error"], "error": str(e)[:300]}
     if True:
         flags = []
         if mt.get("verdict") != "pass":
