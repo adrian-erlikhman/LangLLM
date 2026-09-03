@@ -75,7 +75,7 @@ def plan(cfg: dict, models: list[str], langs: list[str]) -> list[dict]:
 def run_job(job: dict, gcfg: dict) -> dict:
     messages = [{"role": "user", "content": job["prompt"]}]
     rec = {k: job[k] for k in ("cell_id", "model_key", "model", "prompt_id", "lang", "gen", "fk_tier", "stance")}
-    rec["requested_at"] = dt.datetime.utcnow().isoformat() + "Z"
+    rec["requested_at"] = dt.datetime.now(dt.timezone.utc).isoformat()
     rec["params"] = {"temperature": gcfg["temperature"], "max_tokens": gcfg["max_tokens"],
                      "reasoning": gcfg.get("reasoning"), "seed": 1000 + job["gen"]}
     try:

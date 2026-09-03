@@ -93,10 +93,12 @@ def validate() -> pd.DataFrame:
             "cell_id": r["cell_id"], "model_key": r["model_key"], "model_served": r.get("model_served"),
             "prompt_id": r["prompt_id"], "lang": r["lang"], "gen": r["gen"], "fk_tier": r["fk_tier"],
             "error": bool(r.get("error")), "finish_reason": r.get("finish_reason"),
+            "truncated": r.get("finish_reason") == "length",
+            "reasoning_tokens": (r.get("usage") or {}).get("reasoning_tokens"),
             "word_equiv": wc, "lang_detected": det, "lang_conf": round(conf, 3),
             "wrong_language": wrong_lang, "refusal": refusal, "too_short": too_short, "too_long": too_long,
             "structure_lines": structure_violations(text),
-            "keep": not (r.get("error") or wrong_lang or refusal or too_short or too_long),
+            "keep": not (r.get("error") or wrong_lang or refusal or too_short or too_long or r.get("finish_reason") == "length"),
         })
     df = pd.DataFrame(rows)
     (ROOT / "data").mkdir(exist_ok=True)
@@ -107,7 +109,7 @@ def validate() -> pd.DataFrame:
     RESULTS_DIR.mkdir(exist_ok=True)
     summ = (df.groupby(["model_key", "lang"])
               .agg(n=("cell_id", "size"), wrong_language_rate=("wrong_language", "mean"),
-                   refusal_rate=("refusal", "mean"), error_rate=("error", "mean"),
+                   refusal_rate=("refusal", "mean"), error_rate=("error", "mean"), truncated_rate=("truncated", "mean"),
                    too_short_rate=("too_short", "mean"), too_long_rate=("too_long", "mean"),
                    keep_rate=("keep", "mean"), median_words=("word_equiv", "median"))
               .reset_index())

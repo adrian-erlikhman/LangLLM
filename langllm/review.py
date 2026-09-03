@@ -17,6 +17,7 @@ import argparse
 import json
 import re
 import datetime as dt
+from concurrent.futures import ThreadPoolExecutor
 from .config import load_config, load_schemas, NATIVE_PROMPTS_DIR, language_codes
 from .openrouter import chat, text_of
 from .prompts import load_native
@@ -56,20 +57,22 @@ def _json(text: str) -> dict:
     return json.loads(m.group(0)) if m else {"_parse_error": text[:300]}
 
 
-def review_language(lang: str, cfg: dict, schemas: list[dict]) -> list[dict]:
+NO_REASONING = {"enabled": False}  # Qwen 3.7 is a reasoning model; without this it spends the whole budget thinking
+
+
+def _ask(reviewer: str, content: str, max_tokens: int) -> dict:
+    return _json(text_of(chat(reviewer, [{"role": "user", "content": content}], temperature=0.0,
+                              max_tokens=max_tokens, seed=0, reasoning=NO_REASONING)))
+
+
+def review_one(s: dict, p: dict | None, lang: str, cfg: dict) -> dict:
     reviewer, L = cfg["prompt_reviewer"], cfg["languages"][lang]
-    native = load_native(lang)
-    out = []
-    for s in schemas:
-        p = native.get(s["id"])
-        if not p:
-            out.append({"id": s["id"], "lang": lang, "verdict": "missing"})
-            continue
-        ex = _json(text_of(chat(reviewer, [{"role": "user", "content": EXTRACT.format(name_en=L["name_en"], prompt=p["prompt"])}],
-                                temperature=0.0, max_tokens=700, seed=0)))
-        mt = _json(text_of(chat(reviewer, [{"role": "user", "content": MATCH.format(
-            topic=s["topic"], stance=s["stance"], c1=s["subclaims"][0], c2=s["subclaims"][1], c3=s["subclaims"][2],
-            extracted=json.dumps(ex, ensure_ascii=False))}], temperature=0.0, max_tokens=500, seed=0)))
+    if not p:
+        return {"id": s["id"], "lang": lang, "verdict": "missing"}
+    ex = _ask(reviewer, EXTRACT.format(name_en=L["name_en"], prompt=p["prompt"]), 900)
+    mt = _ask(reviewer, MATCH.format(topic=s["topic"], stance=s["stance"], c1=s["subclaims"][0], c2=s["subclaims"][1],
+                                     c3=s["subclaims"][2], extracted=json.dumps(ex, ensure_ascii=False)), 600)
+    if True:
         flags = []
         if mt.get("verdict") != "pass":
             flags.append("content")
@@ -81,11 +84,19 @@ def review_language(lang: str, cfg: dict, schemas: list[dict]) -> list[dict]:
             flags.append("non_native")
         if ex.get("other_language_mentioned"):
             flags.append("mentions_language")
+        if "_parse_error" in ex or "_parse_error" in mt:
+            flags.append("reviewer_parse_error")
         rec = {"id": s["id"], "lang": lang, "verdict": "pass" if not flags else "flag", "flags": flags,
                "extracted": ex, "match": mt, "reviewer_model": reviewer,
-               "reviewed_at": dt.datetime.utcnow().isoformat() + "Z"}
-        out.append(rec)
-        print(f"[{lang}] {s['id']}: {rec['verdict']} {flags or ''}")
+               "reviewed_at": dt.datetime.now(dt.timezone.utc).isoformat()}
+        print(f"[{lang}] {s['id']}: {rec['verdict']} {flags or ''}", flush=True)
+        return rec
+
+
+def review_language(lang: str, cfg: dict, schemas: list[dict]) -> list[dict]:
+    native = load_native(lang)
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        out = list(ex.map(lambda s: review_one(s, native.get(s["id"]), lang, cfg), schemas))
     with open(NATIVE_PROMPTS_DIR / f"review_{lang}.json", "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
     return out

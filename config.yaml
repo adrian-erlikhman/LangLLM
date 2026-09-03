@@ -38,9 +38,11 @@ fk_tiers:
 generation:
   n_per_cell: 2            # generations per (model, prompt, language)
   temperature: 0.7
-  max_tokens: 1800
-  # OpenRouter unified reasoning control. Several subjects are reasoning models;
-  # we keep the visible text and drop the trace so every response is prose only.
+  max_tokens: 4000         # budget shared by hidden reasoning + prose; only used tokens bill
+  # OpenRouter unified reasoning control, identical for all five subjects. Gemini 3.5 Flash
+  # cannot disable reasoning, so 'low effort, trace excluded' is the one setting every model
+  # accepts (probed 2026-09-03: GPT-5.5/Opus 4.7 emit 0 reasoning tokens at low, Grok/DeepSeek
+  # a few hundred). Reasoning tokens are logged per response.
   reasoning: {effort: low, exclude: true}
   workers: 6
   max_retries: 5

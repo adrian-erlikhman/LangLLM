@@ -85,7 +85,7 @@ def write_prompts(langs: list[str], force: bool = False) -> None:
                 "id": s["id"], "lang": lang, "prompt": text_of(resp),
                 "schema": {k: s[k] for k in ("topic", "stance", "subclaims", "fk_tier")},
                 "writer_model": writer, "writer_model_served": resp.get("model"),
-                "usage": usage_of(resp), "written_at": dt.datetime.utcnow().isoformat() + "Z",
+                "usage": usage_of(resp), "written_at": dt.datetime.now(dt.timezone.utc).isoformat(),
                 "human_checked": False,
             })
             print(f"[{lang}] {s['id']} ok ({len(out[-1]['prompt'])} chars)")

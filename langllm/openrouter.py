@@ -89,4 +89,6 @@ def text_of(resp: dict) -> str:
 
 def usage_of(resp: dict) -> dict:
     u = resp.get("usage") or {}
-    return {k: u.get(k) for k in ("prompt_tokens", "completion_tokens", "total_tokens", "cost")}
+    out = {k: u.get(k) for k in ("prompt_tokens", "completion_tokens", "total_tokens", "cost")}
+    out["reasoning_tokens"] = (u.get("completion_tokens_details") or {}).get("reasoning_tokens")
+    return out
