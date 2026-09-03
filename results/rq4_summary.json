@@ -1,0 +1,20 @@
+{
+  "centroid_dist": {
+    "spearman_rho_vs_rank": -0.9642857142857145,
+    "p": 0.00045414916919416935,
+    "english": 3.592221087137581,
+    "lowest_resource": 2.6927855684232056
+  },
+  "silhouette": {
+    "spearman_rho_vs_rank": -0.9285714285714288,
+    "p": 0.0025194724037946887,
+    "english": 0.03983730365510909,
+    "lowest_resource": -0.019053023865509878
+  },
+  "between_within_ratio": {
+    "spearman_rho_vs_rank": -1.0,
+    "p": 0.0,
+    "english": 0.41194332515795784,
+    "lowest_resource": 0.17548443208119394
+  }
+}

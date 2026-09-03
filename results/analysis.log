@@ -1,0 +1,69 @@
+839 responses, 7 languages, 5 models
+
+RQ1 — attribution accuracy (leave-one-prompt-out):
+classifier  logreg     rf
+lang                     
+en           0.717  0.675
+es           0.625  0.675
+zh           0.650  0.650
+ru           0.650  0.717
+ja           0.708  0.733
+tr           0.592  0.600
+hi           0.639  0.622
+
+RQ2 — gradient: {
+ "logreg": {
+  "spearman_rho": -0.4504687313477795,
+  "spearman_p": 0.310429301851323,
+  "ols_slope_per_rank": -0.008655962384953987,
+  "ols_p": 0.34771045381483934,
+  "acc_english": 0.7166666666666667,
+  "acc_lowest": 0.6386554621848739
+ },
+ "rf": {
+  "spearman_rho": -0.3783937343321348,
+  "spearman_p": 0.4026022019217552,
+  "ols_slope_per_rank": -0.008075730292116858,
+  "ols_p": 0.4226744377053431,
+  "acc_english": 0.675,
+  "acc_lowest": 0.6218487394957983
+ },
+ "glm_cell_level": {
+  "coef_rank_logodds": -0.03834525956280303,
+  "se": 0.041937070244030275,
+  "p": 0.3605317207558639,
+  "n_cells": 839
+ }
+}
+
+RQ3 — mean partial η²: [{'eta2_model': 0.145, 'eta2_lang': 0.539, 'eta2_interaction': 0.127}]
+RQ3 — cross-lingual transfer (rows=train, cols=test):
+       en    es    zh    ru    ja    tr    hi
+en  0.72  0.52  0.43  0.38  0.41  0.39  0.44
+es  0.58  0.62  0.50  0.48  0.54  0.48  0.55
+zh  0.57  0.48  0.65  0.38  0.45  0.37  0.48
+ru  0.56  0.53  0.51  0.65  0.39  0.52  0.49
+ja  0.48  0.59  0.48  0.45  0.71  0.43  0.50
+tr  0.45  0.45  0.37  0.51  0.51  0.59  0.59
+hi  0.58  0.58  0.52  0.50  0.47  0.56  0.64
+
+RQ4 — within-language model separation:
+ lang  rank  centroid_dist  silhouette  between_within_ratio
+  en     1          3.592       0.040                 0.412
+  es     2          3.109       0.021                 0.242
+  zh     3          3.006       0.027                 0.225
+  ru     4          2.973       0.009                 0.216
+  ja     5          2.700       0.018                 0.211
+  tr     6          2.843       0.008                 0.203
+  hi     7          2.693      -0.019                 0.175
+
+Robustness — length-residualised features (tag _lenctl):
+classifier  logreg     rf
+lang                     
+en           0.567  0.658
+es           0.483  0.775
+hi           0.445  0.664
+ja           0.500  0.750
+ru           0.467  0.750
+tr           0.450  0.708
+zh           0.442  0.683

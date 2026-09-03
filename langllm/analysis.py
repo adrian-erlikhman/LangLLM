@@ -57,6 +57,7 @@ def zscore_within_language(df: pd.DataFrame) -> pd.DataFrame:
 def residualise_length(df: pd.DataFrame) -> pd.DataFrame:
     """Robustness: regress each feature on log(n_tokens) within language and keep residuals."""
     out = df.copy()
+    out[FEATURE_NAMES] = out[FEATURE_NAMES].astype(float)
     logn = np.log(out["n_tokens"].clip(lower=1))
     for lang, idx in out.groupby("lang").groups.items():
         X = sm.add_constant(logn.loc[idx])
