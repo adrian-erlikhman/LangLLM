@@ -1,0 +1,59 @@
+# LangLLM — study configuration. Everything the pipeline needs to know that is
+# not data lives here, so a run is reproducible from this file + prompts/schemas.json.
+
+# Subject models (OpenRouter model strings, verified against /api/v1/models 2026-09-03).
+# The string *returned* by the API is also logged per response, in case of aliasing.
+models:
+  gpt:      openai/gpt-5.5
+  gemini:   google/gemini-3.5-flash
+  claude:   anthropic/claude-opus-4.7
+  grok:     x-ai/grok-4.3
+  deepseek: deepseek/deepseek-v4-pro-0813
+
+# Non-subject model that writes the native-language prompts from each schema.
+prompt_writer: meta-llama/llama-4-maverick
+
+# Languages, in decreasing order of (approximate) training-data share. The rank
+# is the RQ2 covariate. `stanza` is the Stanza package id; `name_en` is used in
+# the instruction to the prompt writer; `length_hint` is the native length target
+# put into every prompt (word for spaced scripts; characters for zh/ja).
+languages:
+  en: {rank: 1, name_en: English,  native: English,  stanza: en, length_hint: "about 350 words",            unit: word}
+  es: {rank: 2, name_en: Spanish,  native: español,  stanza: es, length_hint: "unas 350 palabras",          unit: word}
+  zh: {rank: 3, name_en: Chinese,  native: 中文,      stanza: zh, length_hint: "大约600字",                  unit: char}
+  ru: {rank: 4, name_en: Russian,  native: русский,  stanza: ru, length_hint: "около 350 слов",             unit: word}
+  ja: {rank: 5, name_en: Japanese, native: 日本語,    stanza: ja, length_hint: "800字程度",                  unit: char}
+  tr: {rank: 6, name_en: Turkish,  native: Türkçe,   stanza: tr, length_hint: "yaklaşık 350 kelime",        unit: word}
+  hi: {rank: 7, name_en: Hindi,    native: हिन्दी,    stanza: hi, length_hint: "लगभग 350 शब्द",             unit: word}
+
+# Reading-level tiers. Flesch–Kincaid is English-only, so the tier is a *prompt
+# control* (an instruction), never a measured feature.
+fk_tiers:
+  general: "a general adult reader (roughly 8th-grade reading level: short sentences, everyday vocabulary)"
+  educated: "an educated adult reader (roughly 12th-grade reading level: varied sentences, some technical terms explained)"
+  expert: "an expert reader (graduate level: dense argument, technical vocabulary used without explanation)"
+
+generation:
+  n_per_cell: 2            # generations per (model, prompt, language)
+  temperature: 0.7
+  max_tokens: 1800
+  # OpenRouter unified reasoning control. Several subjects are reasoning models;
+  # we keep the visible text and drop the trace so every response is prose only.
+  reasoning: {effort: low, exclude: true}
+  workers: 6
+  max_retries: 5
+
+validation:
+  # Word-equivalent bounds; zh/ja are converted from characters (see validate.py).
+  min_words: 150
+  max_words: 900
+  langid_min_confidence: 0.6
+
+features:
+  mattr_window: 50
+  stanza_dir: stanza_resources   # relative to repo root; gitignored
+
+analysis:
+  cv: leave_one_prompt_out       # the two generations of a prompt never straddle train/test
+  n_bootstrap: 1000
+  random_state: 0
