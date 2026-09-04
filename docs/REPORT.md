@@ -22,7 +22,12 @@ keep separating them. Finally, translation does **not** destroy the fingerprint:
 Translate or a free non-subject LLM renders the English responses into the six other languages,
 five-way attribution still runs 0.57–0.70, and an English-trained classifier reads the
 translations at 0.66, because the surviving signal is structural (paragraphing, sentence rhythm,
-punctuation) rather than lexical.
+punctuation) rather than lexical. Asked directly which model wrote a text, four of the five
+models are at chance in every language (GPT names itself 82% of the time regardless of
+author; the others default to "Claude"); only Claude is above chance (25.4%, p < 0.001) with
+a genuine, if small, self-recognition signal (own-text recall 17% vs 7% false claims) that is
+strongest in Hindi, not weakest. Interpretable features beat every LLM judge by 35 to 50
+points in every language.
 
 ## 1. Design
 
@@ -406,6 +411,10 @@ Mean Spearman ρ between original and translation, per feature (averaged over th
   out design prevents leakage but confidence intervals are correspondingly wide (±7–9 points).
 * **Automated prompt review.** Prompt fidelity was checked by a model, not a person, in all seven
   languages. The review and every regenerated wording are versioned for audit.
+* **Judge condition.** RQ6 disables hidden reasoning for the four judges that allow it
+  (instant-answer condition); Gemini keeps low-effort reasoning. A reasoning-on condition was
+  piloted and abandoned for cost; it may raise judge accuracy and should be tested before
+  claiming that LLM judges *cannot* attribute.
 * **Snapshot.** Model strings are dated snapshots served through OpenRouter in September 2026;
   fingerprints will drift with model updates.
 

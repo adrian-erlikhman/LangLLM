@@ -1,3 +1,6 @@
-author,claude,deepseek,gemini,gpt
-claude,29,21,0,118
-deepseek,15,21,5,113
+author,claude,deepseek,gemini,gpt,grok
+claude,29,21,0,118,0
+deepseek,19,21,6,122,0
+gemini,0,32,26,110,0
+gpt,21,12,0,135,0
+grok,4,32,0,129,2

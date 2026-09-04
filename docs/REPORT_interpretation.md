@@ -17,7 +17,12 @@ keep separating them. Finally, translation does **not** destroy the fingerprint:
 Translate or a free non-subject LLM renders the English responses into the six other languages,
 five-way attribution still runs 0.57–0.70, and an English-trained classifier reads the
 translations at 0.66, because the surviving signal is structural (paragraphing, sentence rhythm,
-punctuation) rather than lexical.
+punctuation) rather than lexical. Asked directly which model wrote a text, four of the five
+models are at chance in every language (GPT names itself 82% of the time regardless of
+author; the others default to "Claude"); only Claude is above chance (25.4%, p < 0.001) with
+a genuine, if small, self-recognition signal (own-text recall 17% vs 7% false claims) that is
+strongest in Hindi, not weakest. Interpretable features beat every LLM judge by 35 to 50
+points in every language.
 <!-- summary -->
 
 <!-- rq1 -->
@@ -116,6 +121,43 @@ translation is not an effective laundering step against interpretable features, 
 classifier trained in English can be applied across a translation boundary without retraining.
 <!-- rq5 -->
 
+<!-- rq6 -->
+**Interpretation.** Asked directly, the models cannot do what the feature classifier does.
+Four of the five judges sit at chance on every language: GPT-5.5 20.6%, Grok 21.9%, Gemini
+21.2%, DeepSeek 20.3%, none significant, against 59–72% for the 21-feature classifier on the
+same texts. Their answers are not guesses spread evenly but fixed defaults: GPT names *itself*
+for 82% of all texts whether or not it wrote them (own-text recall 0.82, false-self rate 0.82,
+so no discrimination at all), while Grok, Gemini and DeepSeek almost never name themselves and
+call most texts "Claude" (Grok 681 of 839). Out of the box, attribution by an LLM is a prior
+about who writes essays, not a reading of the text.
+
+Claude Opus 4.7 is the exception, as in the CompLLM result, and the exception is small but
+robust. Its overall accuracy is 25.4% (213/839, binomial p < 0.001), and it is the only judge
+whose own-text recall (17.3%) exceeds the rate at which it names itself on others' text (6.6%;
+one-sided Fisher p < 0.001). Its self-claims are also unusually precise: when Claude says
+"Claude" it is right 40% of the time against a 20% base rate, and when it says "Gemini" it is
+right 81% of the time; it simply under-calls both, defaulting to "GPT" for 614 of 839 texts.
+Its above-chance accuracy therefore comes from cautious discrimination rather than from
+self-recognition alone (accuracy on others' text 0.27, on its own 0.17).
+
+The self-recognition signal does not fade with resource level; if anything it is strongest
+where the resource hypothesis predicted it should vanish. Own-text recall versus false-self
+rate is significant in English (25% vs 3%, p = 0.002), Japanese (38% vs 16%, p = 0.02) and
+Hindi (42% vs 13%, p = 0.003), where Claude's overall accuracy also peaks at 36.1% (p < 0.001).
+In Spanish and Russian Claude never names itself at all (0 of 24 own texts), so the signal is
+absent there rather than reversed. The correlation of own-recall with rank is positive and
+non-significant (ρ = 0.45, p = 0.31): there is no gradient, and the low-resource end is where
+Claude is most willing to claim its own writing.
+
+Two caveats. First, the effect is modest in absolute terms; a 25% judge is far from a usable
+attributor, and the paper's practical claim should be that interpretable features beat every
+LLM judge by 35–50 points in every language, not that Claude can identify itself reliably.
+Second, the judge condition disabled hidden reasoning for the four models that allow it, so
+this is the instant-answer setting; Gemini kept low-effort reasoning because it cannot be
+disabled, and still sat at chance, which argues against reasoning being what the others were
+missing.
+<!-- rq6 -->
+
 <!-- limitations -->
 * **One prompt family.** Twelve persuasive-essay schemas with a fixed three-point structure.
   The paragraph-count and connective features that carry much of the fingerprint are partly a
@@ -133,6 +175,10 @@ classifier trained in English can be applied across a translation boundary witho
   out design prevents leakage but confidence intervals are correspondingly wide (±7–9 points).
 * **Automated prompt review.** Prompt fidelity was checked by a model, not a person, in all seven
   languages. The review and every regenerated wording are versioned for audit.
+* **Judge condition.** RQ6 disables hidden reasoning for the four judges that allow it
+  (instant-answer condition); Gemini keeps low-effort reasoning. A reasoning-on condition was
+  piloted and abandoned for cost; it may raise judge accuracy and should be tested before
+  claiming that LLM judges *cannot* attribute.
 * **Snapshot.** Model strings are dated snapshots served through OpenRouter in September 2026;
   fingerprints will drift with model updates.
 <!-- limitations -->
