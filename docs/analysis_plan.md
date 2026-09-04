@@ -77,8 +77,11 @@ Suggested by Philo: does Google Translate, or translation in general, destroy th
 
 Continuation of the CompLLM self-recognition protocol. Each subject model is shown each kept
 original response (no metadata, no language label) and asked which of the five models wrote it,
-answering with one candidate key; option order shuffled per text; temperature 0; same reasoning
-setting as collection. Originals only (translations deferred for budget).
+answering with one candidate key; option order shuffled per text; temperature 0. Hidden reasoning is
+*disabled* for every judge that allows it (instant-answer condition, matching an out-of-the-box
+judge); Gemini 3.5 Flash cannot disable it and keeps low effort with the trace excluded — noted
+as a deviation. A pilot with low-effort reasoning showed DeepSeek exhausting its budget without
+answering and GPT-5.5 tripling the cost. Originals only (translations deferred for budget).
 - Attribution: five-way accuracy per judge × language, exact binomial vs 0.20.
   **Decision rule**: a judge "can attribute" in a language if its CI excludes 0.20.
 - Self-recognition: own-text recall vs the rate at which the judge names itself on others'

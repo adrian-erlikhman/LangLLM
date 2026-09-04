@@ -85,10 +85,14 @@ def judge_one(judge: str, model: str, r: dict, gcfg: dict) -> dict:
     keys = options_for(r["cell_id"])
     prompt = PROMPT.format(options="\n".join(f"- {k}: {LABEL[k]}" for k in keys), keys=", ".join(keys), text=r["text"])
     rec = {"cell_id": r["cell_id"], "judge": judge, "judge_model": model, "author": r["model_key"], "lang": r["lang"],
+           "reasoning": "mandatory-low" if judge == "gemini" else "disabled",
            "prompt_id": r["prompt_id"], "gen": r["gen"], "option_order": keys, "judged_at": dt.datetime.now(dt.timezone.utc).isoformat()}
     try:
+        # "Instant answer" condition: hidden reasoning disabled wherever the API allows it. Gemini 3.5 Flash
+        # cannot disable reasoning, so it keeps the collection setting (low effort, trace excluded).
+        reasoning = gcfg.get("reasoning") if judge == "gemini" else {"enabled": False}
         resp = chat(model, [{"role": "user", "content": prompt}], temperature=0.0, max_tokens=800,
-                    reasoning=gcfg.get("reasoning"), seed=7, max_retries=4)
+                    reasoning=reasoning, seed=7, max_retries=4)
         raw = text_of(resp)
         rec.update({"raw": raw[:300], "answer": parse_answer(raw, keys), "judge_served": resp.get("model"),
                     "finish_reason": resp["choices"][0].get("finish_reason"), "usage": usage_of(resp), "error": None})
