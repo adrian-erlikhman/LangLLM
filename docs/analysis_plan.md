@@ -73,6 +73,22 @@ Suggested by Philo: does Google Translate, or translation in general, destroy th
 - T3: per-feature Spearman ρ between original and translation across sources; mean model
   η² before vs after. Reports which feature groups carry through translation.
 
+## RQ6 (extension, added 2026-09-03 before any judge data existed) — LLM-as-judge
+
+Continuation of the CompLLM self-recognition protocol. Each subject model is shown each kept
+original response (no metadata, no language label) and asked which of the five models wrote it,
+answering with one candidate key; option order shuffled per text; temperature 0; same reasoning
+setting as collection. Originals only (translations deferred for budget).
+- Attribution: five-way accuracy per judge × language, exact binomial vs 0.20.
+  **Decision rule**: a judge "can attribute" in a language if its CI excludes 0.20.
+- Self-recognition: own-text recall vs the rate at which the judge names itself on others'
+  text (false-self rate), one-sided Fisher exact per judge. **Decision rule**: self-recognition
+  is claimed if own recall exceeds false-self rate with p < 0.05; "persists across languages"
+  if the per-language own-recall CIs exclude 0.20 in the low-resource languages too.
+- Comparison: judge accuracy vs the RQ1 feature classifier per language.
+- Prediction registered from the CompLLM result: four judges at chance in every language;
+  Claude above chance on its own text.
+
 ## Confounds we address
 
 - Length → residualised robustness run.
