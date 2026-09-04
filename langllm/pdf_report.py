@@ -168,7 +168,7 @@ def build() -> Path:
     langs = sorted(cfg["languages"], key=rank.get)
     interp = (DOCS / "REPORT_interpretation.md").read_text(encoding="utf-8")
     sec = {}
-    for tag in ("summary", "rq1", "rq2", "rq3", "rq4", "rq5", "limitations"):
+    for tag in ("summary", "rq1", "rq2", "rq3", "rq4", "rq5", "rq6", "limitations"):
         m = interp.split(f"<!-- {tag} -->")
         sec[tag] = m[1].strip() if len(m) > 1 else ""
 
@@ -333,6 +333,22 @@ def build() -> Path:
             fs = t3.groupby(["translator", "feature"])["spearman_rho"].mean().unstack(0).reset_index().sort_values(t3["translator"].unique()[0], ascending=False)
             st += table(fs, "{:.2f}", "Table 7.3. Mean Spearman ρ between original and translation per feature, averaged over the six target languages (question rate is undefined: the essays contain no questions)", [1.6 * inch, 1.0 * inch, 1.0 * inch], True)
         st += md_blocks(sec["rq5"])
+
+    # ---- 7b RQ6
+    j6 = _csv("rq6_judge_summary.csv")
+    if j6 is not None:
+        per = _csv("rq6_judge_by_language.csv"); comp = _csv("rq6_judge_vs_features.csv")
+        st.append(CondPageBreak(3.2 * inch)); st.append(Paragraph("7b · RQ6 — LLM-as-judge attribution and self-recognition", S["h1"]))
+        st += figure("F10_rq6_judge", "Figure 10. Left: five-way attribution accuracy per judge and language against the RQ1 feature classifier. Right: own-text recall versus the rate at which a judge names itself on others' text.")
+        j = j6.copy(); j["judge"] = j["judge"].map(MODEL_NAME)
+        j.columns = ["judge", "n", "accuracy", "p vs chance", "own recall", "false-self rate", "self-recognition p (Fisher)", "self-claim rate", "unparsed"]
+        st += table(j, caption="Table 7b.1. Per judge, all languages pooled (chance 0.20)")
+        c = comp.rename(columns={comp.columns[0]: "language"}); c["language"] = c["language"].map(LANG_NAME)
+        c.columns = [MODEL_NAME.get(x, x).replace("feature_classifier", "feature classifier (RQ1)") if x != "language" else x for x in c.columns]
+        st += table(c, caption="Table 7b.2. Five-way accuracy per language: each judge vs the feature classifier", first_col_bold=True)
+        own = per.pivot(index="judge", columns="lang", values="own_recall")[langs].reset_index(); own["judge"] = own["judge"].map(MODEL_NAME)
+        st += table(own, "{:.2f}", "Table 7b.3. Own-text recall per judge × language (self-recognition; chance 0.20)", [1.4 * inch] + [0.6 * inch] * 7, True)
+        st += md_blocks(sec["rq6"])
 
     # ---- 8, 9
     st.append(CondPageBreak(3.2 * inch)); st.append(Paragraph("8 · Limitations", S["h1"]))

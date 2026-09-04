@@ -36,7 +36,7 @@ def build() -> str:
     langs = sorted(cfg["languages"], key=rank.get)
     interp = (DOCS / "REPORT_interpretation.md").read_text(encoding="utf-8") if (DOCS / "REPORT_interpretation.md").exists() else ""
     sec = {}
-    for tag in ("summary", "rq1", "rq2", "rq3", "rq4", "rq5", "limitations"):
+    for tag in ("summary", "rq1", "rq2", "rq3", "rq4", "rq5", "rq6", "limitations"):
         m = interp.split(f"<!-- {tag} -->")
         sec[tag] = m[1].strip() if len(m) > 1 else ""
 

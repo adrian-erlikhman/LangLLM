@@ -87,7 +87,7 @@ def build() -> str:
     langs = sorted(cfg["languages"], key=rank.get)
     interp = (DOCS / "REPORT_interpretation.md").read_text(encoding="utf-8")
     sec = {}
-    for tag in ("summary", "rq1", "rq2", "rq3", "rq4", "rq5", "limitations"):
+    for tag in ("summary", "rq1", "rq2", "rq3", "rq4", "rq5", "rq6", "limitations"):
         m = interp.split(f"<!-- {tag} -->")
         sec[tag] = md_inline(m[1].strip()) if len(m) > 1 else ""
 
@@ -111,6 +111,10 @@ def build() -> str:
         k = list(s5)[0]
         tiles.append(("RQ5", f"{s5[k]['mean_acc_translated_lopo']:.0%} · {s5[list(s5)[-1]]['mean_acc_translated_lopo']:.0%}" if len(s5) > 1 else f"{s5[k]['mean_acc_translated_lopo']:.0%}",
                       "attribution after Google / LLM translation (from " + f"{s5[k]['acc_english_originals']:.0%} in English)"))
+    j6t = _csv("rq6_judge_summary.csv")
+    if j6t is not None:
+        best = j6t.sort_values("accuracy", ascending=False).iloc[0]
+        tiles.append(("RQ6", f"{best['accuracy']:.0%} best judge", f"LLM-as-judge attribution ({MODEL_NAME[best['judge']]}; chance 20%) · self-recognition in §7b"))
     tiles_html = "".join(f'<div class="tile"><span class="eyebrow">{a}</span><span class="num">{b}</span><span class="cap">{c}</span></div>' for a, b, c in tiles)
 
     parts = []
@@ -243,6 +247,20 @@ def build() -> str:
 {fig('F9_rq5_feature_survival', 'Which features survive translation: Spearman ρ between each original and its translation.')}
 {fh}
 {sec['rq5']}</section>""")
+
+    # ---- RQ6
+    j6 = _csv("rq6_judge_summary.csv")
+    if j6 is not None:
+        per = _csv("rq6_judge_by_language.csv"); comp = _csv("rq6_judge_vs_features.csv")
+        j6 = j6.copy(); j6["judge"] = j6["judge"].map(MODEL_NAME)
+        comp = comp.rename(columns={comp.columns[0]: "language"}); comp["language"] = comp["language"].map(LANG_NAME)
+        own = per.pivot(index="judge", columns="lang", values="own_recall")[langs].reset_index(); own["judge"] = own["judge"].map(MODEL_NAME)
+        parts.append(f"""<section id="rq6"><h2>7b · RQ6 — LLM-as-judge attribution and self-recognition</h2>
+{fig('F10_rq6_judge', 'Left: five-way attribution accuracy per judge and language against the feature classifier. Right: own-text recall versus the rate at which a judge names itself on others’ text.')}
+{table(j6, '{:.3f}', 'Per judge, all languages pooled')}
+{table(comp, '{:.3f}', 'Five-way accuracy per language: judges vs the RQ1 feature classifier')}
+{table(own, '{:.2f}', 'Own-text recall per judge × language (self-recognition)')}
+{sec['rq6']}</section>""")
 
     parts.append(f"""<section id="limits"><h2>8 · Limitations</h2>{sec['limitations']}</section>
 <section id="repro"><h2>9 · Reproduction</h2>
