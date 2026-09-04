@@ -1,138 +1,258 @@
-"""Conference poster (48 × 36 in landscape) from results/figures + summary numbers.
+"""Conference poster, 48 x 36 in landscape, in the layout used at NeurIPS / ICML poster sessions:
+title band with authors, affiliations and a QR code; a TL;DR strip; three numbered columns
+(motivation + method with a pipeline diagram; results; results + takeaways); one large figure
+per result with a one-sentence caption. Built from results/figures + summary numbers.
+
+The build refuses to finish if any em dash, en dash or arrow glyph survives in the text layer.
 
     python -m langllm.poster      # -> docs/LangLLM_poster_URTC2026.pdf
 """
 from __future__ import annotations
 import json
+import tempfile
+from pathlib import Path
 import pandas as pd
-from reportlab.lib.colors import HexColor
-from reportlab.lib.enums import TA_LEFT
+from reportlab.graphics.shapes import Drawing, Rect, String, Line, Polygon
+from reportlab.lib.colors import HexColor, white
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
-from reportlab.platypus import Paragraph, Frame, Image, Spacer, Table, TableStyle
+from reportlab.platypus import Paragraph, Frame, Image, Spacer, Table, TableStyle, HRFlowable
 from .config import RESULTS_DIR, FIG_DIR, ROOT
 
 OUT = ROOT / "docs" / "LangLLM_poster_URTC2026.pdf"
+REPO = "https://github.com/adrian-erlikhman/LangLLM"
 W, H = 48 * inch, 36 * inch
-INK, INK2, MUTE, RULE = HexColor("#1E2430"), HexColor("#4A5160"), HexColor("#7A8090"), HexColor("#C9C8C0")
-ACCENT, BG, TILE = HexColor("#3F66A8"), HexColor("#F6F5F1"), HexColor("#FFFFFF")
-GAP = 0.45 * inch
+M = 1.0 * inch
+INK, INK2, MUTE = HexColor("#1B2130"), HexColor("#4A5160"), HexColor("#6F7583")
+ACCENT, ACCENT2 = HexColor("#2B4C8C"), HexColor("#E8EDF6")
+BG, TILE, RULE = white, HexColor("#F4F5F8"), HexColor("#C8CCD6")
+FORBIDDEN = "—–→←→⇒"
+OVERFLOW: list[str] = []
 
 S = {
-    "h": ParagraphStyle("h", fontName="Helvetica-Bold", fontSize=46, leading=52, textColor=ACCENT, spaceAfter=14),
-    "b": ParagraphStyle("b", fontName="Helvetica", fontSize=30, leading=38, textColor=INK, spaceAfter=12),
-    "bs": ParagraphStyle("bs", fontName="Helvetica", fontSize=26, leading=33, textColor=INK2, spaceAfter=10),
-    "cap": ParagraphStyle("cap", fontName="Helvetica-Oblique", fontSize=23, leading=29, textColor=MUTE, spaceAfter=18),
-    "num": ParagraphStyle("num", fontName="Helvetica-Bold", fontSize=58, leading=62, textColor=INK),
-    "numcap": ParagraphStyle("numcap", fontName="Helvetica", fontSize=20, leading=25, textColor=INK2),
-    "eyebrow": ParagraphStyle("eyebrow", fontName="Helvetica-Bold", fontSize=14, leading=17, textColor=ACCENT),
+    "h": ParagraphStyle("h", fontName="Helvetica-Bold", fontSize=42, leading=48, textColor=ACCENT, spaceBefore=6, spaceAfter=4),
+    "b": ParagraphStyle("b", fontName="Helvetica", fontSize=26, leading=33, textColor=INK, spaceAfter=10),
+    "bs": ParagraphStyle("bs", fontName="Helvetica", fontSize=24, leading=31, textColor=INK, spaceAfter=6),
+    "cap": ParagraphStyle("cap", fontName="Helvetica-Oblique", fontSize=20, leading=25, textColor=MUTE, spaceAfter=10),
+    "tldr": ParagraphStyle("tldr", fontName="Helvetica", fontSize=29, leading=37, textColor=INK),
+    "tldrh": ParagraphStyle("tldrh", fontName="Helvetica-Bold", fontSize=29, leading=37, textColor=ACCENT),
+    "cell": ParagraphStyle("cell", fontName="Helvetica", fontSize=23, leading=29, textColor=INK),
+    "cellb": ParagraphStyle("cellb", fontName="Helvetica-Bold", fontSize=23, leading=29, textColor=INK),
+    "take": ParagraphStyle("take", fontName="Helvetica", fontSize=24, leading=31, textColor=INK),
 }
 
 
-def img(name, width):
+def img(name: str, width: float) -> Image:
     from PIL import Image as PILImage
     p = FIG_DIR / f"{name}.png"
     w, h = PILImage.open(p).size
     return Image(str(p), width=width, height=width * h / w)
 
 
-def build():
-    acc = pd.read_csv(RESULTS_DIR / "rq1_accuracy.csv"); lr = acc[acc.classifier == "logreg"]
+def section(title: str) -> list:
+    return [Paragraph(title, S["h"]), HRFlowable(width="100%", thickness=2.2, color=ACCENT, spaceBefore=2, spaceAfter=12)]
+
+
+def kv_table(rows: list[tuple[str, str]], width: float, key_w: float = 3.1 * inch) -> Table:
+    data = [[Paragraph(k, S["cellb"]), Paragraph(v, S["cell"])] for k, v in rows]
+    t = Table(data, colWidths=[key_w, width - key_w])
+    t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LINEBELOW", (0, 0), (-1, -2), 0.8, RULE),
+                           ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+                           ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 8)]))
+    return t
+
+
+def pipeline(width: float) -> Drawing:
+    """Two-row flow diagram of the study pipeline."""
+    steps = [
+        ("12 English prompts", "topic, stance, three supporting points, reading tier, prose only"),
+        ("Native prompts, 7 languages", "written from the prompt by Llama 4, never translated; each checked by Qwen 3.7 against the original"),
+        ("840 essays", "5 models x 7 languages x 12 prompts x 2 generations; no system prompt"),
+        ("Validation", "language ID, 150 to 900 words, refusal and truncation checks; 839 kept"),
+        ("Stanza UD parse", "21 features with one definition in every language"),
+        ("Pre-registered tests", "RQ1 to RQ6; analysis plan fixed before collection"),
+    ]
+    cols, gap = 3, 0.35 * inch
+    bw = (width - (cols - 1) * gap) / cols
+    bh = 2.55 * inch
+    rows = 2
+    d = Drawing(width, rows * bh + (rows - 1) * gap)
+    from reportlab.lib.utils import simpleSplit
+    for i, (head, body) in enumerate(steps):
+        r, c = divmod(i, cols)
+        x = c * (bw + gap)
+        y = (rows - 1 - r) * (bh + gap)
+        d.add(Rect(x, y, bw, bh, rx=8, ry=8, fillColor=ACCENT2, strokeColor=ACCENT, strokeWidth=1.4))
+        d.add(String(x + 14, y + bh - 34, head, fontName="Helvetica-Bold", fontSize=24, fillColor=ACCENT))
+        lines = simpleSplit(body, "Helvetica", 19, bw - 28)
+        for k, ln in enumerate(lines[:4]):
+            d.add(String(x + 14, y + bh - 64 - k * 24, ln, fontName="Helvetica", fontSize=19, fillColor=INK))
+        # arrow to the next box
+        if i < len(steps) - 1:
+            if c < cols - 1:
+                ax0, ay = x + bw, y + bh / 2
+                d.add(Line(ax0 + 3, ay, ax0 + gap - 10, ay, strokeColor=ACCENT, strokeWidth=3))
+                d.add(Polygon([ax0 + gap - 12, ay - 9, ax0 + gap - 12, ay + 9, ax0 + gap - 1, ay], fillColor=ACCENT, strokeColor=ACCENT))
+            else:  # wrap: down from end of row 1 to start of row 2
+                sx, sy = x + bw / 2, y
+                ex, ey = bw / 2, y - gap
+                d.add(Line(sx, sy - 3, sx, sy - gap / 2, strokeColor=ACCENT, strokeWidth=3))
+                d.add(Line(sx, sy - gap / 2, ex, sy - gap / 2, strokeColor=ACCENT, strokeWidth=3))
+                d.add(Line(ex, sy - gap / 2, ex, ey + 12, strokeColor=ACCENT, strokeWidth=3))
+                d.add(Polygon([ex - 9, ey + 13, ex + 9, ey + 13, ex, ey + 1], fillColor=ACCENT, strokeColor=ACCENT))
+    return d
+
+
+def qr_png() -> Path:
+    import segno
+    p = Path(tempfile.gettempdir()) / "langllm_qr.png"
+    segno.make(REPO, error="m").save(str(p), scale=12, border=1, dark="#1B2130")
+    return p
+
+
+def fill(c, x, y, w, h, items, name):
+    f = Frame(x, y, w, h, showBoundary=0, leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
+    left = list(items)
+    f.addFromList(left, c)
+    if left:
+        OVERFLOW.append(f"{name}: {len(left)} flowables did not fit")
+
+
+def build() -> None:
+    acc = pd.read_csv(RESULTS_DIR / "rq1_accuracy.csv"); lr = acc[acc.classifier == "logreg"].set_index("lang")
     g = json.load(open(RESULTS_DIR / "rq2_gradient.json")); eta = pd.read_csv(RESULTS_DIR / "rq3_anova_eta2.csv")
     ts = json.load(open(RESULTS_DIR / "rq3_transfer_summary.json")); s4 = json.load(open(RESULTS_DIR / "rq4_summary.json"))
     s5 = json.load(open(RESULTS_DIR / "rq5_summary.json")); j6 = pd.read_csv(RESULTS_DIR / "rq6_judge_summary.csv").set_index("judge")
     mean = eta[eta.feature == "MEAN"].iloc[0]
+    lo, hi = lr["accuracy"].min(), lr["accuracy"].max()
 
     c = canvas.Canvas(str(OUT), pagesize=(W, H))
+    c.setTitle("Do LLM fingerprints survive outside English?")
     c.setFillColor(BG); c.rect(0, 0, W, H, fill=1, stroke=0)
-    # ---- title band
-    c.setFillColor(TILE); c.rect(0, H - 5.1 * inch, W, 5.1 * inch, fill=1, stroke=0)
-    c.setFillColor(ACCENT); c.rect(0, H - 5.1 * inch, W, 0.12 * inch, fill=1, stroke=0)
-    c.setFillColor(INK); c.setFont("Helvetica-Bold", 78)
-    c.drawString(1.2 * inch, H - 2.0 * inch, "Do LLM fingerprints survive outside English?")
-    c.setFont("Helvetica", 34); c.setFillColor(INK2)
-    c.drawString(1.2 * inch, H - 2.85 * inch, "Interpretable attribution of five frontier models across seven languages, under translation, and against the models themselves as judges")
-    c.setFont("Helvetica", 26); c.setFillColor(INK)
-    c.drawString(1.2 * inch, H - 3.75 * inch, "Adrian Erlikhman¹ · Michael Tarekegn¹ · Philo Juang²        ¹ LACES, Los Angeles   ² UCLA")
-    c.setFont("Helvetica", 20); c.setFillColor(MUTE)
-    c.drawString(1.2 * inch, H - 4.45 * inch, "IEEE MIT Undergraduate Research Technology Conference 2026 · Technology of Computation · github.com/adrian-erlikhman/LangLLM")
 
-    # ---- headline tiles across the top
-    tiles = [
-        (f"{lr['accuracy'].min():.0%}–{lr['accuracy'].max():.0%}", "five-way attribution accuracy from 21 interpretable features, in every one of 7 languages (chance 20%)"),
-        (f"p = {g['glm_cell_level']['p']:.2f}", "no resource gradient: accuracy does not fall from English to Hindi (cell-level GLM, n = 839)"),
-        (f"{ts['n_offdiag_above_chance']}/{ts['n_offdiag']}", "cross-lingual transfers above chance: the fingerprint is largely language-invariant (mean 0.49)"),
-        (f"ρ = {s4['centroid_dist']['spearman_rho_vs_rank']:.2f}", "models converge stylistically as resources fall: separation shrinks monotonically to Hindi"),
-        (f"{s5['google']['mean_acc_translated_lopo']:.0%}", "attribution after Google Translate; English-trained classifier reads translations at 66%"),
-        (f"{j6.loc['claude', 'accuracy']:.0%} vs 20%", "only Claude beats chance as a judge of authorship; the other four default to one fixed answer"),
+    # ------------------------------------------------------------------ title band
+    band = 5.4 * inch
+    c.setFillColor(ACCENT); c.rect(0, H - 0.22 * inch, W, 0.22 * inch, fill=1, stroke=0)
+    c.setFillColor(INK); c.setFont("Helvetica-Bold", 86)
+    c.drawString(M, H - 1.55 * inch, "Do LLM fingerprints survive outside English?")
+    c.setFont("Helvetica", 36); c.setFillColor(INK2)
+    c.drawString(M, H - 2.35 * inch, "Interpretable attribution of five frontier models across seven languages, under translation, and against the models as judges")
+    c.setFont("Helvetica", 31); c.setFillColor(INK)
+    c.drawString(M, H - 3.2 * inch, "Adrian Erlikhman")
+    x = M + c.stringWidth("Adrian Erlikhman", "Helvetica", 31); c.setFont("Helvetica", 20); c.drawString(x, H - 3.05 * inch, "1")
+    c.setFont("Helvetica", 31); c.drawString(x + 0.55 * inch, H - 3.2 * inch, "Michael Tarekegn")
+    x2 = x + 0.55 * inch + c.stringWidth("Michael Tarekegn", "Helvetica", 31); c.setFont("Helvetica", 20); c.drawString(x2, H - 3.05 * inch, "1")
+    c.setFont("Helvetica", 31); c.drawString(x2 + 0.55 * inch, H - 3.2 * inch, "Philo Juang")
+    x3 = x2 + 0.55 * inch + c.stringWidth("Philo Juang", "Helvetica", 31); c.setFont("Helvetica", 20); c.drawString(x3, H - 3.05 * inch, "2")
+    c.setFont("Helvetica", 24); c.setFillColor(INK2)
+    c.drawString(M, H - 3.8 * inch, "1 Los Angeles Center for Enriched Studies (LACES)     2 University of California, Los Angeles")
+    c.setFont("Helvetica", 22); c.setFillColor(MUTE)
+    c.drawString(M, H - 4.45 * inch, "2026 IEEE MIT Undergraduate Research Technology Conference, Technology of Computation")
+    # QR + label, right edge
+    q = qr_png(); qs = 2.9 * inch
+    c.drawImage(str(q), W - M - qs, H - 0.55 * inch - qs, qs, qs)
+    c.setFont("Helvetica", 19); c.setFillColor(MUTE)
+    c.drawRightString(W - M, H - 0.55 * inch - qs - 0.32 * inch, "code, prompts, all data, full report")
+    c.drawRightString(W - M, H - 0.55 * inch - qs - 0.62 * inch, "github.com/adrian-erlikhman/LangLLM")
+    c.setStrokeColor(RULE); c.setLineWidth(1.5); c.line(M, H - band, W - M, H - band)
+
+    # ------------------------------------------------------------------ TL;DR strip
+    ty, th = H - band - 0.3 * inch, 2.15 * inch
+    c.setFillColor(TILE); c.roundRect(M, ty - th, W - 2 * M, th, 10, fill=1, stroke=0)
+    c.setFillColor(ACCENT); c.rect(M, ty - th, 0.14 * inch, th, fill=1, stroke=0)
+    tldr = [
+        Paragraph("TL;DR", S["tldrh"]),
+        Paragraph(f"Twenty-one interpretable features defined on Universal Dependencies attribute text to one of five frontier LLMs at {lo:.0%} to {hi:.0%} accuracy in all seven languages (chance 20%), "
+                  f"and accuracy does not fall from English to Hindi. The fingerprint is largely language-invariant, survives Google Translate and an LLM translator, "
+                  f"and is invisible to the models themselves, which judge authorship at chance. Models do converge stylistically as resources fall, so the register of low-resource languages is flattening.", S["tldr"]),
     ]
-    tw = (W - 2.4 * inch - 5 * 0.3 * inch) / 6
-    y0 = H - 5.1 * inch - 0.35 * inch
-    for i, (n, capt) in enumerate(tiles):
-        x = 1.2 * inch + i * (tw + 0.3 * inch)
-        c.setFillColor(TILE); c.roundRect(x, y0 - 2.7 * inch, tw, 2.7 * inch, 6, fill=1, stroke=0)
-        c.setFillColor(ACCENT); c.rect(x, y0 - 0.06 * inch, tw, 0.06 * inch, fill=1, stroke=0)
-        f = Frame(x + 0.2 * inch, y0 - 2.7 * inch, tw - 0.4 * inch, 2.65 * inch, showBoundary=0, leftPadding=0, rightPadding=0, topPadding=8, bottomPadding=4)
-        f.addFromList([Paragraph(n, S["num"]), Spacer(1, 4), Paragraph(capt, S["numcap"])], c)
+    fill(c, M + 0.45 * inch, ty - th + 0.2 * inch, W - 2 * M - 0.9 * inch, th - 0.35 * inch, tldr, "tldr")
 
-    # ---- four columns
-    top = y0 - 2.7 * inch - 0.45 * inch
-    bottom = 0.9 * inch
-    cw = (W - 2.4 * inch - 3 * GAP) / 4
-    cols = [1.2 * inch + i * (cw + GAP) for i in range(4)]
-    fw = cw  # figure width inside a column
+    # ------------------------------------------------------------------ columns
+    gap = 0.75 * inch
+    top = ty - th - 0.45 * inch
+    bottom = 0.85 * inch
+    cw = (W - 2 * M - 2 * gap) / 3
+    cols = [M + i * (cw + gap) for i in range(3)]
 
     col1 = [
-        Paragraph("Why", S["h"]),
-        Paragraph("Provenance tools are built and tested in English, but the need to attribute text to a specific model — disinformation tracing, academic integrity, moderation — is mostly non-English. Detection is known to weaken off English; attribution to a <i>specific</i> model has been English-only and black-box.", S["b"]),
-        Paragraph("Nobody had measured attribution with <b>interpretable</b> features across a resource gradient, separated model style from language style, tested convergence in low-resource languages, or checked whether translation launders the signal.", S["b"]),
+        *section("1  Motivation"),
+        Paragraph("Detection of AI-written text is mature and is known to weaken outside English. Attributing a text to a <b>specific</b> model is a different task: it has been studied almost only in English, with opaque embedding classifiers.", S["b"]),
+        Paragraph("Yet the need for attribution, in disinformation tracing, academic integrity and moderation, is mostly non-English. If fingerprints fade with a language's training-data share, attribution fails where it matters most. If models converge on one style in low-resource languages, LLM use is flattening the written register of the languages with the least data.", S["b"]),
+        Paragraph("No prior work had measured attribution with interpretable features across a resource gradient, separated model style from language style, tested stylistic convergence, or checked whether translation removes the signal.", S["b"]),
+        Spacer(1, 14),
+        *section("2  Study design"),
+        kv_table([
+            ("Models", "GPT-5.5, Gemini 3.5 Flash, Claude Opus 4.7, Grok 4.3, DeepSeek V4 Pro, all through one OpenRouter key with served model strings logged"),
+            ("Languages", "English, Spanish, Chinese, Russian, Japanese, Turkish, Hindi, in decreasing training-data share (rank 1 to 7)"),
+            ("Prompts", "12 persuasive-essay prompts; each fixes a topic, a stance (6 for, 6 against) and three supporting points, so content is held constant and only style varies"),
+            ("Generation", "single user turn, no system prompt, temperature 0.7, fixed seeds, hidden reasoning excluded"),
+        ], cw),
         Spacer(1, 18),
-        Paragraph("Design", S["h"]),
-        Paragraph("<b>5 models</b>: GPT-5.5 · Gemini 3.5 Flash · Claude Opus 4.7 · Grok 4.3 · DeepSeek V4 Pro (one OpenRouter key; served model strings logged).", S["b"]),
-        Paragraph("<b>7 languages</b> in decreasing training-data share: English → Spanish → Chinese → Russian → Japanese → Turkish → Hindi.", S["b"]),
-        Paragraph("<b>12 essay prompts</b>, each fixing a topic, a stance (6 for / 6 against) and three supporting points. A non-subject model (Llama 4) writes a native version of each prompt in every language — never a translation — and a third-family reviewer (Qwen) verifies every version against the original. Content is held fixed; only style is free.", S["b"]),
-        Paragraph("<b>840 responses</b> (× 2 generations), no system prompt, temperature 0.7, reasoning traces excluded. 839 pass language ID, length and refusal checks.", S["b"]),
+        pipeline(cw),
         Spacer(1, 18),
-        Paragraph("21 features, one definition in every language", S["h"]),
-        Paragraph("All text parsed with Stanza on Universal Dependencies, so each feature means the same thing in Chinese, Turkish or Hindi.", S["b"]),
-        Paragraph("<b>Lexical</b> MATTR · hapax rate · token length · Zipf slope<br/><b>Syntactic</b> sentence length μ, σ · burstiness · dependency depth · subordination · function-word ratio · first person<br/><b>Structure</b> paragraph count, length · question rate · connectives<br/><b>Punctuation</b> comma · colon · dash · semicolon per 1k, script equivalents mapped<br/><b>Character</b> bigram entropy · digit rate", S["bs"]),
-        Paragraph("English-only measures (Flesch, Fog, hedges, passive, contractions) are deliberately excluded. All tests pre-specified before collection.", S["bs"]),
+        *section("3  Features"),
+        Paragraph("Every text is parsed with Stanza on Universal Dependencies, so each feature means the same thing in Chinese, Turkish and Hindi. English-only measures (Flesch, Fog, hedges, passive voice, contractions) are excluded.", S["b"]),
+        kv_table([
+            ("Lexical", "moving-average type-token ratio, hapax rate, mean token length, Zipf slope"),
+            ("Syntactic", "sentence length mean and SD, burstiness, dependency depth, subordinate-clause rate, function-word ratio, first-person rate"),
+            ("Structure", "paragraph count and length, question rate, connective rate"),
+            ("Punctuation", "comma, colon, dash, semicolon per 1,000 tokens, script equivalents mapped"),
+            ("Character", "character-bigram entropy, digit rate"),
+        ], cw, key_w=2.9 * inch),
     ]
+
     col2 = [
-        Paragraph("1 · Attribution works in every language", S["h"]),
-        img("F1_rq1_accuracy", fw),
-        Paragraph("Leave-one-prompt-out CV; logistic regression on standardised features (interpretable) and random forest (ceiling). Every CI excludes chance. GPT and Grok are most identifiable; DeepSeek the blur.", S["cap"]),
-        Paragraph("2 · … and does not fade with resource level", S["h"]),
-        img("F3_rq2_gradient", fw * 0.92),
-        Paragraph(f"Spearman ρ = {g['logreg']['spearman_rho']:.2f} (p = {g['logreg']['spearman_p']:.2f}); cell-level GLM β = {g['glm_cell_level']['coef_rank_logodds']:+.3f} log-odds per rank (p = {g['glm_cell_level']['p']:.2f}). Japanese matches English; Hindi beats Spanish. The pre-registered gradient hypothesis is <b>not</b> supported.", S["cap"]),
-        Paragraph("The fingerprint is structural: paragraph count, comma and colon density, and lexical-diversity slope carry it; dependency depth and subordination barely contribute.", S["b"]),
+        *section("4  Attribution works in every language"),
+        img("F1_rq1_accuracy", cw * 0.86),
+        Paragraph(f"Five-way accuracy per language, leave-one-prompt-out cross-validation (both generations of a prompt stay on one side). Logistic regression on standardised features is the interpretable primary; a random forest is the ceiling. Every 95% interval excludes chance. GPT-5.5 and Grok 4.3 are the easiest to identify, DeepSeek the blurriest. The signal is structural: paragraph count, comma and colon density and lexical-diversity slope carry most of it; dependency depth and subordination contribute little.", S["cap"]),
+        *section("5  No resource gradient"),
+        img("F3_rq2_gradient", cw * 0.55),
+        Paragraph(f"Spearman rho = {g['logreg']['spearman_rho']:.2f} (p = {g['logreg']['spearman_p']:.2f}) across the seven languages; a cell-level binomial GLM with prompt-clustered errors gives {g['glm_cell_level']['coef_rank_logodds']:+.3f} log-odds per rank step (p = {g['glm_cell_level']['p']:.2f}, n = {g['glm_cell_level']['n_cells']}). Japanese matches English and Hindi exceeds Spanish. The pre-registered gradient hypothesis is not supported.", S["cap"]),
+        *section("6  Model style is mostly language-invariant"),
+        img("F5_rq3_transfer", cw * 0.6),
+        Paragraph(f"Language explains most feature variance (mean partial eta squared {mean.eta2_lang:.2f} for language, {mean.eta2_model:.2f} for model, {mean.eta2_interaction:.2f} for their interaction). Remove each language's mean, and a classifier trained on any one language beats chance on every other: {ts['n_offdiag_above_chance']} of {ts['n_offdiag']} pairs, mean {ts['mean_offdiag_accuracy']:.2f} against {ts['mean_diag_accuracy']:.2f} within language.", S["cap"]),
     ]
+
     col3 = [
-        Paragraph("3 · Model style is mostly language-invariant", S["h"]),
-        img("F5_rq3_transfer", fw * 0.92),
-        Paragraph(f"Language explains most feature variance (mean partial η² {mean.eta2_lang:.2f} vs {mean.eta2_model:.2f} for model, {mean.eta2_interaction:.2f} interaction). But remove each language's mean and a classifier trained on any language beats chance on every other: {ts['n_offdiag_above_chance']}/{ts['n_offdiag']} pairs, mean {ts['mean_offdiag_accuracy']:.2f} vs {ts['mean_diag_accuracy']:.2f} within-language. About three quarters of the fingerprint transfers.", S["cap"]),
-        Paragraph("4 · Yet models converge as resources fall", S["h"]),
-        img("F6_rq4_separation", fw),
-        Paragraph(f"Within-language separation of the five model centroids falls monotonically from English to Hindi (centroid distance ρ = {s4['centroid_dist']['spearman_rho_vs_rank']:.2f}; between/within ratio {s4['between_within_ratio']['english']:.2f} → {s4['between_within_ratio']['lowest_resource']:.2f}). Almost all of it is Grok's terse English register disappearing into the pack. Convergence in the bulk of features, attribution sustained by a few.", S["cap"]),
+        *section("7  Models converge as resources fall"),
+        img("F6_rq4_separation", cw * 0.95),
+        Paragraph(f"Within-language separation of the five model centroids falls monotonically from English to Hindi (centroid distance rho = {s4['centroid_dist']['spearman_rho_vs_rank']:.2f}; between-to-within ratio {s4['between_within_ratio']['english']:.2f} in English, {s4['between_within_ratio']['lowest_resource']:.2f} in Hindi). Almost all of the change is Grok's terse English register disappearing into the pack. Convergence in the bulk of features, attribution sustained by a few.", S["cap"]),
+        *section("8  Translation does not remove the fingerprint"),
+        img("F8_rq5_translation", cw * 0.95),
+        Paragraph(f"All 120 English responses were translated into the six other languages by Google Translate and by a free open model (MiniMax M3). Attribution on translated text alone is {s5['google']['mean_acc_translated_lopo']:.2f} and {s5['llm']['mean_acc_translated_lopo']:.2f}; a classifier trained on the English originals reads the translations at {s5['google']['mean_acc_train_english_test_translated']:.2f}. Structure survives translation (paragraph count rho = 1.00, sentence length 0.89); vocabulary is rewritten (MATTR about 0.3).", S["cap"]),
+        *section("9  Baseline: the models themselves cannot do this"),
+        img("F10_rq6_judge", cw * 0.92),
+        Paragraph(f"Each model was shown each essay and asked which of the five wrote it (five names in shuffled order, temperature 0, hidden reasoning off). GPT-5.5 {j6.loc['gpt','accuracy']:.1%}, Grok {j6.loc['grok','accuracy']:.1%}, Gemini {j6.loc['gemini','accuracy']:.1%}, DeepSeek {j6.loc['deepseek','accuracy']:.1%}: chance in all seven languages, each defaulting to one fixed answer. Claude, at {j6.loc['claude','accuracy']:.1%}, is the only judge above chance, and only just.", S["cap"]),
+        Spacer(1, 8),
+        Table([[[
+            Paragraph("<b>Takeaways</b>", S["tldrh"]),
+            Paragraph(f"Interpretable, cross-lingually defined features attribute LLM text in every language tested and beat every LLM judge by 35 to 50 points.", S["take"]),
+            Paragraph("The fingerprint does not fade with resource level and survives translation, so provenance across a language boundary works from an English-trained classifier.", S["take"]),
+            Paragraph("The five models write more alike in Hindi than in English: the register of low-resource languages is flattening.", S["take"]),
+            Paragraph("Limits: one genre; length is part of the linear signal; ordinal resource rank; dated model snapshots.", S["take"]),
+        ]]], colWidths=[cw], style=TableStyle([("BACKGROUND", (0, 0), (-1, -1), TILE), ("BOX", (0, 0), (-1, -1), 0, TILE),
+                                               ("LEFTPADDING", (0, 0), (-1, -1), 22), ("RIGHTPADDING", (0, 0), (-1, -1), 22),
+                                               ("TOPPADDING", (0, 0), (-1, -1), 12), ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
+                                               ("LINEBEFORE", (0, 0), (0, -1), 8, ACCENT)])),
     ]
-    col4 = [
-        Paragraph("5 · Translation does not launder the fingerprint", S["h"]),
-        img("F8_rq5_translation", fw),
-        Paragraph(f"All 120 English responses translated into the six other languages by Google Translate and by a free open model (MiniMax M3). Attribution on translated text alone: {s5['google']['mean_acc_translated_lopo']:.2f} / {s5['llm']['mean_acc_translated_lopo']:.2f}. An <b>English-trained</b> classifier reads the translations at {s5['google']['mean_acc_train_english_test_translated']:.2f}: structure (paragraph count ρ = 1.00, sentence length 0.89) survives; vocabulary is rewritten (MATTR 0.3).", S["cap"]),
-        Paragraph("6 · Baseline: the models themselves cannot do this", S["h"]),
-        img("F10_rq6_judge", fw),
-        Paragraph(f"Each model asked which of the five wrote each text (reasoning off, options shuffled). GPT {j6.loc['gpt','accuracy']:.1%}, Grok {j6.loc['grok','accuracy']:.1%}, Gemini {j6.loc['gemini','accuracy']:.1%}, DeepSeek {j6.loc['deepseek','accuracy']:.1%}: chance, each defaulting to one answer (GPT names itself 82% of the time). Claude {j6.loc['claude','accuracy']:.1%} is the only judge above chance, and only just. The fingerprint is real but not one the models read off their own output.", S["cap"]),
-        Spacer(1, 6),
-        Paragraph("Takeaways", S["h"]),
-        Paragraph("• Interpretable, UD-based features attribute LLM text in every language and beat every LLM judge by 35–50 points.<br/>• Fingerprints do not fade with resource level and survive translation — provenance across a language boundary works from an English-trained model.<br/>• Low-resource registers are flattening: the five models write more alike in Hindi than in English.<br/>• Limits: one genre; length is part of the linear signal; ordinal resource rank; dated model snapshots.", S["b"]),
-    ]
-    for x, items in zip(cols, [col1, col2, col3, col4]):
-        Frame(x, bottom, cw, top - bottom, showBoundary=0, leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0).addFromList(items, c)
-    c.setFillColor(MUTE); c.setFont("Helvetica", 16)
-    c.drawString(1.2 * inch, 0.45 * inch, "Data, prompts, code, all responses and translations: github.com/adrian-erlikhman/LangLLM · analysis plan pre-specified 3 Sep 2026 · contact erlikhman.adrian@gmail.com")
+    for x, items, name in zip(cols, [col1, col2, col3], ["column 1", "column 2", "column 3"]):
+        fill(c, x, bottom, cw, top - bottom, items, name)
+
+    c.setFillColor(MUTE); c.setFont("Helvetica", 17)
+    c.drawString(M, 0.42 * inch, "Analysis plan pre-specified 3 September 2026. All 840 responses, 1,440 translations, 4,195 judgments, feature tables and result files are in the repository. Contact: erlikhman.adrian@gmail.com")
     c.showPage(); c.save()
-    print("wrote", OUT)
+    if OVERFLOW:
+        raise SystemExit("; ".join(OVERFLOW) + "; shrink text or figures")
+
+    # ---- hard check: no dash or arrow glyphs in the text layer
+    from pypdf import PdfReader
+    text = "".join(p.extract_text() for p in PdfReader(str(OUT)).pages)
+    bad = sorted({ch for ch in text if ch in FORBIDDEN})
+    if bad:
+        raise SystemExit(f"forbidden glyphs in poster text: {[hex(ord(b)) for b in bad]}")
+    print("wrote", OUT, "(no dash or arrow glyphs in text layer)")
 
 
 if __name__ == "__main__":

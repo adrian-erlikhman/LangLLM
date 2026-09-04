@@ -1,4 +1,4 @@
-"""Step 6 — figures from results/*.csv into results/figures/*.png.
+"""Step 6: figures from results/*.csv into results/figures/*.png.
 
 F1 rq1_accuracy      per-language attribution accuracy with 95% CI, chance line
 F2 rq1_confusion     7 confusion matrices (logistic regression)
@@ -57,7 +57,7 @@ def f1_accuracy(cfg, tag=""):
     ax.set_xticks(range(len(langs)), [f"{l}\n#{cfg['languages'][l]['rank']}" for l in langs])
     ax.set_ylim(0, 1.0); ax.set_ylabel("attribution accuracy (LOPO-CV)")
     ax.set_xlabel("language (resource rank)"); ax.legend(frameon=False, ncol=3, fontsize=8)
-    ax.set_title("RQ1 — five-way model attribution from 21 UD-based features")
+    ax.set_title("RQ1: five-way model attribution from 21 UD-based features")
     _save(fig, f"F1_rq1_accuracy{tag}")
 
 
@@ -80,7 +80,7 @@ def f2_confusions(cfg, tag=""):
         ax.set_xlabel("predicted", fontsize=7); ax.set_ylabel("true", fontsize=7)
     for ax in axes.flat[len(langs):]:
         ax.axis("off")
-    fig.suptitle("RQ1 — row-normalised confusion (logistic regression, LOPO-CV)")
+    fig.suptitle("RQ1: row-normalised confusion, logistic regression, LOPO-CV")
     _save(fig, f"F2_rq1_confusion{tag}")
 
 
@@ -97,7 +97,7 @@ def f3_gradient(cfg, tag=""):
             ax.annotate(r["lang"], (r["rank"], r["accuracy"]), textcoords="offset points", xytext=(4, 4), fontsize=7)
     ax.axhline(CHANCE, ls="--", c="k", lw=0.8)
     glm = g["glm_cell_level"]
-    ax.set_title(f"RQ2 — accuracy vs resource rank\ncell-level GLM: β={glm['coef_rank_logodds']:.3f} log-odds/rank, p={glm['p']:.3g}", fontsize=9)
+    ax.set_title(f"RQ2: accuracy vs resource rank\ncell-level GLM: β={glm['coef_rank_logodds']:.3f} log-odds/rank, p={glm['p']:.3g}", fontsize=9)
     ax.set_xlabel("resource rank (1 = English … 7 = Hindi)"); ax.set_ylabel("attribution accuracy"); ax.set_ylim(0, 1)
     ax.legend(frameon=False, fontsize=7)
     _save(fig, f"F3_rq2_gradient{tag}")
@@ -116,7 +116,7 @@ def f4_eta2(cfg, tag=""):
         grp = next(g for g, fs in FEATURE_GROUPS.items() if lbl.get_text() in fs)
         lbl.set_color(GROUP_COLORS[grp])
     ax.set_xlabel("partial η² (prompt as blocking factor)"); ax.legend(frameon=False, loc="lower right")
-    ax.set_title("RQ3 — how much of each feature is model, language, or their interaction")
+    ax.set_title("RQ3: how much of each feature is model, language, or their interaction")
     _save(fig, f"F4_rq3_eta2{tag}")
 
 
@@ -131,7 +131,7 @@ def f5_transfer(cfg, tag=""):
             ax.text(j, i, f"{v:.2f}", ha="center", va="center", fontsize=7, color="white" if v < 0.55 else "black")
     ax.set_xlabel("test language"); ax.set_ylabel("train language"); ax.grid(False)
     fig.colorbar(im, ax=ax, fraction=0.046, label="accuracy (chance 0.20)")
-    ax.set_title("RQ3 — cross-lingual transfer of a within-language\nz-scored classifier (diagonal = LOPO-CV)", fontsize=9)
+    ax.set_title("RQ3: cross-lingual transfer of a within-language\nz-scored classifier (diagonal = LOPO-CV)", fontsize=9)
     _save(fig, f"F5_rq3_transfer{tag}")
 
 
@@ -148,7 +148,7 @@ def f6_separation(cfg, tag=""):
             ax.annotate(r["lang"], (r["rank"], r[k]), textcoords="offset points", xytext=(4, 4), fontsize=7)
         ax.set_title(f"{lab}\nρ={s[k]['spearman_rho_vs_rank']:.2f}, p={s[k]['p']:.2f}", fontsize=8.5)
         ax.set_xlabel("resource rank")
-    fig.suptitle("RQ4 — do the five models converge stylistically as resources fall?", fontsize=10)
+    fig.suptitle("RQ4: do the five models converge stylistically as resources fall?", fontsize=10)
     _save(fig, f"F6_rq4_separation{tag}")
 
 
@@ -193,7 +193,7 @@ def f8_translation(cfg):
         ax.set_xticks(x, [f"{l}\n#{cfg['languages'][l]['rank']}" for l in langs]); ax.set_ylim(0, 1)
         ax.set_title({"google": "Google Translate", "llm": "LLM translator (non-subject)"}.get(tr, tr))
     axes[0].set_ylabel("attribution accuracy"); axes[0].legend(frameon=False, fontsize=7, loc="upper right")
-    fig.suptitle("RQ5 — does translation destroy the fingerprint?", fontsize=10)
+    fig.suptitle("RQ5: does translation destroy the fingerprint?", fontsize=10)
     _save(fig, "F8_rq5_translation")
 
 
@@ -215,7 +215,7 @@ def f9_feature_survival(cfg):
                 ax.text(j, i, f"{M.iat[i, j]:.2f}", ha="center", va="center", fontsize=6)
         ax.set_title({"google": "Google Translate", "llm": "LLM translator"}.get(tr, tr), fontsize=9); ax.grid(False)
     fig.colorbar(im, ax=axes, fraction=0.03, label="Spearman ρ, original vs translation (n = English sources)")
-    fig.suptitle("RQ5 — which features survive translation?", fontsize=10)
+    fig.suptitle("RQ5: which features survive translation?", fontsize=10)
     FIG_DIR.mkdir(parents=True, exist_ok=True); fig.savefig(FIG_DIR / "F9_rq5_feature_survival.png", bbox_inches="tight"); plt.close(fig)
     print("wrote", FIG_DIR / "F9_rq5_feature_survival.png")
 

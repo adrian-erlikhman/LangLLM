@@ -1,4 +1,4 @@
-"""RQ6 — LLM-as-judge attribution and self-recognition (continuation of the CompLLM protocol).
+"""RQ6: LLM-as-judge attribution and self-recognition (continuation of the CompLLM protocol).
 
 Each of the five subject models is shown one kept response, with no metadata, and asked which
 of the five models wrote it. Option order is shuffled per text (seeded by cell id) so no judge
@@ -206,7 +206,7 @@ def analyse() -> None:
     ax.bar(x + w / 2, summ["false_self_rate"], w, color=[MODEL_COLORS[j] for j in summ["judge"]], alpha=0.4, label="names itself on others' text")
     ax.axhline(0.2, ls=":", c="k", lw=0.8); ax.set_xticks(x, summ["judge"]); ax.set_ylim(0, 1)
     ax.set_title("Self-recognition (all languages pooled)", fontsize=10); ax.legend(frameon=False, fontsize=7)
-    fig.suptitle("RQ6 — LLM-as-judge attribution and self-recognition", fontsize=10); fig.tight_layout()
+    fig.suptitle("RQ6: LLM-as-judge attribution and self-recognition", fontsize=10); fig.tight_layout()
     FIG_DIR.mkdir(parents=True, exist_ok=True); fig.savefig(FIG_DIR / "F10_rq6_judge.png", dpi=200); plt.close(fig)
     print("wrote", FIG_DIR / "F10_rq6_judge.png")
 
