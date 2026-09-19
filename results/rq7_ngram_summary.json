@@ -1,0 +1,8 @@
+{
+  "char_mean_acc": 0.7842637054821928,
+  "word_mean_acc": 0.7425370148059224,
+  "char_transfer_mean_offdiag": 0.2771892090169401,
+  "char_transfer_n_above_chance": 28,
+  "char_translation_lopo_mean": 0.7222222222222222,
+  "char_train_en_test_translated_mean": 0.28958333333333336
+}

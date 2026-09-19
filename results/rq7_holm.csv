@@ -1,0 +1,29 @@
+family,lang,test,stat,effect,p_raw,p_holm,significant_holm_05,n_comparisons_in_family_wide_correction
+features vs chance,en,exact binomial (greater),86/120,0.5166666666666666,4.064557076596817e-34,8.535569860853316e-33,True,28
+char n-gram vs chance,en,exact binomial (greater),90/120,0.55,2.8340017361172493e-38,6.518203993069673e-37,True,28
+features vs char n-gram,en,exact McNemar (two-sided),"feat-only 14, ngram-only 18",-0.033333333333333326,0.5966148958541453,0.5966148958541453,False,28
+features vs best judge (claude),en,exact McNemar (two-sided),"feat-only 60, judge-only 6",0.45,2.72580319860688e-12,3.543544158188944e-11,True,28
+features vs chance,es,exact binomial (greater),75/120,0.425,4.349043991664003e-24,6.958470386662404e-23,True,28
+char n-gram vs chance,es,exact binomial (greater),88/120,0.5333333333333332,3.691195264032442e-36,8.120629580871373e-35,True,28
+features vs char n-gram,es,exact McNemar (two-sided),"feat-only 15, ngram-only 28",-0.10833333333333328,0.0659940344557981,0.1979821033673943,False,28
+features vs best judge (deepseek),es,exact McNemar (two-sided),"feat-only 56, judge-only 7",0.4083333333333333,1.363671398024735e-10,1.636405677629682e-09,True,28
+features vs chance,zh,exact binomial (greater),78/120,0.45,1.2456589306230946e-26,2.3667519681838795e-25,True,28
+char n-gram vs chance,zh,exact binomial (greater),104/120,0.6666666666666667,1.84228779631353e-55,5.1584058296778847e-54,True,28
+features vs char n-gram,zh,exact McNemar (two-sided),"feat-only 5, ngram-only 31",-0.21666666666666667,1.2913485988974571e-05,9.0394401922822e-05,True,28
+features vs best judge (claude),zh,exact McNemar (two-sided),"feat-only 65, judge-only 15",0.4166666666666667,1.411466840981396e-08,1.482543537087555e-07,True,28
+features vs chance,ru,exact binomial (greater),78/120,0.45,1.2456589306230946e-26,2.3667519681838795e-25,True,28
+char n-gram vs chance,ru,exact binomial (greater),94/120,0.5833333333333333,9.799999586858091e-43,2.547999892583104e-41,True,28
+features vs char n-gram,ru,exact McNemar (two-sided),"feat-only 13, ngram-only 29",-0.1333333333333333,0.019520472782460274,0.0780818911298411,False,28
+features vs best judge (gemini),ru,exact McNemar (two-sided),"feat-only 59, judge-only 12",0.39166666666666666,1.3477668518977772e-08,1.482543537087555e-07,True,28
+features vs chance,ja,exact binomial (greater),85/120,0.5083333333333333,4.01271938065205e-33,8.0254387613041e-32,True,28
+char n-gram vs chance,ja,exact binomial (greater),95/120,0.5916666666666666,6.681602339522729e-44,1.804032631671137e-42,True,28
+features vs char n-gram,ja,exact McNemar (two-sided),"feat-only 17, ngram-only 27",-0.08333333333333326,0.17417114727072658,0.34834229454145316,False,28
+features vs best judge (claude),ja,exact McNemar (two-sided),"feat-only 63, judge-only 5",0.4833333333333334,7.651062942926057e-14,1.071148812009648e-12,True,28
+features vs chance,tr,exact binomial (greater),71/120,0.39166666666666666,6.554736603212872e-21,9.832104904819308e-20,True,28
+char n-gram vs chance,tr,exact binomial (greater),94/120,0.5833333333333333,9.799999586858091e-43,2.547999892583104e-41,True,28
+features vs char n-gram,tr,exact McNemar (two-sided),"feat-only 12, ngram-only 35",-0.19166666666666665,0.0010885382064742541,0.0065312292388455245,True,28
+features vs best judge (claude),tr,exact McNemar (two-sided),"feat-only 49, judge-only 9",0.3333333333333333,8.959402428981857e-08,8.063462186083671e-07,True,28
+features vs chance,hi,exact binomial (greater),76/119,0.4386554621848739,2.9220830879112894e-25,4.967541249449192e-24,True,28
+char n-gram vs chance,hi,exact binomial (greater),93/119,0.5815126050420167,3.841309622596298e-42,9.219143094231115e-41,True,28
+features vs char n-gram,hi,exact McNemar (two-sided),"feat-only 13, ngram-only 30",-0.1428571428571429,0.0137181850586785,0.0685909252933925,False,28
+features vs best judge (claude),hi,exact McNemar (two-sided),"feat-only 41, judge-only 8",0.27731092436974786,1.9646537765538596e-06,1.5717230212430877e-05,True,28
