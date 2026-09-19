@@ -1,0 +1,527 @@
+===== PAGE 1 =====
+Do LLM Fingerprints Survive Outside English?
+Interpretable Attribution of Five Frontier Models
+Across Seven Languages
+Adrian Erlikhman
+High School Student
+Los Angeles Center for
+Enriched Studies (LACES)
+Los Angeles, CA, USA
+Michael Tarekegn
+High School Student
+Los Angeles Center for
+Enriched Studies (LACES)
+Los Angeles, CA, USA
+Philo Juang
+University of California,
+Los Angeles
+Los Angeles, CA, USA
+Abstract—Tools that detect or attribute AI-generated text are
+built and evaluated mostly in English, while the settings where
+attribution matters, such as disinformation tracing and content
+moderation, are multilingual. We ask whether the stylistic
+fingerprint of a specific large language model (LLM) survives
+outside English. We collected 840 persuasive essays from five
+frontier models (GPT-5.5, Gemini 3.5 Flash, Claude Opus 4.7,
+Grok 4.3, DeepSeek V4 Pro) in seven languages ordered by
+training-data resource level, holding content fixed with natively
+authored prompts. Each text is described by 21 interpretable
+features defined on Universal Dependencies, so each feature
+has the same meaning in every language. A logistic-regression
+classifier attributes texts five ways at 59–72% accuracy in every
+language (chance 20%, leave-one-prompt-out), and accuracy
+does not decline with resource level ( p = 0.36). Language
+explains far more feature variance than model identity (mean
+partial η2 0.54 vs. 0.15), yet a classifier trained on one language
+beats chance on all 42 cross-language pairs. Models become
+more alike as resources fall (centroid separation vs. resource
+rank, ρ = −0.96) without becoming indistinguishable. Machine
+translation does not remove the fingerprint: attribution of
+translated text stays at 57–70%, because paragraphing and
+sentence rhythm survive translation while vocabulary does not.
+The five models themselves, asked which model wrote each text,
+score 20–25%. Code, prompts, and all texts are released.
+Index Terms—authorship attribution, AI-generated text, multi-
+lingual text mining, stylometry, large language models
+1. Introduction
+Most work on machine-generated text asks whether a text
+was written by a person or by a model. A second question
+matters for provenance: which model wrote it. Answering it
+lets an analyst link a coordinated influence campaign to a
+toolchain, check a vendor’s claim about where its content
+came from, or apply platform rules that differ by provider.
+The attribution literature that exists is almost entirely English
+and mostly relies on neural embeddings whose decisions
+cannot be inspected [1], [2], [3].
+There are two reasons to doubt that English results carry
+over to other languages. First, models see far less training
+text in lower-resource languages [ 4], so their writing there
+may be less distinctive or less stable. Second, languages
+differ in script and morphology, so many classic stylometric
+measures (readability formulas, contractions, hedge lists) are
+undefined outside English, and the measures that are defined
+may track the language more than the author.
+We address both problems with a design that holds
+content fixed across languages and describes every text with
+features defined on Universal Dependencies (UD) [ 5]. We
+ask six questions. RQ1: Can five frontier models be told
+apart within each of seven languages? RQ2: Does attribution
+weaken as a language’s resource level falls? RQ3: Is a
+model’s fingerprint shared across languages or specific to
+each? RQ4: Do models converge on one style in lower-
+resource languages? RQ5: Does machine translation erase the
+fingerprint? RQ6: As a baseline, can the models themselves
+identify the author?
+Our contributions are:
+• A content-controlled multilingual corpus of 840
+essays (5 models × 7 languages × 12 prompts × 2
+generations) and 1,440 machine translations, released
+with code.
+• A 21-feature interpretable representation that means
+the same thing in every language, with which five-
+way attribution reaches 59–72% in all seven lan-
+guages and shows no significant resource gradient.
+• Evidence that the fingerprint is largely language-
+invariant while models still converge stylistically in
+lower-resource languages, and an account of why
+both hold.
+• Evidence that translation does not launder the fin-
+gerprint and that LLM judges attribute at or near
+chance.
+All analyses and decision rules were written down before
+data collection; deviations are noted where they occur.
+
+===== PAGE 2 =====
+2. Related Work
+Detection. Zero-shot detectors such as DetectGPT [ 6],
+Fast-DetectGPT [7] and Binoculars [8], and supervised detec-
+tors such as Ghostbuster [ 9], separate human from machine
+text. Multilingual benchmarks, including MULTITuDE [ 10],
+M4 [11] and SemEval-2024 Task 8 [ 12], show that detection
+degrades outside English [ 13]. These works address human
+versus machine, not which machine.
+Model attribution. Uchendu et al. framed attribution
+among neural text generators [ 1] and built the TuringBench
+benchmark [ 2], both in English. Sun et al. showed that
+embedding-based classifiers separate outputs of current
+commercial model families with high accuracy [ 3], again
+in English and with opaque features. LLMmap identifies a
+model actively through probe queries [ 14], which requires
+access to the model rather than only its text. Classic stylom-
+etry relies on function words and character n-grams that are
+tied to a language [ 15]; stylometric detection of AI text has
+so far been applied to English [ 16]. To our knowledge, no
+prior study performs passive, interpretable model attribution
+across a resource gradient.
+Homogenization and LLM judges. Writing with LLMs
+reduces content diversity [ 17], [18], and LLM-style markers
+are rising in real text [ 19]. These studies compare people
+with models in English; whether models converge on each
+other where training data is thin has not been tested. LLM
+evaluators can recognize and favor their own outputs [ 20];
+we use LLM judges only as a baseline, and a companion
+study [21] examines self-recognition in English.
+3. Data and Method
+3.1. Models and languages
+The five subject models, queried through OpenRouter
+with the served model string logged for every response, are
+GPT-5.5, Gemini 3.5 Flash, Claude Opus 4.7, Grok 4.3
+and DeepSeek V4 Pro. The seven languages are English,
+Spanish, Chinese, Russian, Japanese, Turkish and Hindi,
+assigned ordinal resource ranks 1–7 in that order to reflect
+their approximate share of web training data [ 4]. We use an
+ordinal rank because published numeric estimates disagree
+by source.
+3.2. Content-matched prompts
+Twelve English schemas each fix a topic, a stance (six for,
+six against), three supporting claims, a prose-only instruction
+and a reading-level tier (four general, four educated, four
+expert). For each language, a model that is not a subject
+(Llama 4 Maverick) wrote a native prompt from the schema
+rather than translating an English prompt, so the wording is
+idiomatic while the content is fixed. A model from a third
+family (Qwen 3.7 Plus) then read each of the 84 prompts
+blind, extracted the topic, stance and claims, and compared
+them with the schema; prompts that failed were regenerated
+with the reviewer’s note until all 84 passed.
+3.3. Generation and validation
+Each prompt was sent as a single user turn with no
+system prompt at temperature 0.7, twice per cell with fixed
+seeds, with reasoning traces excluded from the output, giving
+5 × 12 × 7 × 2 = 840 responses. Each response passed
+language identification (lingua, confidence ≥ 0.6), a length
+window of 150–900 word-equivalents (characters converted
+for Chinese and Japanese), and a per-language refusal check.
+One Grok response to a Hindi prompt was written in English
+and excluded, leaving 839 texts. Ten DeepSeek responses
+exhausted a 4,000-token budget on hidden reasoning and
+were re-collected at 16,000 tokens.
+3.4. Features
+Every text was parsed with Stanza [ 22] (tokenization,
+part of speech, lemma and dependency parse) in all seven
+languages; Chinese and Japanese were pre-split on sentence-
+final punctuation. We compute 21 features in five groups.
+Lexical: moving-average type-token ratio (MATTR, window
+50) [23], hapax rate, mean token length, Zipf slope. Syntactic:
+mean and SD of sentence length, burstiness [ 24], mean
+maximum dependency depth, subordinate-clause rate ( acl,
+advcl, ccomp, xcomp, csubj per sentence), function-
+word ratio, first-person rate. Structure: paragraph count,
+paragraph length, question rate, connective rate. Punctuation:
+commas, colons, dashes and semicolons per 1,000 tokens,
+with full-width and script variants mapped to the same feature.
+Character: character-bigram entropy and digit rate. English-
+only measures such as readability formulas, contractions,
+hedges and passive rate are excluded.
+3.5. Analysis
+The unit of analysis is one response. The two generations
+of a prompt are not independent, so every cross-validation
+split and every clustered standard error groups by prompt.
+RQ1. Within each language, a multinomial logistic re-
+gression on standardized features (primary, interpretable)
+and a 300-tree random forest (ceiling), evaluated with leave-
+one-prompt-out cross-validation (12 folds), bootstrap 95%
+confidence intervals, and an exact binomial test against
+0.20. RQ2. A binomial GLM of cell-level correctness on
+resource rank with prompt-clustered standard errors, plus
+Spearman’s ρ over the seven per-language accuracies; as a
+robustness check, features residualized on log length within
+each language. RQ3. For each feature, a two-way ANOV A
+(model × language, prompt as a blocking factor) with partial
+η2; and a transfer matrix in which features are z-scored
+within each language, a classifier is trained on language A
+and tested on language B. RQ4. After z-scoring within each
+language, the mean pairwise Euclidean distance between
+the five model centroids, the silhouette of model labels and
+the between/within scatter ratio, with stratified bootstrap
+intervals and Spearman’s ρ against rank. RQ5. All 120
+English responses were translated into the six other languages
+by Google Translate and by a free open model that is not
+
+===== PAGE 3 =====
+TABLE 1. P ER-LANGUAGE RESULTS . LR: LOGISTIC REGRESSION
+ACCURACY [95% CI]; F1: MACRO -F1; RF: RANDOM FOREST ; J UDGE :
+BEST OF THE FIVE LLM JUDGES ; S EP.: MEAN DISTANCE BETWEEN
+MODEL CENTROIDS (z-UNITS ). C HANCE ACCURACY IS 0.20.
+Lang. Rank LR [95% CI] F1 RF Judge Sep.
+English 1 .717 [.65–.79] .711 .675 .267 3.59
+Spanish 2 .625 [.54–.71] .625 .675 .217 3.11
+Chinese 3 .650 [.56–.73] .644 .650 .233 3.01
+Russian 4 .650 [.57–.73] .654 .717 .258 2.97
+Japanese 5 .708 [.63–.79] .707 .733 .225 2.70
+Turkish 6 .592 [.51–.68] .596 .600 .258 2.84
+Hindi 7 .639 [.55–.72] .634 .622 .361 2.69
+English Spanish Chinese Russian Japanese Turkish Hindi
+Language, decreasing resource level →
+0.2
+0.4
+0.6
+0.8
+5-way accuracy
+chance
+Random forest
+Random forest, length-residualized
+Logistic regression (95% CI)
+LLM judges (range of 5)
+Figure 1. Five-way attribution accuracy by language (leave-one-prompt-out).
+Feature classifiers stay between 0.59 and 0.78 across the resource gradient;
+the five LLM judges stay near chance.
+a subject (MiniMax M3). We measure attribution on the
+translations alone, transfer from classifiers trained on English
+originals or on native responses in the target language, and
+per-feature Spearman correlation between each original and
+its translation. RQ6. Each subject model was shown every
+text without metadata and asked which of the five models
+wrote it, with option order shuffled, temperature 0, and hidden
+reasoning disabled where the API allows it.
+4. Results
+4.1. RQ1: Attribution works in every language
+Table 1 and Fig. 1 show five-way accuracy of 0.59–0.72
+in every language, with every confidence interval excluding
+chance (all p <10−20). Per-model recall is highest for GPT-
+5.5 (67–92% across languages) and Grok 4.3 (63–88%),
+followed by Claude Opus 4.7 (63–79%) and Gemini 3.5 Flash
+(54–75%). DeepSeek V4 Pro is the hardest to identify (25–
+58%); it is most often mistaken for Claude in English and for
+GPT or Gemini in Hindi. By mean absolute coefficient, the
+fingerprint is carried mainly by paragraph count and length,
+comma and colon rates, and lexical diversity (hapax rate, Zipf
+slope, bigram entropy); dependency depth, subordination and
+question rate contribute little.
+Length is part of the signal: Grok writes the shortest
+responses in all seven languages, and GPT-5.5 the longest in
+en es zh ru ja tr hi
+Test language
+en
+es
+zh
+ru
+ja
+tr
+hi
+Train language
+.72 .52 .43 .38 .41 .39 .44
+.58 .62 .50 .48 .54 .48 .55
+.57 .47 .65 .38 .45 .37 .48
+.56 .53 .51 .65 .39 .52 .49
+.47 .59 .47 .45 .71 .43 .50
+.45 .45 .37 .51 .51 .59 .59
+.58 .58 .52 .50 .47 .56 .64
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+accuracy (chance 0.20)
+Figure 2. Cross-lingual transfer. A classifier trained on one language (rows)
+and tested on another (columns) after within-language z-scoring. Diagonal:
+leave-one-prompt-out within language. All 42 off-diagonal cells exceed
+chance.
+six. With features residualized on length, logistic regression
+falls to 0.44–0.57, while the random forest stays at 0.66–0.78.
+A fingerprint independent of length therefore remains, but it
+is non-linear.
+4.2. RQ2: No resource gradient
+The cell-level GLM gives β = −0.038 log-odds per
+rank step (SE 0.042, p = 0.36), less than one percentage
+point of accuracy per step; with length-residualized features,
+β = −0.053 (p = 0.16). Spearman’s ρ over the seven
+languages is −0.45 (p = 0.31). The ordering is not monotone:
+Japanese (rank 5) matches English, and Hindi (rank 7) is
+more identifiable than Spanish and Turkish. Our pre-specified
+criterion for a gradient (negative coefficient, p <0.05) is
+not met.
+4.3. RQ3: A shared fingerprint with a language
+accent
+Averaged over the 21 features, partial η2 is 0.54 for
+language, 0.15 for model, 0.13 for the model × language
+interaction and 0.16 for prompt. Language dominates every
+feature tied to morphology or vocabulary (token length 0.99,
+function-word ratio 0.94, hapax rate 0.93, Zipf slope 0.93,
+MATTR 0.88), as expected when comparing Chinese char-
+acters, Turkish agglutination and Hindi postpositions. Model
+effects are largest for hapax rate (0.38), Zipf slope (0.37),
+comma rate (0.32), bigram entropy (0.31) and paragraph
+count (0.29), and smallest for subordination, question rate and
+dependency depth (≤ 0.03). The models differ in how varied
+their vocabulary is and how they punctuate and paragraph,
+not in clause structure.
+Removing each language’s mean exposes the shared part
+(Fig. 2). A classifier trained on any language reaches 0.37–
+0.59 on any other (mean 0.49, against 0.65 within language),
+
+===== PAGE 4 =====
+TABLE 2. ATTRIBUTION AFTER MACHINE TRANSLATION OF THE 120
+ENGLISH RESPONSES INTO SIX LANGUAGES (LLM: M INI MAX M3).
+“TRAINED ON ” ROWS TEST ON THE TRANSLATIONS . REFERENCE :
+ENGLISH ORIGINALS 0.717; NATIVE RESPONSES IN THE SIX LANGUAGES ,
+MEAN 0.644.
+Google LLM
+LOPO on translations, range .57–.66 .59–.70
+LOPO on translations, mean .625 .629
+Trained on English originals .664 .660
+Trained on native responses .521 .531
+Features with ρ >0.5 (of 20) 16 16
+Model η2, before → after .40 → .32 .40 → .30
+and all 42 off-diagonal pairs are above chance. About three
+quarters of within-language accuracy (0.49/0.65) transfers, so
+each model’s fingerprint is mostly language-invariant, with
+a per-language accent captured by the interaction term.
+4.4. RQ4: Models converge where data is thin
+All three separation measures fall with resource rank.
+Mean centroid distance drops from 3.59 in English to 2.69
+in Hindi ( ρ = −0.96, p <0.001), and the Hindi interval lies
+entirely below the English one; the between/within scatter
+ratio falls from 0.41 to 0.18 ( ρ = −1.00); and the silhouette
+falls from 0.04 to −0.02 (ρ = −0.93, p = 0.003). Pairwise
+distances locate the change. The largest English gaps, GPT–
+Grok (5.69) and DeepSeek–Grok (4.86), shrink to 2.69 and
+2.02 in Hindi, and Claude–Grok goes from 5.42 to 3.46.
+Grok’s terse, lightly punctuated English register is the outlier
+that disappears; the other four models were never far apart.
+Convergence and stable attribution are compatible. Cen-
+troid distance averages over all 21 features, most of which
+converge, while a classifier needs only the few that keep
+separating the models (paragraph count, comma and colon
+rates, lexical-diversity slope). In lower-resource languages
+the five models write more alike than they do in English,
+but not identically.
+4.5. RQ5: Translation does not launder the finger-
+print
+Attribution on translated text alone runs 0.57–0.70 (Ta-
+ble 2), and every interval excludes chance ( p < 0.001).
+Translating a text costs about nine points relative to the
+English originals, roughly what moving from English to a
+native lower-resource language costs. A classifier trained
+on the English originals reads the translations at 0.66 (0.77
+for the LLM’s Hindi), while one trained on the models’
+own native-language responses reads them at only 0.52–0.53.
+Translated GPT-5.5 text resembles English GPT-5.5 more
+than it resembles native Spanish GPT-5.5: the translator
+carries over the source’s structural habits instead of restyling
+the text.
+Fig. 3 shows why. Paragraph count (ρ = 1.00), paragraph
+length (0.98), sentence length (0.89) and burstiness (0.87)
+pass through translation almost unchanged, while MATTR
+0.0 0.2 0.4 0.6 0.8 1.0
+Spearman ρ, original vs. translated text
+MATTR
+function-word ratio
+connective rate
+char-bigram entropy
+token length
+dash rate
+comma rate
+Zipf slope
+subordination
+hapax rate
+dependency depth
+semicolon rate
+colon rate
+sentence-length SD
+first-person rate
+burstiness
+sentence length
+digit rate
+paragraph length
+paragraph count
+structure
+syntax
+punctuation
+lexical/character
+Figure 3. Feature survival under translation: Spearman ρ between each
+English original and its translation, averaged over six target languages
+and both translators. Structural and rhythmic features survive; vocabulary
+measures are rewritten. Question rate is omitted because the essays contain
+no questions.
+(0.32), function-word ratio (0.46) and bigram entropy (0.49)
+are rewritten by the target language. The share of feature
+variance explained by model falls from 0.40 to 0.32 (Google)
+and 0.30 (LLM), a reduction rather than an erasure. The two
+translators behave almost identically; the LLM normalizes
+semicolons and colons slightly more, yet its output is not
+less attributable, so it does not overwrite the source model’s
+fingerprint with its own.
+4.6. RQ6: LLM judges are near chance
+Asked which of the five models wrote each text, the
+judges score 20.3% (DeepSeek) to 25.4% (Claude) overall.
+Only Claude is above chance ( p < 0.001), and its best
+language is Hindi (36%). Each judge defaults to one answer:
+GPT-5.5 names itself for 82% of texts regardless of author,
+Claude most often names GPT-5.5, and the other three most
+often name Claude. The feature classifier exceeds the best
+judge by 28–48 points in every language (Table 1). This is
+an instant-answer condition; judges allowed to reason may
+do better.
+5. Discussion
+Three practical points follow. First, attribution with
+interpretable features does not require English: accuracy
+in Hindi and Turkish is within a few points of Spanish,
+and a classifier trained in one language transfers to the
+others. Second, translation is not an effective way to hide
+which model wrote a text, because the features that carry
+the fingerprint are structural, and a classifier trained on
+English can be applied across a translation boundary without
+retraining. Third, asking a model who wrote a text is not a
+substitute for measurement.
+The convergence result (RQ4) bears on the homoge-
+nization literature [ 17], [18]. Model-generated text in lower-
+resource languages is drifting toward a shared register faster
+
+===== PAGE 5 =====
+than in English. As more of the text in these languages is
+machine-written, that register may become the default style
+that readers and future training sets encounter.
+Dual use. The same pipeline that attributes text to a
+model can attribute text to a person, and our translation
+result suggests that machine translation offers pseudonymous
+human writers little protection against structural stylometry.
+We release only model-generated text and no tools aimed at
+human authors.
+Limitations. (i) We study one genre, persuasive essays
+with a three-claim structure; paragraph count partly reflects
+how each model follows that instruction, and other genres
+may fingerprint differently. (ii) Length is entangled with
+style; the length-controlled result holds only non-linearly.
+(iii) Resource level is an ordinal rank over seven languages.
+(iv) Two generations per cell give intervals of about ±8
+points. (v) Prompt fidelity was checked by a model rather
+than by native speakers. (vi) Results describe model versions
+served in September 2026, and fingerprints will drift with
+updates. (vii) Judges were tested without extended reasoning.
+6. Conclusion
+Across seven languages and five frontier models, inter-
+pretable UD-based features attribute text to its source model
+at 59–72% accuracy with no significant decline in lower-
+resource languages. The fingerprint is mostly shared across
+languages, survives machine translation through structural
+features, and is far easier to read with simple statistics
+than by asking the models. At the same time, the models’
+styles converge where training data is thin. Future work will
+test other genres, human-verified prompts, numeric resource
+covariates and reasoning-enabled judges.
+Data Availability
+Code, native prompts and their reviews, all 839 analyzed
+responses, 1,440 translations, features and result tables: https:
+//github.com/adrian-erlikhman/LangLLM.
+References
+[1] A. Uchendu, T. Le, K. Shu, and D. Lee, “Authorship attribution for
+neural text generation,” in Proc. EMNLP, 2020, pp. 8384–8395.
+[2] A. Uchendu, Z. Ma, T. Le, R. Zhang, and D. Lee, “TURINGBENCH:
+A benchmark environment for Turing test in the age of neural text
+generation,” in Findings of EMNLP , 2021.
+[3] M. Sun, Y . Yin, Z. Xu, J. Z. Kolter, and Z. Liu, “Idiosyncrasies in
+large language models,” in Proc. ICML, 2025.
+[4] P. Joshi, S. Santy, A. Budhiraja, K. Bali, and M. Choudhury, “The
+state and fate of linguistic diversity and inclusion in the NLP world,”
+in Proc. ACL, 2020, pp. 6282–6293.
+[5] J. Nivre et al. , “Universal Dependencies v2: An evergrowing multilin-
+gual treebank collection,” in Proc. LREC, 2020, pp. 4034–4043.
+[6] E. Mitchell, Y . Lee, A. Khazatsky, C. D. Manning, and C. Finn, “De-
+tectGPT: Zero-shot machine-generated text detection using probability
+curvature,” in Proc. ICML, 2023.
+[7] G. Bao, Y . Zhao, Z. Teng, L. Yang, and Y . Zhang, “Fast-DetectGPT:
+Efficient zero-shot detection of machine-generated text via conditional
+probability curvature,” in Proc. ICLR, 2024.
+[8] A. Hans et al. , “Spotting LLMs with Binoculars: Zero-shot detection
+of machine-generated text,” in Proc. ICML, 2024.
+[9] V . Verma, E. Fleisig, N. Tomlin, and D. Klein, “Ghostbuster: Detecting
+text ghostwritten by large language models,” in Proc. NAACL, 2024.
+[10] D. Macko et al. , “MULTITuDE: Large-scale multilingual machine-
+generated text detection benchmark,” in Proc. EMNLP, 2023.
+[11] Y . Wanget al., “M4: Multi-generator, multi-domain, and multi-lingual
+black-box machine-generated text detection,” in Proc. EACL, 2024.
+[12] Y . Wang et al. , “SemEval-2024 Task 8: Multidomain, multimodel
+and multilingual machine-generated text detection,” in Proc. SemEval,
+2024.
+[13] J. Wu, S. Yang, R. Zhan, Y . Yuan, L. S. Chao, and D. F. Wong, “A
+survey on LLM-generated text detection: Necessity, methods, and
+future directions,” Computational Linguistics , vol. 51, no. 1, 2025.
+[14] D. Pasquini, E. M. Kornaropoulos, and G. Ateniese, “LLMmap:
+Fingerprinting for large language models,” in Proc. USENIX Security ,
+2025.
+[15] E. Stamatatos, “A survey of modern authorship attribution methods,”
+J. Amer . Soc. Inf. Sci. Technol. , vol. 60, no. 3, pp. 538–556, 2009.
+[16] T. Kumarage et al. , “Stylometric detection of AI-generated text in
+Twitter timelines,” arXiv:2303.03697, 2023.
+[17] V . Padmakumar and H. He, “Does writing with language models
+reduce content diversity?” in Proc. ICLR, 2024.
+[18] A. R. Doshi and O. P. Hauser, “Generative AI enhances individual
+creativity but reduces the collective diversity of novel content,” Science
+Advances, vol. 10, no. 28, 2024.
+[19] W. Liang et al. , “Monitoring AI-modified content at scale: A case
+study on the impact of ChatGPT on AI conference peer reviews,” in
+Proc. ICML, 2024.
+[20] A. Panickssery, S. R. Bowman, and S. Feng, “LLM evaluators
+recognize and favor their own generations,” in Proc. NeurIPS, 2024.
+[21] A. Erlikhman et al. , “Self-attribution is not self-recognition: A peer
+baseline for LLM judges,” under review, 2026.
+[22] P. Qi, Y . Zhang, Y . Zhang, J. Bolton, and C. D. Manning, “Stanza: A
+Python natural language processing toolkit for many human languages,”
+in Proc. ACL: System Demonstrations , 2020.
+[23] M. A. Covington and J. D. McFall, “Cutting the Gordian knot: The
+moving-average type–token ratio (MATTR),” J. Quant. Linguist. , vol.
+17, no. 2, pp. 94–100, 2010.
+[24] K.-I. Goh and A.-L. Barabási, “Burstiness and memory in complex
+systems,” EPL, vol. 81, no. 4, 2008.

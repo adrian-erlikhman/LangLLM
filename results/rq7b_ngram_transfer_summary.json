@@ -1,0 +1,16 @@
+{
+  "union_vocab_zscored": {
+    "diag_mean": 0.7842637054821928,
+    "offdiag_mean": 0.40538215286114443,
+    "offdiag_n_above_chance": 41,
+    "offdiag_min": 0.16806722689075632,
+    "offdiag_max": 0.675
+  },
+  "script_neutral_punct_digits": {
+    "diag_mean": 0.6200080032012805,
+    "offdiag_mean": 0.37882319594504466,
+    "offdiag_n_above_chance": 41,
+    "offdiag_min": 0.175,
+    "offdiag_max": 0.6
+  }
+}
