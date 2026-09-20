@@ -2,6 +2,24 @@
 
 Authors: two high-school first authors + adjunct faculty co-author (UCLA). Criteria: deadline soon, decision soon, eligibility verified, credibility. Every fact below is quoted from an official page in the six domain reports (`venues_A` to `venues_F` in this folder); "not addressed" means the venue states no rule on author status, which in practice means allowed.
 
+## Decisions in October 2026 (peer-reviewed, on topic, eligibility verified; sources: venues_G1, G2, G3)
+
+| Venue | Deadline | Decision | Pages | Proceedings | Angle | Eligibility |
+|---|---|---|---|---|---|---|
+| TRUSTMORE 2026 @ IEEE BigData (trustworthy multimodal agents) | 4 Oct AoE | **21 Oct** | 8 to 9, or 4 to 6 | IEEE Xplore | trust in LLM outputs / LLM judges | not addressed |
+| DMAIL 2026 @ IEEE BigData (data mining and AI for law) | 30 Sept 23:59 AoE | **25 Oct** | 8 + 2 | IEEE Xplore | AI text as evidence, provenance | not addressed |
+| CyberHunt 2026 @ IEEE BigData (cyber threat intelligence) | 4 Oct 23:59 ET | **25 Oct** | 10 | IEEE Xplore | attributing AI-generated disinformation | not addressed |
+| **SIGNAL @ WACV 2027** (attribution, watermarking, fingerprinting, provenance) | 15 Oct 11:59 PM AoE | **30 Oct** | WACV template | WACV workshop proceedings, IEEE Xplore; in person 4 or 5 Jan | the paper's own framing; best fit found | not addressed |
+| REU Symposium @ IEEE BigData | 28 Sept (no TZ) | **30 Oct** | 10 / 6 | IEEE CS proceedings | any new student-led study | **explicit: lead author must be an undergraduate or high-school student** |
+| AI-DARLD @ IEEE BigData (AI in real-life domains) | 10 Oct | 30 Oct | 10 / 6 | IEEE Xplore | broad | not addressed |
+| Special Session: Machine Learning on Big Data @ IEEE BigData | 30 Sept (no TZ) | **31 Oct** | 10 / 6 | main-conference proceedings, Xplore | method paper | not addressed |
+| Special Session: Privacy and Security on Big Data @ IEEE BigData | 30 Sept (no TZ) | **31 Oct** | 10 / 6 | main-conference proceedings, Xplore | stylometry as privacy risk, translation as obfuscation | not addressed |
+| SE4AgenticAI @ IEEE BigData | 10 Oct | 31 Oct | 8 to 10, or 3 to 4 | IEEE Xplore | only for an agents paper | not addressed |
+
+Every BigData entry requires one full author-rate registration per paper (amount unpublished) and in-person presentation in Phoenix, 15 to 18 Dec. Earliest reputable decision anywhere: 21 Oct. Nothing on topic decides before that; the two ACL-family workshops at AACL that decide 7 Oct (ARRSI, TrustAudio) do not fit, and CSCI 2026 ("about 10 days after submission") and ICMLC 2027 (25 Oct) are low-tier.
+
+Journals whose own statistics put a reviewed first decision inside October: IEEE Access ("4 weeks", $2,160 APC); borderline: Language Resources and Evaluation (median 36 days, free on the subscription route), PeerJ Computer Science (median 35 days, $2,155), Machine Learning with Applications (38 days, $3,030). Computational Linguistics (46-day average, free) misses by about a week. MDPI titles clear October easily and are the ones a knowledgeable reader discounts.
+
 ## Tier 1: explicitly eligible and decided within six weeks
 
 | Venue | Deadline | Decision | Format | Eligibility (quoted) | Cost / attendance | Caution |
