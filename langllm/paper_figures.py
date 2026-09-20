@@ -50,21 +50,21 @@ def fig1(langs):
 
 
 def fig2(langs):
+    """Column-width, two panels side by side, no colorbar (values are printed in every cell)."""
     F = pd.read_csv(RESULTS_DIR / "rq3_transfer_matrix.csv", index_col=0).loc[langs, langs]
     N = pd.read_csv(RESULTS_DIR / "rq7b_ngram_transfer_union_vocab_zscored.csv", index_col=0).loc[langs, langs]
-    fig, axes = plt.subplots(1, 2, figsize=(DCOL, 2.3))
-    for ax, M, title in zip(axes, [F, N], ["(a) 21 UD features", "(b) character n-grams, same within-language adaptation"]):
-        im = ax.imshow(M.to_numpy(float), cmap="Blues", vmin=0.15, vmax=0.9)
-        ax.set_xticks(range(7), langs); ax.set_yticks(range(7), langs)
+    fig, axes = plt.subplots(1, 2, figsize=(COL, 1.95))
+    for ax, M, title in zip(axes, [F, N], ["(a) UD features", "(b) char n-grams, adapted"]):
+        ax.imshow(M.to_numpy(float), cmap="Blues", vmin=0.15, vmax=0.9)
+        ax.set_xticks(range(7), langs, fontsize=5.5); ax.set_yticks(range(7), langs, fontsize=5.5)
         for i in range(7):
             for k in range(7):
-                v = M.iat[i, k]; ax.text(k, i, f"{v:.2f}".lstrip("0"), ha="center", va="center", fontsize=6.2, color="white" if v > 0.6 else "black", fontweight="bold" if i == k else "normal")
+                v = M.iat[i, k]; ax.text(k, i, f"{v:.2f}".lstrip("0"), ha="center", va="center", fontsize=4.6, color="white" if v > 0.6 else "black", fontweight="bold" if i == k else "normal")
         off = M.to_numpy(float)[~np.eye(7, dtype=bool)]
-        sub = f"off-diagonal mean {off.mean():.2f}".replace("mean 0.", "mean .")
-        ax.set_xlabel("test language"); ax.set_title(title + "\n" + sub, fontsize=7.5); ax.grid(False)
-    axes[0].set_ylabel("train language")
-    cb = fig.colorbar(im, ax=axes, fraction=0.02, pad=0.02); cb.set_label("accuracy (chance .20)")
-    fig.savefig(OUT / "fig2_transfer.pdf", bbox_inches="tight", pad_inches=0.02); plt.close(fig)
+        ax.set_title(f"{title}, off-diag. mean {off.mean():.2f}".replace("mean 0.", "mean ."), fontsize=6.2); ax.grid(False)
+        ax.set_xlabel("test language", fontsize=6, labelpad=1); ax.tick_params(length=2, pad=1)
+    axes[0].set_ylabel("train language", fontsize=6, labelpad=1); axes[1].set_yticks([])
+    fig.tight_layout(pad=0.25, w_pad=0.6); fig.savefig(OUT / "fig2_transfer.pdf"); plt.close(fig)
 
 
 def fig3(langs):
@@ -110,8 +110,8 @@ def fig3_features(langs):
     a.axhline(CHANCE, color="k", ls=":", lw=0.7)
     a.set_xlim(0.5, 21.5); a.set_ylim(0.15, 0.9); a.set_xticks([1, 3, 5, 10, 15, 21]); a.set_xlabel("number of features, ranked on the training folds")
     a.set_ylabel("macro-F1 (LOPO)"); a.legend(frameon=False, loc="lower right", fontsize=6); a.set_title("(a)", loc="left", fontsize=8)
-    b.barh(range(len(s)), s.values, color=[GC[grp[f]] for f in s.index], height=0.7)
-    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=6); b.set_xlim(0, 1.0); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
+    b.barh(range(len(s)), s.values, color=[GC[grp[f]] for f in s.index], height=0.78); b.tick_params(axis="y", length=1.5, pad=1)
+    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=5.2); b.set_xlim(0, 1.0); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
     from matplotlib.patches import Patch
     b.legend(handles=[Patch(color=c, label=g) for g, c in [("structure", "#DD8452"), ("syntax", "#55A868"), ("punctuation", "#C44E52"), ("lexical / character", "#8172B3")]],
              frameon=False, loc="lower right", fontsize=6); b.grid(axis="y", alpha=0); b.set_title("(b)", loc="left", fontsize=8)
