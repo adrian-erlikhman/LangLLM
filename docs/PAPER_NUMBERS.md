@@ -304,6 +304,8 @@ Language-clustered GLM: beta -0.038, SE 0.032, p $p = 0.226$; language x prompt 
 ## Notes from the audits
 
 - mean |coef| ranking: paragraph count 0.62, comma rate 0.61, char-bigram entropy 0.58, paragraph length 0.54, Zipf slope 0.45, MATTR 0.42, colon rate 0.42, subordination 0.41, function-word ratio 0.40, connective rate 0.40, first-person rate 0.39, hapax rate 0.38, token length 0.36, sentence length 0.36, digit rate 0.35, dash rate 0.32, semicolon rate 0.32, dependency depth 0.28, sentence-length SD 0.24, burstiness 0.23, question rate 0.11
+- Grok pairs mean by lang: {'en': 4.88, 'es': 3.34, 'zh': 3.61, 'ru': 2.89, 'ja': 3.25, 'tr': 3.49, 'hi': 2.78}; other pairs: {'en': 2.73, 'es': 2.96, 'zh': 2.6, 'ru': 3.03, 'ja': 2.34, 'tr': 2.41, 'hi': 2.63}
+- knee (smallest k within 0.03 of best): {'en': 11, 'es': 6, 'zh': 6, 'ru': 4, 'ja': 7, 'tr': 13, 'hi': 12}
 - RQ2: report beta with 95% CI and the steepest compatible decline; three clusterings (prompt / language / language x prompt) all give p > 0.3.
 - RQ6 is the single-text protocol (Bai et al.); CompLLM's headline lineup allows reasoning and shows five responses side by side. CompLLM's single-text condition matches ours.
 - 'n-grams transfer at chance' is NOT supported once n-grams get within-language adaptation (0.41 vs 0.49 for features); the naive figure (0.28, 14 constant-prediction cells) is a vocabulary-overlap failure.

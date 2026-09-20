@@ -175,6 +175,74 @@ def build() -> None:
     M["AblPunctMin"] = d2(on[on.group == "punctuation"]["macro_f1"].min()); M["AblPunctMax"] = d2(on[on.group == "punctuation"]["macro_f1"].max())
     M["AblLexMin"] = d2(on[on.group == "lexical"]["macro_f1"].min()); M["AblLexMax"] = d2(on[on.group == "lexical"]["macro_f1"].max())
 
+    # ---- additions for the 20 Sept draft (Michael's review) -------------------------------
+    from itertools import permutations
+    def exact_perm_p(x, y):
+        """Two-sided exact permutation p for Spearman rho with n = 7 (5040 permutations)."""
+        x = np.asarray(x, float); y = np.asarray(y, float); r0 = abs(stats.spearmanr(x, y)[0])
+        cnt = sum(1 for perm in permutations(y) if abs(stats.spearmanr(x, perm)[0]) >= r0 - 1e-12)
+        return cnt / 5040
+    def pvx(p):
+        return "$p < 0.001$" if p < 0.001 else f"$p = {r(p, 3)}$"
+    # RQ4 per-language centroid distance + silhouette intervals + exact p
+    for l in langs:
+        M[f"Cent{l.capitalize()}"] = r(sep.loc[l, "centroid_dist"], 2)
+    ss = sep.loc[langs]
+    M["CentPexact"] = pvx(exact_perm_p(ss["rank"], ss["centroid_dist"])); M["BWPexact"] = pvx(exact_perm_p(ss["rank"], ss["between_within_ratio"]))
+    M["SilMin"] = r(ss["silhouette"].min(), 2); M["SilMax"] = r(ss["silhouette"].max(), 2)
+    M["SilEnLo"] = r(sep.loc["en", "silhouette_ci_lo"], 2); M["SilEnHi"] = r(sep.loc["en", "silhouette_ci_hi"], 2)
+    M["SilHiLo"] = r(sep.loc["hi", "silhouette_ci_lo"], 2); M["SilHiHi"] = r(sep.loc["hi", "silhouette_ci_hi"], 2)
+    grokp = pw[(pw.model_a == "grok") | (pw.model_b == "grok")].groupby("lang")["centroid_dist"].mean().loc[langs]
+    othp = pw[(pw.model_a != "grok") & (pw.model_b != "grok")].groupby("lang")["centroid_dist"].mean().loc[langs]
+    M["GrokPairsEn"] = r(grokp["en"], 2); M["GrokPairsHi"] = r(grokp["hi"], 2); M["OtherPairsEn"] = r(othp["en"], 2); M["OtherPairsHi"] = r(othp["hi"], 2)
+    rk = [rank[l] for l in langs]; rho_o = stats.spearmanr(rk, othp.values)[0]
+    M["OtherPairsRho"] = r(rho_o, 2); M["OtherPairsPexact"] = pvx(exact_perm_p(rk, othp.values))
+    notes.append(f"Grok pairs mean by lang: {grokp.round(2).to_dict()}; other pairs: {othp.round(2).to_dict()}")
+    # RQ2: Joshi two-class split, minimum detectable effect at 80% power
+    c5 = ["en", "es", "zh", "ja"]; c4 = ["ru", "tr", "hi"]
+    M["ClassFiveMean"] = d3(lr.loc[c5, "accuracy"].mean()); M["ClassFourMean"] = d3(lr.loc[c4, "accuracy"].mean())
+    mde_logodds = (1.96 + 0.8416) * fg["se"] * 6
+    lo0 = np.log(fg["acc_english"] / (1 - fg["acc_english"])); acc_mde = 1 / (1 + np.exp(-(lo0 - mde_logodds)))
+    M["MDEpts"] = r((fg["acc_english"] - acc_mde) * 100, 0)
+    # n-gram gap details
+    M["GapNGmean"] = r(float(np.mean(gapn)), 0); M["GapNGes"] = r((ch.loc["es", "accuracy"] - lr.loc["es", "accuracy"]) * 100, 0)
+    M["GapNGesHolmP"] = pv(fn[fn.lang == "es"]["p_holm"].iloc[0])
+    M["JudgeclaudeP"] = pv(j6.loc["claude", "p_vs_chance"])
+    # transfer details
+    M["TransferChanceCorrected"] = pct0((ts["mean_offdiag_accuracy"] - 0.2) / (ts["mean_diag_accuracy"] - 0.2))
+    Ff = csv("rq3_transfer_matrix.csv").set_index(csv("rq3_transfer_matrix.csv").columns[0]); Nf = pd.read_csv(RESULTS_DIR / "rq7b_ngram_transfer_union_vocab_zscored.csv", index_col=0)
+    offmask = ~np.eye(len(langs), dtype=bool)
+    M["FeatBeatsNGCells"] = str(int(((Ff.loc[langs, langs].to_numpy() > Nf.loc[langs, langs].to_numpy()) & offmask).sum()))
+    Pn = pd.read_csv(RESULTS_DIR / "rq7b_ngram_transfer_script_neutral_punct_digits.csv", index_col=0)
+    M["PunctDiagMin"] = d2(np.diag(Pn.loc[langs, langs]).min()); M["PunctDiagMax"] = d2(np.diag(Pn.loc[langs, langs]).max())
+    # translation details
+    M["TrCostPts"] = r((lr.loc["en", "accuracy"] - t5["acc_translated_lopo"].mean()) * 100, 0)
+    M["TrTrainEnMean"] = d2(t5["acc_train_english_test_translated"].mean())
+    for f in ["digit_rate", "hapax_rate", "zipf_slope"]:
+        M[f"Surv{f.replace('_', '')}"] = d2(surv[f])
+    M["Survcommaperk"] = d2(surv["comma_per_1k"])
+    nones = n7[n7.lang != "es"]["acc_train_english_test_translated"]; M["NGTrTrainEnNonEsMin"] = d2(nones.min()); M["NGTrTrainEnNonEsMax"] = d2(nones.max())
+    # feature economy details
+    k5s = c7[c7.k == 5].set_index("lang")["macro_f1"]; k21s = k21["macro_f1"]
+    share = (k5s.loc[langs] / k21s.loc[langs] * 100)
+    M["CurveKfiveShareMin"] = r(share.min(), 0); M["CurveKfiveShareMax"] = r(share.max(), 0)
+    M["CurveKtwentyoneMin"] = d2(k21s.min()); M["CurveKtwentyoneMax"] = d2(k21s.max())
+    knee = {}
+    for l in langs:
+        d = c7[c7.lang == l].sort_values("k"); best = d["macro_f1"].max()
+        knee[l] = int(d[d["macro_f1"] >= best - 0.03]["k"].iloc[0])
+    kmin, kmax = min(knee, key=knee.get), max(knee, key=knee.get)
+    M["CurveKneeMin"] = str(knee[kmin]); M["CurveKneeMinLang"] = LANG[kmin]; M["CurveKneeMax"] = str(knee[kmax]); M["CurveKneeMaxLang"] = LANG[kmax]
+    notes.append(f"knee (smallest k within 0.03 of best): {knee}")
+    orders = csv("rq7_feature_curve_order.csv").set_index("lang")["order"]
+    ORD = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth", "twenty-first"]
+    for l in ("en", "ru"):
+        M[f"ParaCountRank{l.capitalize()}"] = ORD[orders[l].split(" > ").index("para_count")]
+    etop = e["eta2_model"].sort_values(ascending=False); M["EtaModelTopFive"] = ", ".join(f"{FEAT[f]} ({d2(v)})" for f, v in etop.head(5).items())
+    w2 = wo.sort_values("delta_f1_vs_all").head(2)
+    M["AblMaxDropWhere"] = ", ".join(f"{g if g != 'syntactic' else 'syntax'} in {LANG[l]}" for g, l in zip(w2["group"], w2["lang"]))
+    M["AblNoStructureWorst"] = d2(-wo[wo.group == "structure"]["delta_f1_vs_all"].min())
+
     # ---- write numbers.tex
     PAPER.mkdir(exist_ok=True)
     lines = ["% GENERATED by python -m langllm.paper_numbers from results/. Do not edit by hand.", "% Rounding: half-up. Accuracies as .xxx, percentages as xx.x\\%."]

@@ -53,7 +53,7 @@ def fig2(langs):
     F = pd.read_csv(RESULTS_DIR / "rq3_transfer_matrix.csv", index_col=0).loc[langs, langs]
     N = pd.read_csv(RESULTS_DIR / "rq7b_ngram_transfer_union_vocab_zscored.csv", index_col=0).loc[langs, langs]
     fig, axes = plt.subplots(1, 2, figsize=(DCOL, 2.3))
-    for ax, M, title in zip(axes, [F, N], ["21 UD features", "character n-grams, same within-language adaptation"]):
+    for ax, M, title in zip(axes, [F, N], ["(a) 21 UD features", "(b) character n-grams, same within-language adaptation"]):
         im = ax.imshow(M.to_numpy(float), cmap="Blues", vmin=0.15, vmax=0.9)
         ax.set_xticks(range(7), langs); ax.set_yticks(range(7), langs)
         for i in range(7):
@@ -95,10 +95,33 @@ def fig4(langs):
     fig.tight_layout(pad=0.3); fig.savefig(OUT / "fig4_survival.pdf"); plt.close(fig)
 
 
+def fig3_features(langs):
+    """Two-panel figure for the 20 Sept draft: (a) nested selection curve with per-language band, (b) survival."""
+    cv = pd.read_csv(RESULTS_DIR / "rq7_feature_curve.csv")
+    ng = pd.read_csv(RESULTS_DIR / "rq7_ngram_accuracy.csv"); ngm = ng[ng.baseline == "char_ngram"]["macro_f1"].mean()
+    fs = pd.read_csv(RESULTS_DIR / "rq5_feature_survival.csv"); s = fs.groupby("feature")["spearman_rho"].mean().drop("question_rate", errors="ignore").sort_values()
+    GC = {"lexical": "#8172B3", "syntactic": "#55A868", "structure": "#DD8452", "punctuation": "#C44E52", "character": "#8172B3"}
+    grp = {f: g for g, fl in FEATURE_GROUPS.items() for f in fl}
+    fig, (a, b) = plt.subplots(2, 1, figsize=(COL, 3.15), gridspec_kw={"height_ratios": [1, 1.2]})
+    per = cv[cv.lang != "pooled"].pivot(index="k", columns="lang", values="macro_f1")
+    a.fill_between(per.index, per.min(axis=1), per.max(axis=1), color=BLUE, alpha=0.15, lw=0, label="range over 7 languages")
+    d = cv[cv.lang == "pooled"]; a.plot(d["k"], d["macro_f1"], "o-", color=BLUE, ms=2.6, lw=1.2, label="pooled, z-scored within language")
+    a.axhline(ngm, color=RED, ls="--", lw=0.9, label=f"char n-grams, all, mean macro-F1 {ngm:.2f}".replace(" 0.", " ."))
+    a.axhline(CHANCE, color="k", ls=":", lw=0.7)
+    a.set_xlim(0.5, 21.5); a.set_ylim(0.15, 0.9); a.set_xticks([1, 3, 5, 10, 15, 21]); a.set_xlabel("number of features, ranked on the training folds")
+    a.set_ylabel("macro-F1 (LOPO)"); a.legend(frameon=False, loc="lower right", fontsize=6); a.set_title("(a)", loc="left", fontsize=8)
+    b.barh(range(len(s)), s.values, color=[GC[grp[f]] for f in s.index], height=0.7)
+    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=6); b.set_xlim(0, 1.0); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
+    from matplotlib.patches import Patch
+    b.legend(handles=[Patch(color=c, label=g) for g, c in [("structure", "#DD8452"), ("syntax", "#55A868"), ("punctuation", "#C44E52"), ("lexical / character", "#8172B3")]],
+             frameon=False, loc="lower right", fontsize=6); b.grid(axis="y", alpha=0); b.set_title("(b)", loc="left", fontsize=8)
+    fig.tight_layout(pad=0.3); fig.savefig(OUT / "fig3_features.pdf"); plt.close(fig)
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     langs = language_codes(load_config())
-    fig1(langs); fig2(langs); fig3(langs); fig4(langs)
+    fig1(langs); fig2(langs); fig3(langs); fig4(langs); fig3_features(langs)
     print("wrote", sorted(p.name for p in OUT.glob("*.pdf")))
 
 
