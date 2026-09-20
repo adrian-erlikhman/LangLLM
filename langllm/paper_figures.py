@@ -38,21 +38,21 @@ def fig1(langs):
     j = cci[cci.system.str.startswith("judge_") & (cci.system != "judge_mean_of_5")]
     jmin = j.groupby("lang")["accuracy"].min().loc[langs]; jmax = j.groupby("lang")["accuracy"].max().loc[langs]
     x = np.arange(len(langs))
-    fig, ax = plt.subplots(figsize=(COL, 2.55))
+    fig, ax = plt.subplots(figsize=(COL, 2.05))
     ax.fill_between(x, jmin, jmax, color=GOLD, alpha=0.35, lw=0, label="LLM judges (range of 5)")
     ax.errorbar(x, n["accuracy"], yerr=[n["accuracy"] - n["ci_lo_cluster"], n["ci_hi_cluster"] - n["accuracy"]], fmt="s--", ms=3.5, color=RED, lw=0.9, capsize=2, label="character n-grams (opaque)")
     ax.errorbar(x, f["accuracy"], yerr=[f["accuracy"] - f["ci_lo_cluster"], f["ci_hi_cluster"] - f["accuracy"]], fmt="o-", ms=3.5, color=BLUE, lw=1.1, capsize=2, label="21 UD features (interpretable)")
     ax.axhline(CHANCE, color="k", ls=":", lw=0.7); ax.text(6.35, CHANCE + 0.015, "chance", fontsize=6, ha="right")
     ax.set_xticks(x, [LANG[l] for l in langs], rotation=25, ha="right"); ax.set_ylim(0, 1); ax.set_ylabel("5-way accuracy")
     ax.set_xlabel(r"language, decreasing resource level $\rightarrow$", labelpad=1)
-    ax.legend(frameon=False, loc="upper center", ncol=2, bbox_to_anchor=(0.5, -0.36), handlelength=1.8, columnspacing=1.0)
+    ax.legend(frameon=False, loc="upper center", ncol=2, bbox_to_anchor=(0.5, -0.58), handlelength=1.8, columnspacing=1.0)
     fig.tight_layout(pad=0.3); fig.savefig(OUT / "fig1_accuracy.pdf", bbox_inches="tight", pad_inches=0.02); plt.close(fig)
 
 
 def fig2(langs):
     F = pd.read_csv(RESULTS_DIR / "rq3_transfer_matrix.csv", index_col=0).loc[langs, langs]
     N = pd.read_csv(RESULTS_DIR / "rq7b_ngram_transfer_union_vocab_zscored.csv", index_col=0).loc[langs, langs]
-    fig, axes = plt.subplots(1, 2, figsize=(DCOL, 2.55))
+    fig, axes = plt.subplots(1, 2, figsize=(DCOL, 2.3))
     for ax, M, title in zip(axes, [F, N], ["21 UD features", "character n-grams, same within-language adaptation"]):
         im = ax.imshow(M.to_numpy(float), cmap="Blues", vmin=0.15, vmax=0.9)
         ax.set_xticks(range(7), langs); ax.set_yticks(range(7), langs)
@@ -70,7 +70,7 @@ def fig2(langs):
 def fig3(langs):
     cv = pd.read_csv(RESULTS_DIR / "rq7_feature_curve.csv")
     ng = pd.read_csv(RESULTS_DIR / "rq7_ngram_accuracy.csv"); ngm = ng[ng.baseline == "char_ngram"]["macro_f1"].mean()
-    fig, ax = plt.subplots(figsize=(COL, 2.2))
+    fig, ax = plt.subplots(figsize=(COL, 1.8))
     for l in langs:
         d = cv[cv.lang == l]; ax.plot(d["k"], d["macro_f1"], "-", color=BLUE, alpha=0.28, lw=0.8)
     d = cv[cv.lang == "pooled"]; ax.plot(d["k"], d["macro_f1"], "o-", color=BLUE, ms=2.8, lw=1.3, label="pooled, z-scored within language")
