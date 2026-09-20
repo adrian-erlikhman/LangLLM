@@ -61,8 +61,8 @@ def fig2(langs):
             for k in range(7):
                 v = M.iat[i, k]; ax.text(k, i, f"{v:.2f}".lstrip("0"), ha="center", va="center", fontsize=4.6, color="white" if v > 0.6 else "black", fontweight="bold" if i == k else "normal")
         off = M.to_numpy(float)[~np.eye(7, dtype=bool)]
-        ax.set_title(f"{title}
-off-diagonal mean {off.mean():.2f}".replace("mean 0.", "mean ."), fontsize=6); ax.grid(False)
+        sub = f"off-diagonal mean {off.mean():.2f}".replace("mean 0.", "mean .")
+        ax.set_title(title + "\n" + sub, fontsize=6); ax.grid(False)
         ax.set_xlabel("test language", fontsize=6, labelpad=1); ax.tick_params(length=2, pad=1)
     axes[0].set_ylabel("train language", fontsize=6, labelpad=1); axes[1].set_yticks([])
     fig.tight_layout(pad=0.25, w_pad=0.6); fig.savefig(OUT / "fig2_transfer.pdf"); plt.close(fig)
