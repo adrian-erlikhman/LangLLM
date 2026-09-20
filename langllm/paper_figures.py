@@ -61,7 +61,8 @@ def fig2(langs):
             for k in range(7):
                 v = M.iat[i, k]; ax.text(k, i, f"{v:.2f}".lstrip("0"), ha="center", va="center", fontsize=4.6, color="white" if v > 0.6 else "black", fontweight="bold" if i == k else "normal")
         off = M.to_numpy(float)[~np.eye(7, dtype=bool)]
-        ax.set_title(f"{title}, off-diag. mean {off.mean():.2f}".replace("mean 0.", "mean ."), fontsize=6.2); ax.grid(False)
+        ax.set_title(f"{title}
+off-diagonal mean {off.mean():.2f}".replace("mean 0.", "mean ."), fontsize=6); ax.grid(False)
         ax.set_xlabel("test language", fontsize=6, labelpad=1); ax.tick_params(length=2, pad=1)
     axes[0].set_ylabel("train language", fontsize=6, labelpad=1); axes[1].set_yticks([])
     fig.tight_layout(pad=0.25, w_pad=0.6); fig.savefig(OUT / "fig2_transfer.pdf"); plt.close(fig)
@@ -102,16 +103,16 @@ def fig3_features(langs):
     fs = pd.read_csv(RESULTS_DIR / "rq5_feature_survival.csv"); s = fs.groupby("feature")["spearman_rho"].mean().drop("question_rate", errors="ignore").sort_values()
     GC = {"lexical": "#8172B3", "syntactic": "#55A868", "structure": "#DD8452", "punctuation": "#C44E52", "character": "#8172B3"}
     grp = {f: g for g, fl in FEATURE_GROUPS.items() for f in fl}
-    fig, (a, b) = plt.subplots(2, 1, figsize=(COL, 3.15), gridspec_kw={"height_ratios": [1, 1.2]})
+    fig, (a, b) = plt.subplots(2, 1, figsize=(COL, 3.15), gridspec_kw={"height_ratios": [0.8, 1.55]})
     per = cv[cv.lang != "pooled"].pivot(index="k", columns="lang", values="macro_f1")
     a.fill_between(per.index, per.min(axis=1), per.max(axis=1), color=BLUE, alpha=0.15, lw=0, label="range over 7 languages")
     d = cv[cv.lang == "pooled"]; a.plot(d["k"], d["macro_f1"], "o-", color=BLUE, ms=2.6, lw=1.2, label="pooled, z-scored within language")
     a.axhline(ngm, color=RED, ls="--", lw=0.9, label=f"char n-grams, all, mean macro-F1 {ngm:.2f}".replace(" 0.", " ."))
     a.axhline(CHANCE, color="k", ls=":", lw=0.7)
     a.set_xlim(0.5, 21.5); a.set_ylim(0.15, 0.9); a.set_xticks([1, 3, 5, 10, 15, 21]); a.set_xlabel("number of features, ranked on the training folds")
-    a.set_ylabel("macro-F1 (LOPO)"); a.legend(frameon=False, loc="lower right", fontsize=6); a.set_title("(a)", loc="left", fontsize=8)
+    a.set_ylabel("macro-F1 (LOPO)", fontsize=6.5); a.legend(frameon=False, loc="lower right", fontsize=5.5); a.set_title("(a)", loc="left", fontsize=8)
     b.barh(range(len(s)), s.values, color=[GC[grp[f]] for f in s.index], height=0.78); b.tick_params(axis="y", length=1.5, pad=1)
-    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=5.2); b.set_xlim(0, 1.0); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
+    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=5.0); b.set_xlim(0, 1.0); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
     from matplotlib.patches import Patch
     b.legend(handles=[Patch(color=c, label=g) for g, c in [("structure", "#DD8452"), ("syntax", "#55A868"), ("punctuation", "#C44E52"), ("lexical / character", "#8172B3")]],
              frameon=False, loc="lower right", fontsize=6); b.grid(axis="y", alpha=0); b.set_title("(b)", loc="left", fontsize=8)
