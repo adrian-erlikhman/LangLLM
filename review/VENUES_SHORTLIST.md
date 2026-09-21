@@ -20,6 +20,16 @@ Every BigData entry requires one full author-rate registration per paper (amount
 
 Journals whose own statistics put a reviewed first decision inside October: IEEE Access ("4 weeks", $2,160 APC); borderline: Language Resources and Evaluation (median 36 days, free on the subscription route), PeerJ Computer Science (median 35 days, $2,155), Machine Learning with Applications (38 days, $3,030). Computational Linguistics (46-day average, free) misses by about a week. MDPI titles clear October easily and are the ones a knowledgeable reader discounts.
 
+### Decisions in the first two weeks of October (venues_G4; every AACL-IJCNLP 2026 and WACV 2027 workshop checked)
+
+| Venue | Deadline | Decision | Pages | Proceedings | Fit | Eligibility |
+|---|---|---|---|---|---|---|
+| ARRSI @ AACL-IJCNLP 2026, AI research and recursive self-improvement (https://ar-rsi.github.io) | 30 Sept 23:59 AoE | **7 Oct** | 8 long / 4 short, excl. refs; double-blind on OpenReview | ACL Anthology (optional); in person 10 Nov, Hengqin, China | weak to medium: an LLM judging or recognizing its own output framed as AI evaluating AI | not addressed |
+| Multi-LLL @ AACL-IJCNLP 2026, multilingual LLMs | **20 Sept AoE (today)** | 3 Oct | ACL format | ACL Anthology; hybrid | best topical fit of the early group, but due today and must differ from the HS-symposium paper | not addressed |
+| IEEE BigData HS Symposium (already submitting) | 20 Sept | 9 Oct | 5 | IEEE CS Press | the LangLLM paper | explicit |
+
+Everything else at AACL closed 7 to 19 Sept; all 26 WACV 2027 workshops notify 23 Oct or later; AAAI-27 has no bridges yet and no late-breaking call; BigData main, industry and demo tracks notify 24 Oct. Note the distinction at BigData: the REU *Symposium* (workshop 30, bigdatareu.umbc.edu) admits high-school lead authors; the Undergraduate/REU *Consortium* and the PhD Forum do not.
+
 ## Tier 1: explicitly eligible and decided within six weeks
 
 | Venue | Deadline | Decision | Format | Eligibility (quoted) | Cost / attendance | Caution |
