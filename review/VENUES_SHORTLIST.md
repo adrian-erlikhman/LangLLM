@@ -30,6 +30,17 @@ Journals whose own statistics put a reviewed first decision inside October: IEEE
 
 Everything else at AACL closed 7 to 19 Sept; all 26 WACV 2027 workshops notify 23 Oct or later; AAAI-27 has no bridges yet and no late-breaking call; BigData main, industry and demo tracks notify 24 Oct. Note the distinction at BigData: the REU *Symposium* (workshop 30, bigdatareu.umbc.edu) admits high-school lead authors; the Undergraduate/REU *Consortium* and the PhD Forum do not.
 
+### Added from the final sweep (venues_G5): free ACL-family journals with fast cycles
+
+| Venue | Deadline | Decision | Format | Notes |
+|---|---|---|---|---|
+| **TACL** (Transactions of the ACL) | 1 Oct, 1 Nov, 1 Dec 2026, 11:59 pm Honolulu | about 7 weeks nominal (3-week reviews plus action-editor week); a 2026 delay notice is posted | 10 pages, double-blind | free; ACL journal with presentation slots at ACL conferences; no author-status rule; accepted papers count as top-venue publications |
+| **NEJLT** (Northern European Journal of Language Technology) | rolling | "90% within twelve weeks"; Letters (up to 6 pages) are faster; 2024 average 58 days | about 12 pages or a 6-page Letter, double-blind, ACL Anthology | free; no author-status rule; a 6-page Letter submitted in late September plausibly decides in November |
+| JDMDH (Journal of Data Mining and Digital Humanities, Episciences overlay on arXiv) | rolling | reviewers commit to under 30 days after accepting | preprint-based, diamond open access | free; digital-humanities audience; stylometry is squarely in scope |
+| ACM IUI 2027 posters and demos | 10 Nov AoE | 14 Dec | 4 pages plus references | in person, Helsinki; only with an interface or tool framing |
+
+Checked and failing the window or not yet announced: ICDE 2027 round 2 (10 Feb), FLAIRS-40 (9 Mar, and it has a reviewer obligation), ICWSM January round (15 Mar), SemEval 2027 (no machine-generated-text task; March), SDM 2027, PAKDD 2027, IEEE CAI 2027, ECIR 2027 workshops (list due 19 Oct), PAN at CLEF 2027, BEA, WOAH, TrustNLP, NLP4PI 2027 (unannounced). CSCW's official page says there are no fixed deadlines; the 15 Oct date on trackers is not official.
+
 ## Tier 1: explicitly eligible and decided within six weeks
 
 | Venue | Deadline | Decision | Format | Eligibility (quoted) | Cost / attendance | Caution |
