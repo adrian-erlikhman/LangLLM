@@ -243,6 +243,54 @@ def build() -> None:
     M["AblMaxDropWhere"] = ", ".join(f"{g if g != 'syntactic' else 'syntax'} in {LANG[l]}" for g, l in zip(w2["group"], w2["lang"]))
     M["AblNoStructureWorst"] = d2(-wo[wo.group == "structure"]["delta_f1_vs_all"].min())
 
+    # ---- camera-ready additions (IEEE BigData HSS reviews, Oct 2026; langllm.camera_ready) ----
+    def p3(x): return r(float(x), 3)
+    ph = csv("cr_holm_prompt_level.csv"); ph["fam"] = ph["family"].str.replace(r" \(.*\)", "", regex=True)
+    M["PLMinP"] = "1/4{,}096"
+    M["PLChanceHolmMax"] = p3(ph[ph.fam == "features vs chance"]["p_holm"].max())
+    M["PLNGChanceHolmMax"] = p3(ph[ph.fam == "char n-gram vs chance"]["p_holm"].max())
+    M["PLJudgeHolmMax"] = p3(ph[ph.fam == "features vs best judge"]["p_holm"].max())
+    png = ph[ph.fam == "features vs char n-gram"].set_index("lang")
+    M["PLNGsigN"] = str(int(png["significant_holm_05"].sum())); M["PLNGsigLangs"] = ", ".join(LANG[l] for l in png[png.significant_holm_05].index)
+    M["PLNGNextHolm"] = p3(png[~png.significant_holm_05]["p_holm"].min()); M["PLNGNextLang"] = LANG[png[~png.significant_holm_05]["p_holm"].idxmin()]
+    nonen = png.drop("en")["prompts_favouring"]; M["PLNGFavMin"] = str(int(nonen.min())); M["PLNGFavMax"] = str(int(nonen.max())); M["PLNGFavEn"] = str(int(png.loc["en", "prompts_favouring"]))
+    from statsmodels.stats.multitest import multipletests
+    jp = csv("cr_judges_prompt_level.csv").set_index("judge")
+    jp["h_acc"] = multipletests(jp["p_vs_chance_signflip"], method="holm")[1]; jp["h_self"] = multipletests(jp["self_recognition_p_signflip"], method="holm")[1]
+    M["PLClaudePrompts"] = str(int(jp.loc["claude", "prompts_above_chance"])); M["PLClaudeHolm"] = p3(jp.loc["claude", "h_acc"])
+    M["PLClaudeSelfPrompts"] = str(int(jp.loc["claude", "prompts_own_gt_false"])); M["PLClaudeSelfHolm"] = p3(jp.loc["claude", "h_self"])
+    M["PLOtherJudgesHolmMin"] = p3(jp.drop("claude")["h_acc"].min())
+    pt = csv("cr_transfer_prompt_level.csv"); ptf = pt[pt.representation == "features"]; ptn = pt[pt.representation == "char_ngram_adapted"]
+    M["PLTransferSig"] = str(int(ptf["significant_holm_05"].sum())); M["PLTransferHolmMax"] = p3(ptf["p_holm"].max()); M["PLTransferNGSig"] = str(int(ptn["significant_holm_05"].sum()))
+    ptr = csv("cr_translation_prompt_level.csv"); M["PLTrMinLo"] = d2(ptr["ci_lo_cluster"].min())
+    tpair = js("cr_prompt_level_summary.json")["transfer_features_vs_ngram"]
+    M["PLTransferPairPrompts"] = str(tpair["prompts_features_ahead"]); M["PLTransferPairP"] = r(tpair["p_signflip_two_sided"], 4)
+    q4 = csv("cr_rq4_prompt_cluster.csv").set_index("lang")
+    for k, nm in (("centroid_dist", "Cent"), ("between_within_ratio", "BW"), ("silhouette", "Sil")):
+        f_ = (lambda x: r(x, 2)) if k != "between_within_ratio" else d2
+        M[f"PC{nm}EnLo"] = f_(q4.loc["en", f"{k}_ci_lo"]); M[f"PC{nm}EnHi"] = f_(q4.loc["en", f"{k}_ci_hi"])
+        M[f"PC{nm}HiLo"] = f_(q4.loc["hi", f"{k}_ci_lo"]); M[f"PC{nm}HiHi"] = f_(q4.loc["hi", f"{k}_ci_hi"])
+        M[f"PC{nm}Sep"] = "below" if q4.loc["hi", f"{k}_ci_hi"] < q4.loc["en", f"{k}_ci_lo"] else "overlapping"
+    fr = csv("cr_fragility.csv").set_index("lang")
+    for k, nm in (("loto_features", "LOTOFeat"), ("loto_char_ngram", "LOTONG"), ("lopo_features_no_paragraph", "NoPara"), ("loto_features_no_paragraph", "LOTONoPara")):
+        M[f"{nm}Min"] = d2(fr[k].min()); M[f"{nm}Max"] = d2(fr[k].max()); M[f"{nm}CIminLo"] = d2(fr[f"{k}_ci_lo"].min())
+    M["LOTOFeatChange"] = r(100 * (fr["loto_features"] - fr["lopo_features"]).mean(), 0); M["LOTONGChange"] = r(100 * (fr["loto_char_ngram"] - fr["lopo_char_ngram"]).mean(), 0)
+    M["LOTOGapMean"] = r(100 * (fr["loto_char_ngram"] - fr["loto_features"]).mean(), 0)
+    if (RESULTS_DIR / "cr_tuned_accuracy.csv").exists():
+        tu = csv("cr_tuned_accuracy.csv").set_index("lang"); ch_ = js("cr_tuned_chosen_C.json")
+        M["TunedFeatMin"] = d2(tu["features_tuned"].min()); M["TunedFeatMax"] = d2(tu["features_tuned"].max())
+        M["TunedNGMin"] = d2(tu["ngram_tuned"].min()); M["TunedNGMax"] = d2(tu["ngram_tuned"].max())
+        M["TunedGapMin"] = r(tu["gap_pts"].min(), 0); M["TunedGapMax"] = r(tu["gap_pts"].max(), 0); M["TunedGapMean"] = r(tu["gap_pts"].mean(), 0)
+        M["TunedGapSigN"] = str(int((tu["gap_p_holm7"] < 0.05).sum()))
+        fC = sorted({c for v in ch_.values() for c in v["features_C"]}); nC = sorted({c for v in ch_.values() for c in v["ngram_C"]})
+        fmt = lambda c: f"{c:g}"
+        M["TunedFeatC"] = f"{fmt(fC[0])}--{fmt(fC[-1])}"; M["TunedNGC"] = f"{fmt(nC[0])}--{fmt(nC[-1])}"
+        chg = lambda x: "less than one" if abs(x) < 0.5 else f"{x:+.0f}"
+        M["TunedFeatMeanChange"] = chg(100 * (tu["features_tuned"] - lr.loc[tu.index, "accuracy"]).mean())
+        M["TunedNGMeanChange"] = chg(100 * (tu["ngram_tuned"] - ch.loc[tu.index, "accuracy"]).mean())
+        notes.append(f"tuned (nested C): {tu[['features_tuned', 'ngram_tuned', 'gap_pts', 'gap_p_holm7']].round(3).to_dict('index')}; chosen C {ch_}")
+    notes.append(f"fragility: {fr[['lopo_features', 'loto_features', 'lopo_features_no_paragraph', 'loto_features_no_paragraph', 'lopo_char_ngram', 'loto_char_ngram']].round(3).to_dict('index')}")
+
     # ---- write numbers.tex
     PAPER.mkdir(exist_ok=True)
     lines = ["% GENERATED by python -m langllm.paper_numbers from results/. Do not edit by hand.", "% Rounding: half-up. Accuracies as .xxx, percentages as xx.x\\%."]

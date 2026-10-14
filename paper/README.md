@@ -1,5 +1,10 @@
 # LangLLM paper: IEEE BigData 2026 High School Symposium
 
+**Camera-ready (Oct 2026).** `main.tex` is the camera-ready version of SP19343, *Interpretable Multilingual Attribution
+of Frontier LLMs*, built from the submitted text with every reviewer request addressed. What changed and why:
+`docs/CAMERA_READY.md`. New analyses: `python -m langllm.camera_ready` (results/cr_*), then
+`python -m langllm.paper_numbers` and `./build.sh`. Overleaf upload: `docs/LangLLM_camera_ready_overleaf.zip`.
+
 Upload this folder (or `docs/LangLLM_overleaf.zip`) to Overleaf as a new project.
 Compiler: **pdfLaTeX**. Main document: `main.tex`. Bibliography: `references.bib` (BibTeX, `IEEEtran` style).
 
@@ -7,7 +12,8 @@ Compiler: **pdfLaTeX**. Main document: `main.tex`. Bibliography: `references.bib
 
 | File | What |
 |---|---|
-| `main.tex` | the paper (IEEEtran conference class, single-blind, first author flagged as a high-school student) |
+| `main.tex` | the paper (IEEEtran conference class, compsoc, single-blind, first author flagged as a high-school student) |
+| `build.sh` | pdfLaTeX + BibTeX build |
 | `numbers.tex` | every number the text cites, as macros; **generated** by `python -m langllm.paper_numbers` from `results/` |
 | `references.bib` | 27 verified references (see `review/references_novelty.md`) |
 | `figures/fig1_accuracy.pdf` | per-language accuracy: features, n-grams, judge range |
