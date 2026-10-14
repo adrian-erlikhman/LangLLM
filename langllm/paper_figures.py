@@ -65,7 +65,7 @@ def fig2(langs):
         ax.set_title(title + "\n" + sub, fontsize=6); ax.grid(False)
         ax.set_xlabel("test language", fontsize=6, labelpad=1); ax.tick_params(length=2, pad=1)
     axes[0].set_ylabel("train language", fontsize=6, labelpad=1); axes[1].set_yticks([])
-    fig.tight_layout(pad=0.25, w_pad=0.6); fig.savefig(OUT / "fig2_transfer.pdf"); plt.close(fig)
+    fig.tight_layout(pad=0.25, w_pad=0.6); fig.savefig(OUT / "fig2_transfer.pdf", bbox_inches="tight", pad_inches=0.02); plt.close(fig)
 
 
 def fig3(langs):
@@ -112,11 +112,11 @@ def fig3_features(langs):
     a.set_xlim(0.5, 21.5); a.set_ylim(0.15, 0.9); a.set_xticks([1, 3, 5, 10, 15, 21]); a.set_xlabel("number of features, ranked on the training folds")
     a.set_ylabel("macro-F1 (LOPO)", fontsize=6.5); a.legend(frameon=False, loc="lower right", fontsize=5.5); a.set_title("(a)", loc="left", fontsize=8)
     b.barh(range(len(s)), s.values, color=[GC[grp[f]] for f in s.index], height=0.78); b.tick_params(axis="y", length=1.5, pad=1)
-    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=5.0); b.set_xlim(0, 1.0); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
+    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=5.0); b.set_xlim(0, 1.36); b.set_xticks([0, 0.2, 0.4, 0.6, 0.8, 1.0]); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
     from matplotlib.patches import Patch
     b.legend(handles=[Patch(color=c, label=g) for g, c in [("structure", "#DD8452"), ("syntax", "#55A868"), ("punctuation", "#C44E52"), ("lexical / character", "#8172B3")]],
              frameon=False, loc="lower right", fontsize=6); b.grid(axis="y", alpha=0); b.set_title("(b)", loc="left", fontsize=8)
-    fig.tight_layout(pad=0.3); fig.savefig(OUT / "fig3_features.pdf"); plt.close(fig)
+    fig.tight_layout(pad=0.3); fig.savefig(OUT / "fig3_features.pdf", bbox_inches="tight", pad_inches=0.02); plt.close(fig)
 
 
 def main():

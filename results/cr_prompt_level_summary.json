@@ -1,0 +1,25 @@
+{
+ "holm28": {
+  "char n-gram vs chance": 7,
+  "features vs best judge": 7,
+  "features vs chance": 7,
+  "features vs char n-gram": 1
+ },
+ "holm28_max_p_holm_vs_chance": 0.00732421875,
+ "holm28_max_p_holm_vs_judge": 0.015625,
+ "ngram_sig_langs": [
+  "zh"
+ ],
+ "transfer_sig": {
+  "char_ngram_adapted": 16,
+  "features": 42
+ },
+ "transfer_features_vs_ngram": {
+  "mean_diff": 0.08063607085346215,
+  "prompts_features_ahead": 12,
+  "n_prompts": 12,
+  "p_signflip_two_sided": 0.00048828125
+ },
+ "translation_min_ci_lo": 0.48333333333333334,
+ "translation_all_ci_exclude_chance": true
+}
