@@ -70,3 +70,19 @@ Format instructions and temperature could not be varied without new generations,
 2. Electronic copyright form (link on the CyberChair camera-ready page).
 3. PDF eXpress (conference ID 70701X) → validated PDF.
 4. Upload the validated PDF on CyberChair; registration receipt; in-person choice.
+
+## Style pass (14 Oct 2026)
+
+Prose and number formatting brought closer to strong papers in this area: Sun et al., *Idiosyncrasies in
+Large Language Models* (ICML 2025); Sapkota et al., *Not All Character N-grams Are Created Equal* (NAACL 2015);
+Uchendu et al., *Authorship Attribution for Neural Text Generation* (EMNLP 2020).
+
+- Abstract carries a handful of headline numbers instead of ~20; results sentences state the finding, point
+  to the table or figure, and carry one or two numbers each.
+- Plain verbs and full sentences instead of colon/semicolon chains and short punch-line sentences.
+- Accuracies are percentages (71.7%, 59–72%); F1, rho, eta, distances and ratios are decimals with a
+  leading zero (0.711), as in ML venues. Fig. 2 cells are percentages (half-up rounding).
+- Content fixes found while checking: the RQ4 sentence now says the English-to-Hindi drop is mostly Grok
+  (Grok's pairs are still farther apart than the others in Chinese, Japanese and Turkish); the abstract
+  says the judges name the author at close to chance (Claude is slightly above chance).
+- "In this setting" is in the Abstract, Discussion ("Within this setting") and Conclusion.
