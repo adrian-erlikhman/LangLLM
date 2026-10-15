@@ -27,12 +27,16 @@ FEAT = {"mattr": "MATTR", "hapax_rate": "hapax rate", "mean_token_len": "token l
         "dash_per_1k": "dash rate", "semicolon_per_1k": "semicolon rate", "bigram_entropy": "char-bigram entropy", "digit_rate": "digit rate"}
 
 
+def andjoin(xs):
+    xs = list(xs); return ", ".join(xs[:-1]) + " and " + xs[-1] if len(xs) > 1 else "".join(xs)
+
+
 def r(x, nd=3):
     return str(Decimal(str(float(x))).quantize(Decimal(1).scaleb(-nd), rounding=ROUND_HALF_UP))
 
 
-def d3(x): return r(x, 3).lstrip("0") if float(x) < 1 else r(x, 3)          # .717
-def d2(x): return r(x, 2).lstrip("0") if float(x) < 1 else r(x, 2)
+def d3(x): return r(x, 3)          # 0.717 (leading zero, as in ML venues)
+def d2(x): return r(x, 2)
 def pct(x, nd=1): return r(100 * float(x), nd) + r"\%"
 def pct0(x): return r(100 * float(x), 0) + r"\%"
 def pv(p):
@@ -72,16 +76,16 @@ def build() -> None:
         for m in MODEL: rec[m].append(cm.loc[m, m] / cm.loc[m].sum())
     for m in MODEL: M[f"Recall{m}Min"] = pct0(min(rec[m])); M[f"Recall{m}Max"] = pct0(max(rec[m]))
     imp = csv("rq1_feature_importance.csv"); top = imp.groupby("feature")["mean_abs_coef"].mean().sort_values(ascending=False)
-    M["TopCoefFeatures"] = ", ".join(FEAT[f] for f in top.index[:5]); notes.append(f"mean |coef| ranking: {', '.join(f'{FEAT[f]} {x:.2f}' for f, x in top.items())}")
+    M["TopCoefFeatures"] = andjoin(FEAT[f] for f in top.index[:5]); notes.append(f"mean |coef| ranking: {', '.join(f'{FEAT[f]} {x:.2f}' for f, x in top.items())}")
     pooled = csv("rq7_feature_curve_order.csv").set_index("lang").loc["pooled", "order"].split(" > ")
-    M["PooledTopFive"] = ", ".join(FEAT[f] for f in pooled[:5])
+    M["PooledTopFive"] = andjoin(FEAT[f] for f in pooled[:5])
 
     # ---- judges
     j6 = csv("rq6_judge_summary.csv").set_index("judge"); jl = csv("rq6_judge_by_language.csv")
     for j in MODEL:
         M[f"Judge{j}"] = pct(j6.loc[j, "accuracy"]); M[f"Judge{j}Own"] = pct0(j6.loc[j, "own_recall"]); M[f"Judge{j}False"] = pct0(j6.loc[j, "false_self_rate"])
         M[f"Judge{j}FisherP"] = pv(j6.loc[j, "self_recognition_p_fisher"]); M[f"Judge{j}SelfClaim"] = pct0(j6.loc[j, "self_claim_rate"])
-    M["JudgeMin"] = pct(j6["accuracy"].min()); M["JudgeMax"] = pct(j6["accuracy"].max())
+    M["JudgeMin"] = r(100 * j6["accuracy"].min(), 1); M["JudgeMax"] = r(100 * j6["accuracy"].max(), 1)  # no % sign: text writes \JudgeMin--\JudgeMax\%
     for l in langs:
         d = jl[jl.lang == l]; M[f"JudgeMean{l}"] = d3(d["accuracy"].mean()); M[f"JudgeBest{l}"] = d3(d["accuracy"].max()); M[f"JudgeBestName{l}"] = MODEL[d.sort_values("accuracy").iloc[-1]["judge"]]
     gap = [lr.loc[l, "accuracy"] - jl[jl.lang == l]["accuracy"].max() for l in langs]; M["GapJudgeMin"] = r(min(gap) * 100, 0); M["GapJudgeMax"] = r(max(gap) * 100, 0)
@@ -238,7 +242,7 @@ def build() -> None:
     ORD = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth", "twenty-first"]
     for l in ("en", "ru"):
         M[f"ParaCountRank{l.capitalize()}"] = ORD[orders[l].split(" > ").index("para_count")]
-    etop = e["eta2_model"].sort_values(ascending=False); M["EtaModelTopFive"] = ", ".join(f"{FEAT[f]} ({d2(v)})" for f, v in etop.head(5).items())
+    etop = e["eta2_model"].sort_values(ascending=False); M["EtaModelTopFive"] = andjoin(f"{FEAT[f]} ({d2(v)})" for f, v in etop.head(5).items())
     w2 = wo.sort_values("delta_f1_vs_all").head(2)
     M["AblMaxDropWhere"] = ", ".join(f"{g if g != 'syntactic' else 'syntax'} in {LANG[l]}" for g, l in zip(w2["group"], w2["lang"]))
     M["AblNoStructureWorst"] = d2(-wo[wo.group == "structure"]["delta_f1_vs_all"].min())
@@ -285,15 +289,34 @@ def build() -> None:
         fC = sorted({c for v in ch_.values() for c in v["features_C"]}); nC = sorted({c for v in ch_.values() for c in v["ngram_C"]})
         fmt = lambda c: f"{c:g}"
         M["TunedFeatC"] = f"{fmt(fC[0])}--{fmt(fC[-1])}"; M["TunedNGC"] = f"{fmt(nC[0])}--{fmt(nC[-1])}"
-        chg = lambda x: "less than one" if abs(x) < 0.5 else f"{x:+.0f}"
+        chg = lambda x: "by less than one point" if abs(x) < 0.5 else (f"up by {x:.0f} points" if x > 0 else f"down by {-x:.0f} points")
         M["TunedFeatMeanChange"] = chg(100 * (tu["features_tuned"] - lr.loc[tu.index, "accuracy"]).mean())
         M["TunedNGMeanChange"] = chg(100 * (tu["ngram_tuned"] - ch.loc[tu.index, "accuracy"]).mean())
         notes.append(f"tuned (nested C): {tu[['features_tuned', 'ngram_tuned', 'gap_pts', 'gap_p_holm7']].round(3).to_dict('index')}; chosen C {ch_}")
     notes.append(f"fragility: {fr[['lopo_features', 'loto_features', 'lopo_features_no_paragraph', 'loto_features_no_paragraph', 'lopo_char_ngram', 'loto_char_ngram']].round(3).to_dict('index')}")
 
+    # ---- accuracies as percentages (style pass, Oct 2026): 0.717 -> 71.7, 0.59 -> 59 (no % sign;
+    # the text adds it). Only the decimal point moves, so rounding is unchanged. F1, rho, eta,
+    # distances and ratios stay decimals.
+    L7 = "(en|es|zh|ru|ja|tr|hi)"
+    ACC = [rf"LR{L7}", rf"LR(lo|hi){L7}", rf"RF{L7}", rf"JudgeMean{L7}", rf"JudgeBest{L7}", rf"NG{L7}", rf"NG(lo|hi){L7}", rf"WG{L7}",
+           r"(LR|RF)(min|max)", r"ClusterCIminLo", r"(LR|RF)len(Min|Max)", r"(NG|WG)(min|max|mean)", r"Class(Five|Four)Mean",
+           r"Transfer(Off|Diag|Min|Max)", r"NGTransfer(Off|Max)", r"NGFairOff", r"Punct(Diag|Off)(Min|Max)?",
+           r"Tr(Google|LLM)(Min|Max|Mean|TrainEn|TrainNative)", r"TrAll(Min|Max)", r"TrNativeMean", r"TrLLMHiTrainEn",
+           r"NGTr(LopoMean|LopoMin|LopoMax|TrainEnNonLatinMin|TrainEnNonLatinMax|TrainEnEs|TrainEnMean|TrainEnNonEsMin|TrainEnNonEsMax)",
+           r"TrTrainEn(Min|Max|Mean)", r"PLTrMinLo", r"LOTO(Feat|NG|NoPara)(Min|Max|CIminLo)", r"NoPara(Min|Max|CIminLo)",
+           r"Tuned(Feat|NG)(Min|Max)", r"SteepestDeclineAcc"]
+    acc_re = re.compile("^(" + "|".join(ACC) + ")$")
+    def to_pct(v: str) -> str:
+        n = len(v.split(".")[1]) if "." in v else 0
+        return str((Decimal(v) * 100).quantize(Decimal(1).scaleb(-max(n - 2, 0)), rounding=ROUND_HALF_UP))
+    for k in list(M):
+        if acc_re.match(k):
+            M[k] = to_pct(M[k])
+
     # ---- write numbers.tex
     PAPER.mkdir(exist_ok=True)
-    lines = ["% GENERATED by python -m langllm.paper_numbers from results/. Do not edit by hand.", "% Rounding: half-up. Accuracies as .xxx, percentages as xx.x\\%."]
+    lines = ["% GENERATED by python -m langllm.paper_numbers from results/. Do not edit by hand.", "% Rounding: half-up. Accuracies are percentages without the % sign (71.7, 59); F1, rho, eta, distances and ratios are decimals (0.711)."]
     for k, val in M.items():
         k = re.sub(r"\d", lambda m: "abcdefghij"[int(m.group())], k)  # LaTeX macro names cannot contain digits
         lines.append(f"\\newcommand{{\\{k}}}{{{val}}}")

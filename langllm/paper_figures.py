@@ -8,6 +8,7 @@ fig4_survival   feature survival under translation (Spearman rho original vs tra
     python -m langllm.paper_figures
 """
 from __future__ import annotations
+from decimal import Decimal, ROUND_HALF_UP
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -59,9 +60,9 @@ def fig2(langs):
         ax.set_xticks(range(7), langs, fontsize=5.5); ax.set_yticks(range(7), langs, fontsize=5.5)
         for i in range(7):
             for k in range(7):
-                v = M.iat[i, k]; ax.text(k, i, f"{v:.2f}".lstrip("0"), ha="center", va="center", fontsize=4.6, color="white" if v > 0.6 else "black", fontweight="bold" if i == k else "normal")
+                v = M.iat[i, k]; ax.text(k, i, str(int((Decimal(str(float(v))) * 100).quantize(Decimal(1), rounding=ROUND_HALF_UP))), ha="center", va="center", fontsize=4.6, color="white" if v > 0.6 else "black", fontweight="bold" if i == k else "normal")
         off = M.to_numpy(float)[~np.eye(7, dtype=bool)]
-        sub = f"off-diagonal mean {off.mean():.2f}".replace("mean 0.", "mean .")
+        sub = f"off-diagonal mean {int((Decimal(str(float(off.mean()))) * 100).quantize(Decimal(1), rounding=ROUND_HALF_UP))}%"
         ax.set_title(title + "\n" + sub, fontsize=6); ax.grid(False)
         ax.set_xlabel("test language", fontsize=6, labelpad=1); ax.tick_params(length=2, pad=1)
     axes[0].set_ylabel("train language", fontsize=6, labelpad=1); axes[1].set_yticks([])
@@ -76,7 +77,7 @@ def fig3(langs):
         d = cv[cv.lang == l]; ax.plot(d["k"], d["macro_f1"], "-", color=BLUE, alpha=0.28, lw=0.8)
     d = cv[cv.lang == "pooled"]; ax.plot(d["k"], d["macro_f1"], "o-", color=BLUE, ms=2.8, lw=1.3, label="pooled, z-scored within language")
     ax.plot([], [], "-", color=BLUE, alpha=0.4, lw=0.8, label="each language")
-    ax.axhline(ngm, color=RED, ls="--", lw=0.9, label=f"char n-grams, all, mean macro-F1 {ngm:.2f}".replace(" 0.", " ."))
+    ax.axhline(ngm, color=RED, ls="--", lw=0.9, label=f"char n-grams, all, mean macro-F1 {ngm:.2f}")
     ax.axhline(CHANCE, color="k", ls=":", lw=0.7)
     ax.set_xlim(0.5, 21.5); ax.set_ylim(0.15, 0.9); ax.set_xticks([1, 3, 5, 10, 15, 21]); ax.set_xlabel("number of features, ranked on the training fold only")
     ax.set_ylabel("macro-F1 (LOPO)"); ax.legend(frameon=False, loc="lower right", bbox_to_anchor=(1.0, 0.12))
@@ -107,7 +108,7 @@ def fig3_features(langs):
     per = cv[cv.lang != "pooled"].pivot(index="k", columns="lang", values="macro_f1")
     a.fill_between(per.index, per.min(axis=1), per.max(axis=1), color=BLUE, alpha=0.15, lw=0, label="range over 7 languages")
     d = cv[cv.lang == "pooled"]; a.plot(d["k"], d["macro_f1"], "o-", color=BLUE, ms=2.6, lw=1.2, label="pooled, z-scored within language")
-    a.axhline(ngm, color=RED, ls="--", lw=0.9, label=f"char n-grams, all, mean macro-F1 {ngm:.2f}".replace(" 0.", " ."))
+    a.axhline(ngm, color=RED, ls="--", lw=0.9, label=f"char n-grams, all, mean macro-F1 {ngm:.2f}")
     a.axhline(CHANCE, color="k", ls=":", lw=0.7)
     a.set_xlim(0.5, 21.5); a.set_ylim(0.15, 0.9); a.set_xticks([1, 3, 5, 10, 15, 21]); a.set_xlabel("number of features, ranked on the training folds")
     a.set_ylabel("macro-F1 (LOPO)", fontsize=6.5); a.legend(frameon=False, loc="lower right", fontsize=5.5); a.set_title("(a)", loc="left", fontsize=8)
