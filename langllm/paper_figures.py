@@ -29,7 +29,7 @@ FEAT = {"mattr": "MATTR", "hapax_rate": "hapax rate", "mean_token_len": "token l
         "sent_len_sd": "sentence-length SD", "burstiness": "burstiness", "dep_depth": "dependency depth", "subord_rate": "subordination",
         "func_word_ratio": "function-word ratio", "first_person_rate": "first-person rate", "para_count": "paragraph count", "para_len_mean": "paragraph length",
         "question_rate": "question rate", "connective_rate": "connective rate", "comma_per_1k": "comma rate", "colon_per_1k": "colon rate",
-        "dash_per_1k": "dash rate", "semicolon_per_1k": "semicolon rate", "bigram_entropy": "char-bigram entropy", "digit_rate": "digit rate"}
+        "dash_per_1k": "dash rate", "semicolon_per_1k": "semicolon rate", "bigram_entropy": "character-bigram entropy", "digit_rate": "digit rate"}
 
 
 def fig1(langs):
@@ -55,7 +55,7 @@ def fig2(langs):
     F = pd.read_csv(RESULTS_DIR / "rq3_transfer_matrix.csv", index_col=0).loc[langs, langs]
     N = pd.read_csv(RESULTS_DIR / "rq7b_ngram_transfer_union_vocab_zscored.csv", index_col=0).loc[langs, langs]
     fig, axes = plt.subplots(1, 2, figsize=(COL, 1.95))
-    for ax, M, title in zip(axes, [F, N], ["(a) UD features", "(b) char n-grams, adapted"]):
+    for ax, M, title in zip(axes, [F, N], ["(a) 21 features", "(b) char n-grams, adapted"]):
         ax.imshow(M.to_numpy(float), cmap="Blues", vmin=0.15, vmax=0.9)
         ax.set_xticks(range(7), langs, fontsize=5.5); ax.set_yticks(range(7), langs, fontsize=5.5)
         for i in range(7):
@@ -104,19 +104,19 @@ def fig3_features(langs):
     fs = pd.read_csv(RESULTS_DIR / "rq5_feature_survival.csv"); s = fs.groupby("feature")["spearman_rho"].mean().drop("question_rate", errors="ignore").sort_values()
     GC = {"lexical": "#8172B3", "syntactic": "#55A868", "structure": "#DD8452", "punctuation": "#C44E52", "character": "#8172B3"}
     grp = {f: g for g, fl in FEATURE_GROUPS.items() for f in fl}
-    fig, (a, b) = plt.subplots(2, 1, figsize=(COL, 3.15), gridspec_kw={"height_ratios": [0.8, 1.55]})
+    fig, (a, b) = plt.subplots(2, 1, figsize=(COL, 3.0), gridspec_kw={"height_ratios": [0.8, 1.55]})
     per = cv[cv.lang != "pooled"].pivot(index="k", columns="lang", values="macro_f1")
     a.fill_between(per.index, per.min(axis=1), per.max(axis=1), color=BLUE, alpha=0.15, lw=0, label="range over 7 languages")
     d = cv[cv.lang == "pooled"]; a.plot(d["k"], d["macro_f1"], "o-", color=BLUE, ms=2.6, lw=1.2, label="pooled, z-scored within language")
     a.axhline(ngm, color=RED, ls="--", lw=0.9, label=f"char n-grams, all, mean macro-F1 {ngm:.2f}")
     a.axhline(CHANCE, color="k", ls=":", lw=0.7)
-    a.set_xlim(0.5, 21.5); a.set_ylim(0.15, 0.9); a.set_xticks([1, 3, 5, 10, 15, 21]); a.set_xlabel("number of features, ranked on the training folds")
-    a.set_ylabel("macro-F1 (LOPO)", fontsize=6.5); a.legend(frameon=False, loc="lower right", fontsize=5.5); a.set_title("(a)", loc="left", fontsize=8)
+    a.set_xlim(0.5, 21.5); a.set_ylim(-0.42, 0.9); a.set_yticks([0, 0.25, 0.5, 0.75]); a.set_xticks([1, 3, 5, 10, 15, 21]); a.set_xlabel("number of features, ranked on the training folds")
+    a.set_ylabel("macro-F1 (LOPO)", fontsize=6.5); a.legend(frameon=False, loc="lower right", fontsize=5.0, labelspacing=0.15, borderaxespad=0.1); a.set_title("(a)", loc="left", fontsize=8)
     b.barh(range(len(s)), s.values, color=[GC[grp[f]] for f in s.index], height=0.78); b.tick_params(axis="y", length=1.5, pad=1)
-    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=5.0); b.set_xlim(0, 1.36); b.set_xticks([0, 0.2, 0.4, 0.6, 0.8, 1.0]); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
+    b.set_yticks(range(len(s)), [FEAT[f] for f in s.index], fontsize=5.8); b.set_xlim(0, 1.36); b.set_xticks([0, 0.2, 0.4, 0.6, 0.8, 1.0]); b.set_xlabel(r"Spearman $\rho$, original vs. translation")
     from matplotlib.patches import Patch
     b.legend(handles=[Patch(color=c, label=g) for g, c in [("structure", "#DD8452"), ("syntax", "#55A868"), ("punctuation", "#C44E52"), ("lexical / character", "#8172B3")]],
-             frameon=False, loc="lower right", fontsize=6); b.grid(axis="y", alpha=0); b.set_title("(b)", loc="left", fontsize=8)
+             frameon=False, loc="lower right", fontsize=5.8, handlelength=1.0, labelspacing=0.15, borderaxespad=0.1); b.grid(axis="y", alpha=0); b.set_title("(b)", loc="left", fontsize=8)
     fig.tight_layout(pad=0.3); fig.savefig(OUT / "fig3_features.pdf", bbox_inches="tight", pad_inches=0.02); plt.close(fig)
 
 
