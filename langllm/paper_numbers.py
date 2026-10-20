@@ -24,7 +24,7 @@ FEAT = {"mattr": "MATTR", "hapax_rate": "hapax rate", "mean_token_len": "token l
         "sent_len_sd": "sentence-length SD", "burstiness": "burstiness", "dep_depth": "dependency depth", "subord_rate": "subordination",
         "func_word_ratio": "function-word ratio", "first_person_rate": "first-person rate", "para_count": "paragraph count", "para_len_mean": "paragraph length",
         "question_rate": "question rate", "connective_rate": "connective rate", "comma_per_1k": "comma rate", "colon_per_1k": "colon rate",
-        "dash_per_1k": "dash rate", "semicolon_per_1k": "semicolon rate", "bigram_entropy": "char-bigram entropy", "digit_rate": "digit rate"}
+        "dash_per_1k": "dash rate", "semicolon_per_1k": "semicolon rate", "bigram_entropy": "character-bigram entropy", "digit_rate": "digit rate"}
 
 
 def andjoin(xs):
